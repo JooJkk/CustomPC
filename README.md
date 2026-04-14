@@ -45,3 +45,11 @@ Além da venda de peças avulsas, o sistema permite que o usuário salve "Builds
 - **Jackson/Gson** – Manipulação de JSON.
 - **Apache POI** – Relatórios em Excel.
 - **iText** – Geração de notas fiscais.
+
+
+## Integrantes do grupo
+- Brenna Vitória de Souza Marinho: brenna.marinho@ufrpe.br
+- ⁠Maria Clara Freitas de Barros Correia: clarafreitas06cf@gmail.com
+- Lucas Carvalho Oliveira da Silva: lucascarvalhoo@outlook.com
+- João Augusto Ferreira Andrade Leitão: joao.aferreira@ufrpe.br
+- Sameque kadmiel Dias Sousa: Sameque.kadmiel@gmail.com
