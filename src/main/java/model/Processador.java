@@ -8,7 +8,9 @@ public class Processador extends Componente{
         this.socket = socket;
         this.tdp = tdp;
     }
-
+    public Processador(){
+        super();
+    }
     public void setSocket(String socket) {
         this.socket = socket;
     }
