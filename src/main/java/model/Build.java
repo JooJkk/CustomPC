@@ -11,10 +11,11 @@ public class Build {
     private Processador processador;
     private PlacaMae placaMae;
     private Fonte fonte;
-    private List<MemoriaRAM> memorias = new ArrayList<>();
+    private List<MemoriaRam> memorias = new ArrayList<>();
     private PlacaVideo gpu;
+    private static long proximoId = 1;
 
-    public void addMemoria(MemoriaRAM memoria) {
+    public void adicionarMemoria(MemoriaRam memoria) {
         memorias.add(memoria);
     }
 
@@ -26,7 +27,7 @@ public class Build {
         this.gpu = gpu;
     }
 
-    public void setMemorias(List<MemoriaRAM> memorias) {
+    public void setMemorias(List<MemoriaRam> memorias) {
         this.memorias = memorias;
     }
 
@@ -42,7 +43,7 @@ public class Build {
         return fonte;
     }
 
-    public List<MemoriaRAM> getMemorias() {
+    public List<MemoriaRam> getMemorias() {
         return memorias;
     }
 
@@ -70,7 +71,7 @@ public class Build {
             total += gpu.getConsumoWatts();
         }
 
-        for (MemoriaRAM memoria : memorias) {
+        for (MemoriaRam memoria : memorias) {
             total += memoria.getConsumoWatts();
         }
 
@@ -79,7 +80,28 @@ public class Build {
     }
 
     public boolean validarCompatibilidade() {
-        // ta faltando implementar a regra dos componentes aqui
+        if (processador == null || placaMae == null) {
+            this.compativel = false;
+            return false;
+        }
+        if (fonte != null && calcularConsumoTotal() > fonte.getPotenciaWatts()) {
+            this.compativel = false;
+            return false;
+        }
+        if (memorias.isEmpty()) {
+            this.compativel = false;
+            return false;
+        }
+        if (!processador.getSocket().equals(placaMae.getSocket())) {
+            this.compativel = false;
+            return false;
+        }
+        for (MemoriaRam memoria : memorias) {
+            if (!memoria.getTipoRam().equals(placaMae.getTipoRamSuportada())) {
+                this.compativel = false;
+                return false;
+            }
+        }
         this.compativel = true;
         return compativel;
     }
@@ -100,17 +122,13 @@ public class Build {
             total += gpu.getPreco();
         }
 
-        for (MemoriaRAM memoria : memorias) {
+        for (MemoriaRam memoria : memorias) {
             total += memoria.getPreco();
         }
 
         return total;
     }
 
-
-    public void setId (long id) {
-        this.id = id;
-    }
     public long getId() {
         return id;
     }
@@ -137,7 +155,8 @@ public class Build {
     }
 
     public Build() {
-
+        this.id = proximoId;
+        proximoId++;
     }
 
 }

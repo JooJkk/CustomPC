@@ -1,19 +1,20 @@
+package main.java.model;
+
 public class Cliente {
-    private int id;
+    private long id;
     private String nome;
     private String email;
     private String senha;
+    private Endereco endereco;
+    private static long proximoId = 1;
 
-
-
-    public void setId(int id) {
-        this.id = id;
-
-    }
-    public int getId() {
+    public long getId() {
         return id;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
     public String getNome() {
         return nome;
@@ -32,6 +33,10 @@ public class Cliente {
         this.email = email;
     }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -40,7 +45,15 @@ public class Cliente {
     }
 
     public Cliente() {
-
+        this.id = proximoId;
+        proximoId++;
+    }
+    public Cliente(String nome, String email, String senha) {
+        this.id = proximoId;
+        proximoId++;
+        setNome(nome);
+        setEmail(email);
+        setSenha(senha);
     }
 
 }

@@ -10,6 +10,8 @@ public abstract class Componente {
     private int consumoWatts;
     private static long proximoId = 1;
     protected  Componente(){
+        this.id = proximoId;
+        proximoId++;
     }
     protected Componente(String nome, String marca, double preco, double peso, int estoque, int consumoWatts){
         this.id = proximoId;
