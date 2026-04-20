@@ -34,7 +34,7 @@ public class Envio {
         return statusEntrega;
     }
 
-    public void setStatusEntrega(String valorFrete) {
+    public void setStatusEntrega(String statusEntrega) {
         this.statusEntrega = statusEntrega;
     }
 
