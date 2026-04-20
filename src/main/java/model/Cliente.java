@@ -6,7 +6,12 @@ public class Cliente {
     private String email;
     private String senha;
     private Endereco endereco;
+    private String cpf;
     private static long proximoId = 1;
+
+    public String getCpf() {
+        return cpf;
+    }
 
     public long getId() {
         return id;
@@ -31,6 +36,10 @@ public class Cliente {
     }
     public void setEmail (String email) {
         this.email = email;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public void setEndereco(Endereco endereco) {
