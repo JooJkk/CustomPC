@@ -28,6 +28,7 @@ public class Carrinho {
         for (ItemCarrinho item : itens) {
             total = total + item.getSubtotal();
         }
+        valorTotal = total;
         return total;
     }
 
@@ -41,6 +42,7 @@ public class Carrinho {
 
     }
     public double getValorTotal() {
+        this.valorTotal = calcularTotal();
         return valorTotal;
     }
 
