@@ -3,7 +3,15 @@ public class ItemPedido {
     private int quantidade;
     private Double precoUnitario;
 
+    private Componente componente;
 
+    public void setComponente(Componente componente) {
+        this.componente = componente;
+    }
+
+    public Componente getComponente() {
+        return componente;
+    }
     ItemPedido(){
 
     }

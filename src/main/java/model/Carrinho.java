@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carrinho {
-    private long idcar;
+    private long id;
     private Double valorTotal;
-
+    private static long proximoId = 1;
 
 
     private List<ItemCarrinho> itens = new ArrayList<>();
@@ -14,13 +14,13 @@ public class Carrinho {
         itens.add(item);
         item.setCarrinho(this); // mesma lógica do pedido
     }
-/*
-    public void removerItem(ItemCarrinho Item) {
-        itens.remove(item);
-        item.setCarrinho(null);
+
+    public void removerItem(ItemCarrinho item) {
+        if(itens.remove(item)){
+            item.setCarrinho(null);}
     }
 
- */
+
 
 
     public double calcularTotal() {
@@ -32,16 +32,8 @@ public class Carrinho {
     }
 
 
-
-
-
-    public void setIdcar(long idcar) {
-        this.idcar = idcar;
-
-    }
-    public long getIdcar() {
-
-        return idcar;
+    public long getId() {
+        return id;
     }
 
     public void setValorTotal(double valorTotal) {
@@ -53,7 +45,8 @@ public class Carrinho {
     }
 
     public Carrinho() {
-
+        this.id = proximoId;
+        proximoId++;
     }
 
 }

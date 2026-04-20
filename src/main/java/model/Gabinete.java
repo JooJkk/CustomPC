@@ -3,7 +3,7 @@ package main.java.model;
 public class Gabinete extends Componente {
     private String formatoPlacaMaeSuportado;
     private int comprimentoMaxGpuMM;
-    public PlacaVideo(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, String formatoPlacaMaeSuportado, int comprimentoMaxGpuMM) {
+    public Gabinete(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, String formatoPlacaMaeSuportado, int comprimentoMaxGpuMM) {
         super(nome, marca, preco, peso, estoque, consumoWatts);
         this.formatoPlacaMaeSuportado = formatoPlacaMaeSuportado;
         this.comprimentoMaxGpuMM = comprimentoMaxGpuMM;

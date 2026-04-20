@@ -7,9 +7,10 @@ public class Pedido {
     private int data;
     private String status;
     private Double valorTotal;
-
-    Pedido(){
-
+    private static long proximoId = 1;
+    public Pedido(){
+        this.id = proximoId;
+        proximoId++;
     }
 
     private Pagamento pagamento;
@@ -48,14 +49,6 @@ public class Pedido {
     }
 
 
-
-
-
-
-    public void setId(long id) {
-        this.id = id;
-
-    }
 
     public long getId() {
 

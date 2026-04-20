@@ -5,6 +5,15 @@ public class ItemCarrinho {
 
 
     private Carrinho carrinho;
+    private Componente componente;
+
+    public void setComponente(Componente componente) {
+        this.componente = componente;
+    }
+
+    public Componente getComponente() {
+        return componente;
+    }
 
     public double getSubtotal() {
         if (precoUnitario == null)
