@@ -14,6 +14,30 @@ public class Pedido {
         proximoId++;
     }
 
+    private Envio envio;
+    public Envio getEnvio() {
+        return envio;
+    }
+    public void setEnvio(Envio envio) {
+        this.envio = envio;
+    }
+
+    private OrdemMontagem ordemMontagem;
+    public OrdemMontagem getOrdemMontagem() {
+        return ordemMontagem;
+    }
+    public void setOrdemMontagem(OrdemMontagem ordemMontagem) {
+        this.ordemMontagem = ordemMontagem;
+    }
+
+    private CupomDesconto cupomDesconto;
+    public CupomDesconto getCupomDesconto() {
+        return cupomDesconto;
+    }
+    public void setCupomDesconto(CupomDesconto cupomDesconto) {
+        this.cupomDesconto = cupomDesconto;
+    }
+
     private Pagamento pagamento;
     public Pagamento getPagamento() {
         return pagamento;
