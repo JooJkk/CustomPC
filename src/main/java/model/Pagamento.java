@@ -1,3 +1,5 @@
+package main.java.model;
+
 public class Pagamento {
     private long id;
     private Double valor;

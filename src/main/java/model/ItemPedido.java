@@ -1,3 +1,4 @@
+package main.java.model;
 public class ItemPedido {
     private int quantidade;
     private Double precoUnitario;
