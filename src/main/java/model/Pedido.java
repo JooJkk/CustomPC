@@ -1,10 +1,11 @@
 package main.java.model;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class Pedido {
     private long id;
-    private int data;
+    private LocalDate data;
     private String status;
     private Double valorTotal;
     private static long proximoId = 1;
@@ -19,10 +20,17 @@ public class Pedido {
     }
     public void setPagamento(Pagamento pagamento) {
         this.pagamento = pagamento;
-        pagamento.setPedido(this); // eh tipo esse pagamento pertence a este pedido. o pagamento que eu vou receber pertence a esse pedido(setpedido(this))
+        if (pagamento != null) {
+            pagamento.setPedido(this);} // eh tipo esse pagamento pertence a este pedido. o pagamento que eu vou receber pertence a esse pedido(setpedido(this))
     }
 
-
+    public boolean cancelar() {
+        if (status != null && (status.equalsIgnoreCase("Enviado") || status.equalsIgnoreCase("Entregue"))) {
+            return false; //não pode ser cancelado depois de enviado ou entregue
+        }
+        status = "Cancelado";
+        return true;
+    }
 
 
 
@@ -55,11 +63,11 @@ public class Pedido {
         return id;
     }
 
-    public void setData(int data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public int getData() {
+    public LocalDate getData() {
         return data;
     }
 
