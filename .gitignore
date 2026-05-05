@@ -1,0 +1,18 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Build / compilação
+out/
+target/
+build/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Arquivos temporários
+*.tmp
