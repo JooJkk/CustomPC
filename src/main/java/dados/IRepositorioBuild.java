@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface IRepositorioBuild {
     void cadastrar(Build build);
-    Build buscar(Long id);
+    Build buscar(long id);
     List<Build> getBuilds();
     void atualizar(Build build);
-    void remover(Long id);
+    void remover(long id);
 }

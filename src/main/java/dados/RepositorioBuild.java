@@ -10,11 +10,11 @@ public class RepositorioBuild implements IRepositorioBuild{
 
     @Override
     public void cadastrar(Build build){
-        //TODO
+        builds.add(build);
     }
 
     @Override
-    public Build buscar(Long id){
+    public Build buscar(long id){
         for(Build b : builds) {
             if(b.getId() == id) {
                 return b;
@@ -30,11 +30,21 @@ public class RepositorioBuild implements IRepositorioBuild{
 
     @Override
     public void atualizar(Build build){
-        //TODO
+        for(int i = 0; i < builds.size(); i++) {
+            if(builds.get(i).getId() == build.getId()) {
+                builds.set(i, build);
+                return;
+            }
+        }
     }
 
     @Override
-    public void remover(Long id){
-        //TODO
+    public void remover(long id){
+        for(int i = 0; i < builds.size(); i++) {
+            if(builds.get(i).getId() == id) {
+                builds.remove(i);
+                return;
+            }
+        }
     }
 }
