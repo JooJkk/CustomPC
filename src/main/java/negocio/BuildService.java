@@ -6,6 +6,14 @@ import java.util.List;
 
 public class BuildService {
     IRepositorioBuild repositorio;
+    public BuildService(IRepositorioBuild repositorio){
+        if(repositorio != null){
+            this.repositorio = repositorio;
+        }
+        else{
+            throw new IllegalArgumentException("Repositorio não pode ser nulo");
+        }
+    }
     public void cadastrar(Build build) {
         if (build == null) {
             throw new IllegalArgumentException("Build não pode ser nula.");
