@@ -24,7 +24,7 @@ public class RepositorioBuild implements IRepositorioBuild{
     }
 
     @Override
-    public List<Build> getBuilds(){
+    public List<Build> listar(){
         return builds;
     }
 
