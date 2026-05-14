@@ -6,34 +6,51 @@ public class CupomDesconto {
     private double valorMinimo;
     private boolean ativo;
 
-    public CupomDesconto(String codigo,double percentual,double valorMinimo,boolean ativo){
+    public CupomDesconto(String codigo, double percentual, double valorMinimo) {
+
+        if (codigo == null || codigo.isBlank()) {
+            throw new IllegalArgumentException("Código inválido");
+        }
+
+        if (percentual <= 0 || percentual > 100) {
+            throw new IllegalArgumentException("Percentual inválido");
+        }
+
+        if (valorMinimo < 0) {
+            throw new IllegalArgumentException("Valor mínimo inválido");
+        }
+
         this.codigo = codigo;
         this.percentual = percentual;
         this.valorMinimo = valorMinimo;
-        this.ativo = ativo;
+        this.ativo = true;
     }
+
     public String getCodigo() {
         return codigo;
     }
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
+
     public double getPercentual() {
         return percentual;
     }
-    public void setPercentual(double percentual) {
-        this.percentual = percentual;
-    }
+
     public double getValorMinimo() {
         return valorMinimo;
     }
-    public void setValorMinimo(double valorMinimo) {
-        this.valorMinimo = valorMinimo;
-    }
-    public boolean getAtivo() {
+
+    public boolean isAtivo() {
         return ativo;
     }
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
+
+    public void ativar() {
+        ativo = true;
+    }
+
+    public void desativar() {
+        ativo = false;
+    }
+
+    public boolean validarCupom(double valorCompra) {
+        return ativo && valorCompra >= valorMinimo;
     }
 }
