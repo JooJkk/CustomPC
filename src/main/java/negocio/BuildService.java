@@ -7,13 +7,19 @@ import java.util.List;
 
 public class BuildService {
     IRepositorioBuild repositorio;
-    public BuildService(IRepositorioBuild repositorio){
-        if(repositorio != null){
-            this.repositorio = repositorio;
-        }
-        else{
+    private CompatibilidadeService compatibilidadeService;
+    public BuildService(IRepositorioBuild repositorio, CompatibilidadeService compatibilidadeService) {
+
+        if(repositorio == null){
             throw new IllegalArgumentException("Repositorio não pode ser nulo");
         }
+
+        if(compatibilidadeService == null){
+            throw new IllegalArgumentException("CompatibilidadeService não pode ser nulo");
+        }
+
+        this.repositorio = repositorio;
+        this.compatibilidadeService = compatibilidadeService;
     }
     public void cadastrar(Build build){
         if (build == null) {
@@ -23,10 +29,13 @@ public class BuildService {
         if (build.getNome() == null || build.getNome().isBlank()) {
             throw new BuildInvalidaException("Nome da build não pode ser vazio");
         }
-
+        compatibilidadeService.validarBuildCompleta(build);
         repositorio.cadastrar(build);
     }
     public Build buscar(long id){
+        if(id <= 0){
+            throw new IllegalArgumentException("id inválido");
+        }
         Build build = repositorio.buscar(id);
 
         if (build == null) {
@@ -50,11 +59,14 @@ public class BuildService {
         if (existente == null) {
             throw new BuildNaoEncontradaException("Build não encontrada.");
         }
-
+        compatibilidadeService.validarBuildCompleta(build);
         repositorio.atualizar(build);
     }
 
     public void remover(long id){
+        if(id <= 0){
+            throw new IllegalArgumentException("id inválido");
+        }
         Build existente = repositorio.buscar(id);
 
         if (existente == null) {
