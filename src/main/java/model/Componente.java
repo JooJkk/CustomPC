@@ -65,4 +65,10 @@ public abstract class Componente {
         this.peso = peso;
     }
 
+    private int nivelDesempenho;
+
+    public int getNivelDesempenho() { return nivelDesempenho; }
+    public void setNivelDesempenho(int nivelDesempenho) { this.nivelDesempenho = nivelDesempenho; }
+
+
 }
