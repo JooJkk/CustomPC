@@ -11,12 +11,14 @@ public class Pedido {
     private double valorTotal;
     private Pagamento pagamento;
     private final List<ItemPedido> itens = new ArrayList<>();
-    private static long proximoId = 1;
+
     public Pedido() {
         this.data = LocalDateTime.now();
         this.status = "AGUARDANDO_PAGAMENTO";
-        this.id = proximoId;
-        proximoId++;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void adicionarItem(ItemPedido item) {
