@@ -25,7 +25,7 @@ public class CarrinhoService {
         ItemCarrinho item =
                 new ItemCarrinho(componente, quantidade);
 
-        carrinho.getItens().add(item);
+        carrinho.adicionarItem(item);
 
         componente.setEstoque(
                 componente.getEstoque() - quantidade
@@ -45,7 +45,7 @@ public class CarrinhoService {
                     .getNome()
                     .equalsIgnoreCase(nome)) {
 
-                carrinho.getItens().remove(i);
+                carrinho.removerItem(item);
 
                 System.out.println("Item removido");
                 return;
@@ -111,5 +111,8 @@ public class CarrinhoService {
         }
 
         return total;
+    }
+    public Carrinho getCarrinho() {
+        return carrinho;
     }
 }
