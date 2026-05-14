@@ -5,16 +5,18 @@ import java.util.List;
 import java.time.LocalDateTime;
 
 public class Pedido {
-    private int id;
+    private long id;
     private LocalDateTime data;
     private String status;
     private double valorTotal;
     private Pagamento pagamento;
     private final List<ItemPedido> itens = new ArrayList<>();
-
+    private static long proximoId = 1;
     public Pedido() {
         this.data = LocalDateTime.now();
         this.status = "AGUARDANDO_PAGAMENTO";
+        this.id = proximoId;
+        proximoId++;
     }
 
     public void adicionarItem(ItemPedido item) {
@@ -46,13 +48,16 @@ public class Pedido {
     }
 
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public long getId() { return id; }
 
     public LocalDateTime getData() { return data; }
 
     public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setStatus(String status) {
+        if(status == null || status.isBlank()){
+            throw new IllegalArgumentException("status não pode ser nulo");
+        }
+        this.status = status; }
 
     public double getValorTotal() { return valorTotal; }
 

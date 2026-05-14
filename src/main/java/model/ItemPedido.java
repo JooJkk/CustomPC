@@ -2,7 +2,7 @@ package main.java.model;
 public class ItemPedido {
 
     private int quantidade;
-    private Double precoUnitario;
+    private double precoUnitario;
 
     private Pedido pedido;
     private Componente componente;
@@ -13,14 +13,17 @@ public class ItemPedido {
 
     public double getSubtotal() {
 
-        if (precoUnitario == null) {
-            return 0;
-        }
-
         return quantidade * precoUnitario;
     }
 
     public void setQuantidade(int quantidade) {
+
+        if(quantidade <= 0){
+            throw new IllegalArgumentException(
+                    "quantidade deve ser maior que zero"
+            );
+        }
+
         this.quantidade = quantidade;
     }
 
@@ -29,14 +32,28 @@ public class ItemPedido {
     }
 
     public void setPrecoUnitario(double precoUnitario) {
+
+        if(precoUnitario < 0){
+            throw new IllegalArgumentException(
+                    "preço unitário não pode ser negativo"
+            );
+        }
+
         this.precoUnitario = precoUnitario;
     }
 
-    public Double getPrecoUnitario() {
+    public double getPrecoUnitario() {
         return precoUnitario;
     }
 
     public void setPedido(Pedido pedido) {
+
+        if(pedido == null){
+            throw new IllegalArgumentException(
+                    "pedido não pode ser nulo"
+            );
+        }
+
         this.pedido = pedido;
     }
 
@@ -45,9 +62,16 @@ public class ItemPedido {
     }
 
     public void setComponente(Componente componente) {
-        this.componente = componente;
-    }
 
+        if(componente == null){
+            throw new IllegalArgumentException(
+                    "componente não pode ser nulo"
+            );
+        }
+
+        this.componente = componente;
+        this.precoUnitario = componente.getPreco();
+    }
     public Componente getComponente() {
         return componente;
     }

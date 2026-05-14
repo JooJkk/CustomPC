@@ -13,8 +13,8 @@ public class ItemCarrinho {
     public ItemCarrinho() {}
 
     public ItemCarrinho(Componente componente, int quantidade) {
-        this.componente = componente;
-        this.quantidade = quantidade;
+        setComponente(componente);
+        setQuantidade(quantidade);
         this.precoUnitario = componente.getPreco();
     }
 
@@ -38,6 +38,9 @@ public class ItemCarrinho {
     }
 
     public void setComponente(Componente componente) {
+        if(componente == null){
+            throw new IllegalArgumentException("componente não pode ser nulo");
+        }
         this.componente = componente;
 
         if (this.precoUnitario == 0) {
@@ -50,6 +53,9 @@ public class ItemCarrinho {
     }
 
     public void setPrecoUnitario(double precoUnitario) {
+        if(precoUnitario < 0){
+            throw new IllegalArgumentException("preço não pode ser negativo");
+        }
         this.precoUnitario = precoUnitario;
     }
 

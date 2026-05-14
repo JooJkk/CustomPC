@@ -15,7 +15,11 @@ public class OrdemMontagem {
     public long getId() {return id;}
 
     public String getStatus() {return status;}
-    public void setStatus(String status) {this.status = status;}
+    public void setStatus(String status) {
+        if(status == null || status.isBlank()){
+            throw new IllegalArgumentException("status não pode ser nulo");
+        }
+        this.status = status;}
 
     public LocalDate getDataCriacao() {return dataCriacao;}
     public void setDataCriacao(LocalDate dataCriacao) {this.dataCriacao = dataCriacao;}
