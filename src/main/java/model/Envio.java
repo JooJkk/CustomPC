@@ -6,19 +6,19 @@ public class Envio {
     private String statusEntrega;
 
     public Envio(String codigoRastreio, double valorFrete, String statusEntrega) {
-        this.codigoRastreio = codigoRastreio;
-        this.valorFrete = valorFrete;
-        this.statusEntrega = statusEntrega;
+        setCodigoRastreio(codigoRastreio);
+        setValorFrete(valorFrete);
+        setStatusEntrega(statusEntrega);
 
     }
-    public Envio(){
-
-    }
-
 
     public String getCodigoRastreio() {return codigoRastreio;}
 
     public void setCodigoRastreio(String codigoRastreio) {
+        if(codigoRastreio == null || codigoRastreio.isBlank()){
+            throw new IllegalArgumentException("código de rastreio inválido");
+        }
+
         this.codigoRastreio = codigoRastreio;
     }
 
@@ -27,6 +27,9 @@ public class Envio {
     }
 
     public void setValorFrete(double valorFrete) {
+        if(valorFrete < 0){
+            throw new IllegalArgumentException("valor do frete inválido");
+        }
         this.valorFrete = valorFrete;
     }
 
@@ -35,6 +38,10 @@ public class Envio {
     }
 
     public void setStatusEntrega(String statusEntrega) {
+        if(statusEntrega == null || statusEntrega.isBlank()){
+            throw new IllegalArgumentException("status de entrega inválido");
+        }
+
         this.statusEntrega = statusEntrega;
     }
 

@@ -6,8 +6,11 @@ import java.util.Collections;
 public class Carrinho {
     private int id;
     private double valorTotal= 0.0;
+    private static int proximoId = 1;
 
-
+    public Carrinho() {
+        this.id = proximoId++;
+    }
 
     private List<ItemCarrinho> itens = new ArrayList<>();
 
@@ -46,11 +49,6 @@ public class Carrinho {
     public int getId() {
         return id;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
 
     public double getValorTotal() {
         return valorTotal;

@@ -5,13 +5,10 @@ public class Cliente {
     private String nome;
     private String email;
     private String senha;
+    private static int proximoId = 1;
 
 
 
-    public void setId(int id) {
-        this.id = id;
-
-    }
     public int getId() {
         return id;
     }
@@ -21,7 +18,7 @@ public class Cliente {
         return nome;
     }
     public void setNome(String nome) {
-        if (nome == null || nome.isEmpty() ) {
+        if (nome == null || nome.isBlank() ) {
             throw new IllegalArgumentException("nome nao pode ser nulo");
         }
         this.nome = nome;
@@ -31,6 +28,9 @@ public class Cliente {
         return email;
     }
     public void setEmail (String email) {
+        if (email == null || email.isBlank() ) {
+            throw new IllegalArgumentException("email nao pode ser nulo");
+        }
         this.email = email;
     }
 
@@ -38,11 +38,18 @@ public class Cliente {
         return senha;
     }
     public void setSenha(String senha) {
+        if (senha == null || senha.isBlank() ) {
+            throw new IllegalArgumentException("senha nao pode ser nulo");
+        }
         this.senha = senha;
     }
 
-    public Cliente() {
+    public Cliente(String nome, String email, String senha) {
+        this.id = proximoId++;
 
+        setNome(nome);
+        setEmail(email);
+        setSenha(senha);
     }
 
 }

@@ -2,14 +2,23 @@ package main.java.model;
 
 public class Pagamento {
     private long id;
-    private Double valor;
+    private double valor;
     private String formaPagamento;
     private String status;
-
+    private static long proximoId = 1;
     private Pedido pedido; //
 
-    public Pagamento() {
+    public Pagamento(double valor,
+                     String formaPagamento,
+                     String status,
+                     Pedido pedido) {
 
+        this.id = proximoId++;
+
+        setValor(valor);
+        setFormaPagamento(formaPagamento);
+        setStatus(status);
+        setPedido(pedido);
     }
 
 
@@ -17,11 +26,14 @@ public class Pagamento {
         return id;
     }
 
-    public Double getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(double valor) {
+        if(valor < 0){
+            throw new IllegalArgumentException("valor não pode ser negativo");
+        }
         this.valor = valor;
     }
 
@@ -30,6 +42,9 @@ public class Pagamento {
     }
 
     public void setFormaPagamento(String formaPagamento) {
+        if(formaPagamento == null || formaPagamento.isBlank()){
+            throw new IllegalArgumentException("forma de pagamento inválida");
+        }
         this.formaPagamento = formaPagamento;
     }
 
@@ -38,6 +53,10 @@ public class Pagamento {
     }
 
     public void setStatus(String status) {
+
+        if(status == null || status.isBlank()){
+            throw new IllegalArgumentException("status não pode ser nulo");
+        }
         this.status = status;
     }
 
