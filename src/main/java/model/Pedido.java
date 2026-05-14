@@ -1,123 +1,60 @@
 package main.java.model;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Pedido {
-    private long id;
-    private LocalDate data;
+    private int id;
+    private LocalDateTime data;
     private String status;
-    private Double valorTotal;
-    private static long proximoId = 1;
-    public Pedido(){
-        this.id = proximoId;
-        proximoId++;
-    }
-
-    private Envio envio;
-    public Envio getEnvio() {
-        return envio;
-    }
-    public void setEnvio(Envio envio) {
-        this.envio = envio;
-    }
-
-    private OrdemMontagem ordemMontagem;
-    public OrdemMontagem getOrdemMontagem() {
-        return ordemMontagem;
-    }
-    public void setOrdemMontagem(OrdemMontagem ordemMontagem) {
-        this.ordemMontagem = ordemMontagem;
-    }
-
-    private CupomDesconto cupomDesconto;
-    public CupomDesconto getCupomDesconto() {
-        return cupomDesconto;
-    }
-    public void setCupomDesconto(CupomDesconto cupomDesconto) {
-        this.cupomDesconto = cupomDesconto;
-    }
-
+    private double valorTotal;
     private Pagamento pagamento;
-    public Pagamento getPagamento() {
-        return pagamento;
+    private final List<ItemPedido> itens = new ArrayList<>();
+
+    public Pedido() {
+        this.data = LocalDateTime.now();
+        this.status = "AGUARDANDO_PAGAMENTO";
     }
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
-        if (pagamento != null) {
-            pagamento.setPedido(this);} // eh tipo esse pagamento pertence a este pedido. o pagamento que eu vou receber pertence a esse pedido(setpedido(this))
-    }
-
-    public boolean cancelar() {
-        if (status != null && (status.equalsIgnoreCase("Enviado") || status.equalsIgnoreCase("Entregue"))) {
-            return false; //não pode ser cancelado depois de enviado ou entregue
-        }
-        status = "Cancelado";
-        return true;
-    }
-
-
-
-    private List<ItemPedido> itens = new ArrayList<>();
 
     public void adicionarItem(ItemPedido item) {
+        if (item == null) return;
 
         itens.add(item);
         item.setPedido(this);
+        atualizarTotalInterno();
     }
 
-    public List<ItemPedido> getItens() {
-        return itens;
-    }
-
-    public double calcularTotal() {
+    private void atualizarTotalInterno() {
         double total = 0;
-
         for (ItemPedido item : itens) {
             total += item.getSubtotal();
         }
         this.valorTotal = total;
-        return total;
+    }
+
+    public List<ItemPedido> getItens() {
+        return Collections.unmodifiableList(itens);
+    }
+
+    public void setPagamento(Pagamento pagamento) {
+        if (this.pagamento != null) {
+            throw new IllegalStateException("Este pedido já possui um pagamento associado.");
+        }
+        this.pagamento = pagamento;
+        pagamento.setPedido(this);
     }
 
 
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public long getId() {
+    public LocalDateTime getData() { return data; }
 
-        return id;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
+    public double getValorTotal() { return valorTotal; }
 
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus(){
-        return status;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public Double getValorTotal(){
-        return valorTotal;
-    }
-
-
-
+    public Pagamento getPagamento() { return pagamento; }
 }
-
-
-
-
-
-
-

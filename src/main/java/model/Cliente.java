@@ -1,25 +1,21 @@
 package main.java.model;
 
 public class Cliente {
-    private long id;
+    private int id;
     private String nome;
     private String email;
     private String senha;
-    private Endereco endereco;
-    private String cpf;
-    private static long proximoId = 1;
 
-    public String getCpf() {
-        return cpf;
+
+
+    public void setId(int id) {
+        this.id = id;
+
     }
-
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
 
     public String getNome() {
         return nome;
@@ -38,14 +34,6 @@ public class Cliente {
         this.email = email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -54,15 +42,7 @@ public class Cliente {
     }
 
     public Cliente() {
-        this.id = proximoId;
-        proximoId++;
-    }
-    public Cliente(String nome, String email, String senha) {
-        this.id = proximoId;
-        proximoId++;
-        setNome(nome);
-        setEmail(email);
-        setSenha(senha);
+
     }
 
 }

@@ -1,24 +1,56 @@
 package main.java.model;
 public class ItemCarrinho {
-    private int quantidade;
-    private Double precoUnitario;
-
-
-    private Carrinho carrinho;
     private Componente componente;
 
-    public void setComponente(Componente componente) {
+
+    private int quantidade;
+
+
+    private double precoUnitario;
+
+    private Carrinho carrinho;
+
+    public ItemCarrinho() {}
+
+    public ItemCarrinho(Componente componente, int quantidade) {
         this.componente = componente;
+        this.quantidade = quantidade;
+        this.precoUnitario = componente.getPreco();
+    }
+
+    public double getSubtotal() {
+        return quantidade * precoUnitario;
+    }
+
+    // só aceita números maiores que 0
+    public void setQuantidade(int quantidade) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException(
+                    "A quantidade deve ser maior que zero."
+            );
+        }
+
+        this.quantidade = quantidade;
     }
 
     public Componente getComponente() {
         return componente;
     }
 
-    public double getSubtotal() {
-        if (precoUnitario == null)
-            return 0;
-        return quantidade * precoUnitario;
+    public void setComponente(Componente componente) {
+        this.componente = componente;
+
+        if (this.precoUnitario == 0) {
+            this.precoUnitario = componente.getPreco();
+        }
+    }
+
+    public double getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(double precoUnitario) {
+        this.precoUnitario = precoUnitario;
     }
 
     public void setCarrinho(Carrinho carrinho) {
@@ -29,23 +61,7 @@ public class ItemCarrinho {
         return carrinho;
     }
 
-
-
-
-    public void setQuantidade(int quantidade){
-        this.quantidade = quantidade;
-    }
     public int getQuantidade() {
         return quantidade;
     }
-
-    public void setPrecoUnitario(Double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-    public Double getPrecoUnitario(){
-        return precoUnitario;
-    }
-
-
-
 }

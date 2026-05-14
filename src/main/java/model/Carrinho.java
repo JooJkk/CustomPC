@@ -1,54 +1,58 @@
 package main.java.model;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Carrinho {
-    private long id;
-    private Double valorTotal;
-    private static long proximoId = 1;
+    private int id;
+    private double valorTotal= 0.0;
+
 
 
     private List<ItemCarrinho> itens = new ArrayList<>();
 
     public void adicionarItem(ItemCarrinho item) {
         itens.add(item);
-        item.setCarrinho(this); // mesma lógica do pedido
+        item.setCarrinho(this);// mesma lógica do pedido
+        atualizarTotalInterno();
     }
 
     public void removerItem(ItemCarrinho item) {
-        if(itens.remove(item)){
-            item.setCarrinho(null);}
+        if (itens.remove(item)) {
+            item.setCarrinho(null); //faz com q o item q saia do carrinho nao seja mais apontado.
+            atualizarTotalInterno();
+        }
     }
 
-
-
-
-    public double calcularTotal() {
+    // tirei calcaulartotal e coloquei esse. esse metodo eh disparado automaticamente dentro de adicionaritem e removeritem
+    private void atualizarTotalInterno() {
         double total = 0;
         for (ItemCarrinho item : itens) {
-            total = total + item.getSubtotal();
+            total += item.getSubtotal();
         }
-        valorTotal = total;
-        return total;
+        this.valorTotal = total;
     }
 
+    //caso o cliente queira comprar novamente, o carrinho da compra passada vai estar zerado
+    public void limpar() {
+        this.itens.clear();
+        this.valorTotal = 0.0;
+    }
 
-    public long getId() {
+    public List<ItemCarrinho> getItens() {
+        return Collections.unmodifiableList(itens);  //precisa passar pelo metodo adicionaritem antes pra n baguncar a logica.impede que as pessoas deem clear, remove, set...
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-
+    public void setId(int id) {
+        this.id = id;
     }
+
+
     public double getValorTotal() {
-        this.valorTotal = calcularTotal();
         return valorTotal;
     }
-
-    public Carrinho() {
-        this.id = proximoId;
-        proximoId++;
-    }
-
 }
