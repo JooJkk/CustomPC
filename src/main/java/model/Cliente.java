@@ -6,8 +6,18 @@ public class Cliente {
     private String email;
     private String senha;
     private static int proximoId = 1;
+    private Endereco endereco;
 
+    public void setEndereco(Endereco endereco) {
+        if (endereco == null) {
+            throw new IllegalArgumentException("Endereço não pode ser nulo");
+        }
+        this.endereco = endereco;
+    }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
     public int getId() {
         return id;
@@ -44,12 +54,13 @@ public class Cliente {
         this.senha = senha;
     }
 
-    public Cliente(String nome, String email, String senha) {
+    public Cliente(String nome, String email, String senha, Endereco endereco) {
         this.id = proximoId++;
 
         setNome(nome);
         setEmail(email);
         setSenha(senha);
+        setEndereco(endereco);
     }
 
 }

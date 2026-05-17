@@ -4,12 +4,25 @@ public class Envio {
     private String codigoRastreio;
     private double valorFrete;
     private String statusEntrega;
+    private Endereco endereco;
 
-    public Envio(String codigoRastreio, double valorFrete, String statusEntrega) {
+
+    public Envio(String codigoRastreio, double valorFrete, String statusEntrega, Endereco endereco) {
         setCodigoRastreio(codigoRastreio);
         setValorFrete(valorFrete);
         setStatusEntrega(statusEntrega);
+        setEndereco(endereco);
+    }
 
+    public void setEndereco(Endereco endereco) {
+        if (endereco == null) {
+            throw new IllegalArgumentException("Endereço não pode ser nulo");
+        }
+        this.endereco = endereco;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
     }
 
     public String getCodigoRastreio() {return codigoRastreio;}
