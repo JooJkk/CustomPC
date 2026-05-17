@@ -11,7 +11,7 @@ public class Pedido {
     private double valorTotal;
     private Pagamento pagamento;
     private final List<ItemPedido> itens = new ArrayList<>();
-
+    private Endereco endereco;
     public Pedido() {
         this.data = LocalDateTime.now();
         this.status = "AGUARDANDO_PAGAMENTO";
@@ -51,6 +51,17 @@ public class Pedido {
 
 
     public long getId() { return id; }
+
+    public void setEndereco(Endereco endereco) {
+        if (endereco == null) {
+            throw new IllegalArgumentException("Endereço não pode ser nulo");
+        }
+        this.endereco = endereco;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
     public LocalDateTime getData() { return data; }
 
