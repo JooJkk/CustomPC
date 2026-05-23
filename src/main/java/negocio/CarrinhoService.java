@@ -1,8 +1,8 @@
 package main.java.negocio;
 
 import main.java.exception.EstoqueInsuficienteException;
-import main.java.model.Componente;
-import main.java.model.Carrinho;
+import main.java.model.componentes.Componente;
+import main.java.model.componentes.Carrinho;
 import main.java.model.ItemCarrinho;
 
 public class CarrinhoService {

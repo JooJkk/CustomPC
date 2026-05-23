@@ -1,7 +1,7 @@
 package main.java.negocio;
 
 import main.java.dados.IRepositorioComponente;
-import main.java.model.Componente;
+import main.java.model.componentes.Componente;
 import main.java.exception.*;
 import java.util.List;
 

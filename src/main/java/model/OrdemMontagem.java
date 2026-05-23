@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class OrdemMontagem {
     private long id;
+    private Pedido pedido;
     private String status;
     private LocalDate dataCriacao;
     private static long proximoId = 1;
@@ -13,6 +14,14 @@ public class OrdemMontagem {
     }
 
     public long getId() {return id;}
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
 
     public String getStatus() {return status;}
     public void setStatus(String status) {

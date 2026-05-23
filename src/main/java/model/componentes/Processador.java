@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.model.componentes;
 
 public class Processador extends Componente{
     private String socket;

@@ -1,6 +1,6 @@
 package main.java.negocio;
 import main.java.dados.IRepositorioPedido;
-import main.java.model.Carrinho;
+import main.java.model.componentes.Carrinho;
 import main.java.model.ItemCarrinho;
 import main.java.model.ItemPedido;
 import main.java.model.Pedido;

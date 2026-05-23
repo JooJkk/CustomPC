@@ -1,4 +1,7 @@
 package main.java.model;
+
+import main.java.model.componentes.Componente;
+
 public class ItemPedido {
 
     private int quantidade;

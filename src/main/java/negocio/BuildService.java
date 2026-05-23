@@ -1,6 +1,6 @@
 package main.java.negocio;
 import main.java.dados.IRepositorioBuild;
-import main.java.model.Build;
+import main.java.model.componentes.Build;
 import main.java.exception.*;
 
 import java.util.List;

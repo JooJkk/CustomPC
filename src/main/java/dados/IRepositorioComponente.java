@@ -1,6 +1,6 @@
 package main.java.dados;
 
-import main.java.model.Componente;
+import main.java.model.componentes.Componente;
 import java.util.List;
 
 public interface IRepositorioComponente {
