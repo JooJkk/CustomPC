@@ -1,4 +1,8 @@
 package main.java.model;
+
+import main.java.model.componentes.Carrinho;
+import main.java.model.componentes.Componente;
+
 public class ItemCarrinho {
     private Componente componente;
 

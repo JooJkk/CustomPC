@@ -12,6 +12,7 @@ public class Pedido {
     private Pagamento pagamento;
     private final List<ItemPedido> itens = new ArrayList<>();
     private Endereco endereco;
+    private OrdemMontagem ordemMontagem;
     public Pedido() {
         this.data = LocalDateTime.now();
         this.status = "AGUARDANDO_PAGAMENTO";
@@ -27,6 +28,16 @@ public class Pedido {
         itens.add(item);
         item.setPedido(this);
         atualizarTotalInterno();
+    }
+
+    public OrdemMontagem getOrdemMontagem() {
+        return ordemMontagem;
+    }
+
+    public void setOrdemMontagem(OrdemMontagem ordemMontagem) {
+        if(ordemMontagem != null) {
+            this.ordemMontagem = ordemMontagem;
+        }
     }
 
     private void atualizarTotalInterno() {

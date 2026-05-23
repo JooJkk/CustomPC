@@ -1,6 +1,6 @@
-package main.java.model;
+package main.java.model.componentes;
 
-public class MemoriaRam extends Componente{
+public class MemoriaRam extends Componente {
     private String tipoRam;
     private int capacidadeGB;
     private int frequenciaMHz;
