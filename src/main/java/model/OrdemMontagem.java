@@ -16,7 +16,9 @@ public class OrdemMontagem {
     public long getId() {return id;}
 
     public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+        if(pedido != null) {
+            this.pedido = pedido;
+        }
     }
 
     public Pedido getPedido() {
