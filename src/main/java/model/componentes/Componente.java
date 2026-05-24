@@ -1,4 +1,4 @@
-package main.java.model.componentes;
+package model.componentes;
 
 public abstract class Componente {
     private long id;

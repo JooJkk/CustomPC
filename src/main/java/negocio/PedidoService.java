@@ -1,10 +1,10 @@
-package main.java.negocio;
-import main.java.dados.IRepositorioPedido;
-import main.java.model.componentes.Carrinho;
-import main.java.model.ItemCarrinho;
-import main.java.model.ItemPedido;
-import main.java.model.Pedido;
-import main.java.exception.*;
+package negocio;
+import dados.IRepositorioPedido;
+import model.componentes.Carrinho;
+import model.ItemCarrinho;
+import model.ItemPedido;
+import model.Pedido;
+import exception.*;
 
 
 public class PedidoService {

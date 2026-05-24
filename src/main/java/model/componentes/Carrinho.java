@@ -1,5 +1,5 @@
-package main.java.model.componentes;
-import main.java.model.ItemCarrinho;
+package model.componentes;
+import model.ItemCarrinho;
 
 import java.util.ArrayList;
 import java.util.List;

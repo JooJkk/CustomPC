@@ -1,6 +1,6 @@
-package main.java.dados;
+package dados;
 
-import main.java.model.componentes.Componente;
+import model.componentes.Componente;
 import java.util.List;
 
 public interface IRepositorioComponente {

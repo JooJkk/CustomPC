@@ -1,9 +1,9 @@
-package main.java.dados;
+package dados;
 import java.util.List;
 
-import main.java.exception.PedidoNaoEncontradoException;
-import main.java.model.Pedido;
-import main.java.exception.*;
+import exception.PedidoNaoEncontradoException;
+import model.Pedido;
+import exception.*;
 
 public interface IRepositorioPedido {
 

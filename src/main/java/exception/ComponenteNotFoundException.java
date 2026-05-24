@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 public class ComponenteNotFoundException extends RuntimeException {
     public ComponenteNotFoundException(String message) {

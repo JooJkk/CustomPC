@@ -1,4 +1,4 @@
-package main.java.model.componentes;
+package model.componentes;
 
 public class PlacaVideo extends Componente{
     private int comprimentoMM;

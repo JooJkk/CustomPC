@@ -1,6 +1,6 @@
-package main.java.dados;
+package dados;
 
-import main.java.model.componentes.Build;
+import model.componentes.Build;
 
 import java.util.List;
 

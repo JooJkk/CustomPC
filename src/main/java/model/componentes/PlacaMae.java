@@ -1,4 +1,4 @@
-package main.java.model.componentes;
+package model.componentes;
 
 public class PlacaMae extends Componente{
     private String socket;

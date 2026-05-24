@@ -1,4 +1,4 @@
-package main.java.model.componentes;
+package model.componentes;
 
 public class Fonte extends Componente{
     private int potenciaWatts;

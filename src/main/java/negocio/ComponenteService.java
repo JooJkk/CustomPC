@@ -1,8 +1,8 @@
-package main.java.negocio;
+package negocio;
 
-import main.java.dados.IRepositorioComponente;
-import main.java.model.componentes.Componente;
-import main.java.exception.*;
+import dados.IRepositorioComponente;
+import model.componentes.Componente;
+import exception.*;
 import java.util.List;
 
 public class ComponenteService {

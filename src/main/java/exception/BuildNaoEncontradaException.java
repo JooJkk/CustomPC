@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 public class BuildNaoEncontradaException extends RuntimeException {
     public BuildNaoEncontradaException(String message) {

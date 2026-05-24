@@ -1,8 +1,8 @@
-package main.java.dados;
+package dados;
 import java.util.ArrayList;
 import java.util.List;
-import main.java.model.Pedido;
-import main.java.exception.*;
+import model.Pedido;
+import exception.*;
 
 
 public class RepositorioPedido implements IRepositorioPedido {

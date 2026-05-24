@@ -1,6 +1,6 @@
-package main.java.model;
+package model;
 
-import main.java.model.componentes.Componente;
+import model.componentes.Componente;
 
 public class ItemPedido {
 

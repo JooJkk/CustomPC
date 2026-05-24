@@ -1,5 +1,5 @@
-package main.java.dados;
-import main.java.model.componentes.Build;
+package dados;
+import model.componentes.Build;
 import java.util.List;
 
 public interface IRepositorioBuild {

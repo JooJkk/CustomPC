@@ -1,7 +1,7 @@
-package main.java.negocio;
-import main.java.dados.IRepositorioBuild;
-import main.java.model.componentes.Build;
-import main.java.exception.*;
+package negocio;
+import dados.IRepositorioBuild;
+import model.componentes.Build;
+import exception.*;
 
 import java.util.List;
 

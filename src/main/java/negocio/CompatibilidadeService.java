@@ -1,9 +1,9 @@
-package main.java.negocio;
+package negocio;
 
-import main.java.exception.BuildIncompativelException;
-import main.java.model.componentes.Build;
-import main.java.model.componentes.MemoriaRam;
-import main.java.model.componentes.PlacaMae;
+import exception.BuildIncompativelException;
+import model.componentes.Build;
+import model.componentes.MemoriaRam;
+import model.componentes.PlacaMae;
 
 public class CompatibilidadeService {
 

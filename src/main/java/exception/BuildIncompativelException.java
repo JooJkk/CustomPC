@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 public class BuildIncompativelException extends RuntimeException {
     public BuildIncompativelException(String mensagem) {
