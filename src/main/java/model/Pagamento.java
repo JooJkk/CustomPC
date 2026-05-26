@@ -8,6 +8,10 @@ public class Pagamento {
     private static long proximoId = 1;
     private Pedido pedido; //
     private  CupomDesconto cupom;
+    public Pagamento(){
+        this.id = proximoId++;
+    }
+
     public Pagamento(double valor,
                      String formaPagamento,
                      String status,

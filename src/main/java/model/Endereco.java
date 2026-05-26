@@ -35,11 +35,14 @@ public class Endereco {
         if (numero == null || numero.isBlank()) {
             throw new IllegalArgumentException("número não pode ser nulo ou vazio.");
         }
-        int num = Integer.parseInt(numero);
-        if (num <= 0) {
-            throw new IllegalArgumentException("número deve ser maior que zero.");
+        try {
+            int num = Integer.parseInt(numero);
+            if (num <= 0) {
+                throw new IllegalArgumentException("número deve ser maior que zero.");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("número invalido! Verifique se não tem letras");
         }
-
         this.numero = numero;
     }
 

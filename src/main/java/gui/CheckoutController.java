@@ -1,5 +1,8 @@
 package gui;
 
+import dados.IRepositorioPedido;
+import dados.RepositorioPedido;
+import exception.CarrinhoVazioException;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -27,13 +30,13 @@ CheckoutController controller =
 
 controller.setCarrinhoService(carrinhoService); */
     private CarrinhoService carrinhoService;
-
-    public void setCarrinhoService(
-            CarrinhoService carrinhoService
+    private PedidoService pedidoService;
+    public void setCarrinhoService(CarrinhoService carrinhoService
     ) {
         this.carrinhoService = carrinhoService;
         carregarDados();
     }
+
 
     //tabela com dados dos produtos comprados
     @FXML
@@ -120,15 +123,50 @@ controller.setCarrinhoService(carrinhoService); */
 
     @FXML
     private void finalizarCompra() {
+        IRepositorioPedido repositorio = new RepositorioPedido();
+        pedidoService = new PedidoService(repositorio);
+
         String rua = txtRua.getText();
         String numero = txtNumero.getText();
         String cidade = txtCidade.getText();
         String cep = txtCep.getText();
         String estado = txtEstado.getText();
         String bairro = txtBairro.getText();
-        Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
 
+
+
+        Toggle selecionado = grupoPagamento.getSelectedToggle();
+
+        if (selecionado == null) {
+            alert("Selecione uma forma de pagamento!");
+            return;
+        }
+
+        String formaPagamento = ((RadioButton) selecionado).getText();
+
+        try {
+            Pagamento pagamento = new Pagamento();
+            pagamento.setFormaPagamento(formaPagamento);
+            pagamento.setValor(carrinhoService.calcularTotal());
+
+            Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
+            pedidoService.finalizarCompra(carrinhoService.getCarrinho(),  endereco, pagamento);
+        } catch (CarrinhoVazioException e) {
+            alert("Carrinho não pode estar vazio!");
+        }
+        catch (IllegalArgumentException e){
+            alert(e.getMessage());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            alert("Erro: " + e.getMessage());
+        }
 
     }
 
+    private void alert(String mensagem) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(mensagem);
+        alert.showAndWait();
+    }
 }

@@ -1,9 +1,6 @@
 package negocio;
 import dados.IRepositorioPedido;
-import model.Carrinho;
-import model.ItemCarrinho;
-import model.ItemPedido;
-import model.Pedido;
+import model.*;
 import exception.*;
 
 
@@ -29,14 +26,17 @@ public class PedidoService {
         System.out.println("Pedido " + id + " foi cancelado com sucesso.");
     }
 
-    public Pedido finalizarCompra(Carrinho carrinho) throws CarrinhoVazioException {
+    public Pedido finalizarCompra(Carrinho carrinho, Endereco endereco, Pagamento pagamento) throws CarrinhoVazioException {
         if (carrinho.getItens() == null || carrinho.getItens().isEmpty()) {
             throw new CarrinhoVazioException();
         }
 
         Pedido novoPedido = new Pedido();
         novoPedido.setId(carrinho.getId());
-
+        novoPedido.setEndereco(endereco);
+        novoPedido.setPagamento(pagamento);
+        novoPedido.getPagamento().setStatus("PENDENTE");
+        novoPedido.setStatus("PENDENTE");
         for (ItemCarrinho itemC : carrinho.getItens()) {
 
             ItemPedido itemP = new ItemPedido();
