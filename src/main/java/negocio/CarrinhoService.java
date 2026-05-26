@@ -2,7 +2,7 @@ package negocio;
 
 import exception.EstoqueInsuficienteException;
 import model.componentes.Componente;
-import model.componentes.Carrinho;
+import model.Carrinho;
 import model.ItemCarrinho;
 
 public class CarrinhoService {

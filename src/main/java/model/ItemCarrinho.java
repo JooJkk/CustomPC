@@ -1,6 +1,5 @@
 package model;
 
-import model.componentes.Carrinho;
 import model.componentes.Componente;
 
 public class ItemCarrinho {

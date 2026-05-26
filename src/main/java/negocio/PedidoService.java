@@ -1,6 +1,6 @@
 package negocio;
 import dados.IRepositorioPedido;
-import model.componentes.Carrinho;
+import model.Carrinho;
 import model.ItemCarrinho;
 import model.ItemPedido;
 import model.Pedido;
