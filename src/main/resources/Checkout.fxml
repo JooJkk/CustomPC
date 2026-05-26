@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -16,16 +19,13 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CheckoutController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <top>
-            <Label prefHeight="18.0" prefWidth="56.0" text="Checkout" BorderPane.alignment="CENTER" />
-         </top>
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="289.0">
+                  <VBox prefHeight="144.0" prefWidth="600.0">
                      <children>
                         <Label text="Informações do pedido" />
-                        <TableView prefHeight="190.0" prefWidth="600.0">
+                        <TableView fx:id="tabelaCheckout" prefHeight="125.0" prefWidth="600.0">
                           <columns>
                             <TableColumn prefWidth="116.0" text="Produto" />
                             <TableColumn prefWidth="168.0" text="Quantidade" />
@@ -35,76 +35,104 @@
                         </TableView>
                      </children>
                   </VBox>
-                  <HBox prefHeight="135.0" prefWidth="600.0">
+                  <HBox prefHeight="110.0" prefWidth="600.0">
                      <children>
                         <VBox prefHeight="91.0" prefWidth="600.0">
                            <children>
-                              <Label text="Endereço de entrega" />
-                              <GridPane prefHeight="94.0" prefWidth="258.0">
+                              <Label text="Endereço de entrega">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <GridPane hgap="10.0" prefHeight="352.0" prefWidth="320.0" vgap="10.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.60003662109375" minWidth="10.0" prefWidth="56.799993896484374" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="527.2" minWidth="10.0" prefWidth="201.6000061035156" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label prefHeight="18.0" prefWidth="143.0" text="Rua: " />
-                                    <Label text="Número:" GridPane.rowIndex="3" />
+                                    <Label text="Número:" GridPane.rowIndex="4" />
                                     <Label text="Cep:" GridPane.rowIndex="5" />
-                                    <Label text="Cidade: " GridPane.rowIndex="1" />
-                                    <Label text="Estado: " GridPane.rowIndex="2" />
-                                    <TextField GridPane.columnIndex="1" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField prefHeight="12.0" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label text="Cidade: " GridPane.rowIndex="2" />
+                                    <Label text="Estado: " GridPane.rowIndex="3" />
+                                    <TextField fx:id="txtRua" prefWidth="233.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="txtCidade" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtEstado" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="txtNumero" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txtCep" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label text="Bairro" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtBairro" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
+                                 <VBox.margin>
+                                    <Insets top="8.0" />
+                                 </VBox.margin>
                               </GridPane>
                            </children>
                         </VBox>
                         <VBox prefHeight="302.0" prefWidth="560.0">
                            <children>
                               <Label text="Forma de Pagamento" />
-                              <RadioButton mnemonicParsing="false" text="Pix" />
-                              <RadioButton mnemonicParsing="false" text="Cartão" />
-                              <RadioButton mnemonicParsing="false" text="Boleto" />
+                              <RadioButton fx:id="btnPix" mnemonicParsing="false" text="Pix">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="grupoPagamento" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="btnCartao" mnemonicParsing="false" text="Cartão" toggleGroup="$grupoPagamento" />
+                              <RadioButton fx:id="btnBoleto" mnemonicParsing="false" text="Boleto" toggleGroup="$grupoPagamento" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="90.0" prefWidth="600.0">
-                     <children>
-                        <GridPane prefHeight="40.0" prefWidth="600.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label text="Frete" GridPane.rowIndex="1" />
-                              <Label text="Total" GridPane.rowIndex="2" />
-                              <Label text="Subtotal" />
-                              <Label text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="R$ 0,00" GridPane.columnIndex="1" />
-                           </children>
-                        </GridPane>
-                        <RadioButton mnemonicParsing="false" text="Confirmar Compra" />
-                     </children>
-                  </VBox>
                </children>
             </VBox>
          </center>
+         <top>
+            <HBox prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnVoltar" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Voltar" />
+                  <Label prefHeight="18.0" prefWidth="265.0" text="Checkout" />
+                  <Button fx:id="btnLogar" mnemonicParsing="false" text="Login" />
+               </children>
+            </HBox>
+         </top>
+         <bottom>
+            <VBox prefHeight="91.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane prefHeight="40.0" prefWidth="600.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Frete" GridPane.rowIndex="1" />
+                        <Label text="Total" GridPane.rowIndex="2" />
+                        <Label text="Subtotal" />
+                        <Label fx:id="txtTotal" text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="txtFrete" text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="txtSubtotal" text="R$ 0,00" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="btnConfirmar" mnemonicParsing="false" text="Confirmar Compra" />
+               </children>
+               <BorderPane.margin>
+                  <Insets top="8.0" />
+               </BorderPane.margin>
+            </VBox>
+         </bottom>
       </BorderPane>
+      <HBox layoutX="-160.0" layoutY="-113.0" prefHeight="100.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
