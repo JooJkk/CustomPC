@@ -32,8 +32,14 @@ public class ConfirmacaoController {
         lblPagamento.setText(pedido.getPagamento().getFormaPagamento());
         lblValor.setText(String.valueOf(pedido.getValorTotal()));
         lblEndereco.setText(pedido.getEndereco().toString());
+        lblStatus.setText(pedido.getStatus());
+        ObservableList<ItemPedido> itens = FXCollections.observableArrayList(pedido.getItens());
+
+        tabelaCheckout.setItems(itens);
     }
 
+    @FXML
+    private Label lblStatus;
     @FXML
     private Label lblIdPedido;
 
@@ -45,5 +51,33 @@ public class ConfirmacaoController {
 
     @FXML
     private Label lblValor;
+
+    //tabela com dados dos produtos comprados
+    @FXML
+    private TableView<ItemPedido> tabelaCheckout;
+
+    @FXML
+    private TableColumn<ItemPedido, String> colunaProduto;
+
+    @FXML
+    private TableColumn<ItemPedido, Integer> colunaQuantidade;
+
+    @FXML
+    private TableColumn<ItemPedido, Double> colunaPreco;
+
+    @FXML
+    private TableColumn<ItemPedido, Double> colunaTotal;
+
+
+    public void initialize() {
+
+        //Tabela
+        colunaTotal.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
+
+        colunaProduto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getComponente().getNome()));
+        colunaQuantidade.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantidade()).asObject());
+        colunaPreco.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrecoUnitario()).asObject());
+
+    }
 }
 

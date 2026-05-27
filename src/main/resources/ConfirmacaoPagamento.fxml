@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -16,78 +18,13 @@
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConfirmacaoController">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="1200.0">
-         <left>
-            <VBox prefHeight="666.0" prefWidth="522.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Resumo da compra:">
-                     <font>
-                        <Font size="37.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblIdPedido" text="Id do pedido: ">
-                     <font>
-                        <Font size="22.0" />
-                     </font>
-                  </Label>
-                  <GridPane prefHeight="91.0" prefWidth="856.0" vgap="20.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.4000244140625" minWidth="10.0" prefWidth="175.20001449584962" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1049.1999969482422" minWidth="10.0" prefWidth="294.59998550415037" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label text="Endereço de entrega:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Pagamento:" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Valor:" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblEndereco" text="endereço" GridPane.columnIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblPagamento" text="pagamento" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lblValor" text="valor" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </GridPane>
-               </children>
-               <padding>
-                  <Insets left="20.0" top="20.0" />
-               </padding>
-            </VBox>
-         </left>
          <bottom>
             <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </bottom>
          <top>
             <HBox alignment="CENTER" prefHeight="108.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Pedido realizado com sucesso!">
+                  <Label text="✅ Pedido realizado com sucesso!">
                      <font>
                         <Font size="27.0" />
                      </font>
@@ -105,6 +42,117 @@
                </children>
             </HBox>
          </top>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="592.0" prefWidth="603.0">
+                     <children>
+                        <Label text="Resumo da compra:">
+                           <font>
+                              <Font size="37.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblIdPedido" text="Id do pedido: ">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <GridPane prefHeight="156.0" prefWidth="566.0" vgap="20.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.4000244140625" minWidth="10.0" prefWidth="175.20001449584962" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1049.1999969482422" minWidth="10.0" prefWidth="294.59998550415037" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Endereço de entrega:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Pagamento:" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Valor:" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblEndereco" text="endereço" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblPagamento" text="pagamento" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblValor" text="valor" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Status" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lblStatus" text="status" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="630.0">
+                     <children>
+                        <Label text="Pedidos comprados:">
+                           <font>
+                              <Font size="37.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tabelaCheckout" prefHeight="214.0" prefWidth="500.0">
+                           <columns>
+                              <TableColumn fx:id="colunaProduto" prefWidth="140.00000876188278" text="Produto" />
+                              <TableColumn fx:id="colunaQuantidade" prefWidth="142.40000915527344" text="Quantidade" />
+                              <TableColumn fx:id="colunaPreco" prefWidth="151.99993896484375" text="Preço unidade" />
+                              <TableColumn fx:id="colunaTotal" prefWidth="153.59994506835938" text="Preço total" />
+                           </columns>
+                           <VBox.margin>
+                              <Insets right="10.0" />
+                           </VBox.margin>
+                        </TableView>
+                        <Button mnemonicParsing="false" text="Gerar nota fiscal">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets top="90.0" />
+               </BorderPane.margin>
+            </HBox>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

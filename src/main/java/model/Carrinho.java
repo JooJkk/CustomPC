@@ -52,6 +52,7 @@ public class Carrinho {
     }
 
     public double getValorTotal() {
+        atualizarTotalInterno();
         return valorTotal;
     }
 }

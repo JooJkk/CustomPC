@@ -12,6 +12,7 @@ public class Pedido {
     private Pagamento pagamento;
     private final List<ItemPedido> itens = new ArrayList<>();
     private Endereco endereco;
+    private double frete;
     private OrdemMontagem ordemMontagem;
     public Pedido() {
         this.data = LocalDateTime.now();
@@ -21,7 +22,13 @@ public class Pedido {
     public void setId(long id) {
         this.id = id;
     }
+    public double getFrete() {
+        return frete;
+    }
 
+    public void setFrete(double frete) {
+        this.frete = frete;
+    }
     public void adicionarItem(ItemPedido item) {
         if (item == null) return;
 
@@ -45,7 +52,7 @@ public class Pedido {
         for (ItemPedido item : itens) {
             total += item.getSubtotal();
         }
-        this.valorTotal = total;
+        this.valorTotal = total + frete;
     }
 
     public List<ItemPedido> getItens() {
@@ -84,6 +91,9 @@ public class Pedido {
         this.status = status; }
 
     public double getValorTotal() { return valorTotal; }
+
+    public void setValorTotal(double valorTotal) {this.valorTotal = valorTotal;
+    }
 
     public Pagamento getPagamento() { return pagamento; }
 }

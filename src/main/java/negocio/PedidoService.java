@@ -36,6 +36,14 @@ public class PedidoService {
         Pedido novoPedido = new Pedido();
         novoPedido.setId(carrinho.getId());
         novoPedido.setEndereco(endereco);
+        double subtotal = carrinho.getValorTotal();
+        double frete = calcularFrete(endereco);
+        double total = subtotal + frete;
+        novoPedido.setFrete(frete);
+
+        novoPedido.setValorTotal(total);
+
+        pagamento.setValor(total);
         novoPedido.setPagamento(pagamento);
         novoPedido.getPagamento().setStatus("PENDENTE");
         novoPedido.setStatus("PENDENTE");
