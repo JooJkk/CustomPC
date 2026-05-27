@@ -89,4 +89,9 @@ public class Endereco {
 
         this.estado = estado;
         }
+
+    @Override
+    public String toString() {
+        return rua + ", " + numero + " " + bairro + " " + cidade + " - " + estado + " " + "CEP: " + cep;
+    }
     }

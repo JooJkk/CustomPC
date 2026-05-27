@@ -54,9 +54,9 @@
                         <Label text="Frete:" GridPane.rowIndex="1" />
                         <Label text="Total:" GridPane.rowIndex="2" />
                         <Label text="Subtota:" />
-                        <Label fx:id="txtTotal" text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="txtFrete" text="R$ 0,00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="txtSubtotal" text="R$ 0,00" GridPane.columnIndex="1" />
+                        <Label fx:id="txtTotal" text="--" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="txtFrete" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="txtSubtotal" text="--" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <Button fx:id="btnConfirmar" mnemonicParsing="false" onAction="#finalizarCompra" text="Confirmar Compra">
@@ -116,13 +116,13 @@
                                     <Label text="Cep:" GridPane.rowIndex="5" />
                                     <Label text="Cidade: " GridPane.rowIndex="2" />
                                     <Label text="Estado: " GridPane.rowIndex="3" />
-                                    <TextField fx:id="txtRua" prefWidth="233.0" GridPane.columnIndex="1" />
-                                    <TextField fx:id="txtCidade" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="txtEstado" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField fx:id="txtNumero" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField fx:id="txtCep" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="txtRua" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="txtCidade" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtEstado" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="txtNumero" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txtCep" onKeyReleased="#atualizarFrete" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                     <Label text="Bairro" GridPane.rowIndex="1" />
-                                    <TextField fx:id="txtBairro" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtBairro" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                                  <VBox.margin>
                                     <Insets top="8.0" />

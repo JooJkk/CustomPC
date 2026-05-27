@@ -62,5 +62,11 @@ public class Cliente {
         setSenha(senha);
         setEndereco(endereco);
     }
+    public Cliente(String nome, String email, String senha) {
+        this.id = proximoId++;
 
+        setNome(nome);
+        setEmail(email);
+        setSenha(senha);
+    }
 }

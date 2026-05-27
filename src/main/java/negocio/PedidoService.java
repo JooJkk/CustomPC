@@ -25,7 +25,9 @@ public class PedidoService {
         repositorio.deletar(id);
         System.out.println("Pedido " + id + " foi cancelado com sucesso.");
     }
-
+    public double calcularFrete(Endereco endereco) {
+        return 25.0;
+    }
     public Pedido finalizarCompra(Carrinho carrinho, Endereco endereco, Pagamento pagamento) throws CarrinhoVazioException {
         if (carrinho.getItens() == null || carrinho.getItens().isEmpty()) {
             throw new CarrinhoVazioException();

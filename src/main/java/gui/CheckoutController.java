@@ -8,7 +8,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.*;
 import negocio.*;
 import javafx.fxml.FXML;
@@ -31,6 +35,10 @@ CheckoutController controller =
 controller.setCarrinhoService(carrinhoService); */
     private CarrinhoService carrinhoService;
     private PedidoService pedidoService;
+    private Cliente usuarioLogado;
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+    }
     public void setCarrinhoService(CarrinhoService carrinhoService
     ) {
         this.carrinhoService = carrinhoService;
@@ -89,7 +97,7 @@ controller.setCarrinhoService(carrinhoService); */
 
     // Finalizar (e dados da compra finais)
     @FXML
-    private Button btnFinalizar;
+    private Button btnConfirmar;
 
     @FXML
     private Label txtSubtotal;
@@ -112,6 +120,8 @@ controller.setCarrinhoService(carrinhoService); */
 
     @FXML
     public void initialize() {
+        IRepositorioPedido repositorio = new RepositorioPedido();
+        pedidoService = new PedidoService(repositorio);
         //Tabela
         colunaTotal.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
 
@@ -123,8 +133,7 @@ controller.setCarrinhoService(carrinhoService); */
 
     @FXML
     private void finalizarCompra() {
-        IRepositorioPedido repositorio = new RepositorioPedido();
-        pedidoService = new PedidoService(repositorio);
+
 
         String rua = txtRua.getText();
         String numero = txtNumero.getText();
@@ -150,7 +159,17 @@ controller.setCarrinhoService(carrinhoService); */
             pagamento.setValor(carrinhoService.calcularTotal());
 
             Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
-            pedidoService.finalizarCompra(carrinhoService.getCarrinho(),  endereco, pagamento);
+            Pedido pedido = pedidoService.finalizarCompra(carrinhoService.getCarrinho(),  endereco, pagamento);
+            //Carrega tela de pagamento, passando o cliente logado e o pedido feito
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConfirmacaoPagamento.fxml"));
+
+            Parent root = loader.load();
+            ConfirmacaoController controller =
+                    loader.getController();
+            controller.setPedido(pedido);
+            Stage stage = (Stage) btnConfirmar.getScene().getWindow();
+
+            stage.setScene(new Scene(root));
         } catch (CarrinhoVazioException e) {
             alert("Carrinho não pode estar vazio!");
         }
@@ -164,6 +183,55 @@ controller.setCarrinhoService(carrinhoService); */
 
     }
 
+    @FXML
+    private void atualizarFrete() {
+
+        try {
+
+            String rua = txtRua.getText();
+            String numero = txtNumero.getText();
+            String cidade = txtCidade.getText();
+            String cep = txtCep.getText();
+            String estado = txtEstado.getText();
+            String bairro = txtBairro.getText();
+
+            double subtotal = carrinhoService.calcularTotal();
+
+            txtSubtotal.setText(
+                    String.format("R$ %.2f", subtotal)
+            );
+
+            // só calcula frete se endereço válido
+            Endereco endereco = new Endereco(
+                    rua,
+                    numero,
+                    bairro,
+                    cidade,
+                    cep,
+                    estado
+            );
+
+            double frete =
+                    pedidoService.calcularFrete(endereco);
+
+            double total = subtotal + frete;
+
+            txtFrete.setText(
+                    String.format("R$ %.2f", frete)
+            );
+
+            txtTotal.setText(
+                    String.format("R$ %.2f", total)
+            );
+
+        } catch (Exception e) {
+
+            // enquanto usuário digita,
+            // evita popup de erro
+            txtFrete.setText("—");
+            txtTotal.setText("—");
+        }
+    }
     private void alert(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(mensagem);
