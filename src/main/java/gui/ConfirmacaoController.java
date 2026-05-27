@@ -21,6 +21,9 @@ import javafx.scene.control.*;
 public class ConfirmacaoController {
     private Pedido pedido;
     private Cliente usuarioLogado;
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+    }
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
 
@@ -78,6 +81,11 @@ public class ConfirmacaoController {
         colunaQuantidade.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantidade()).asObject());
         colunaPreco.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrecoUnitario()).asObject());
 
+    }
+
+    @FXML
+    public void gerarNota(){
+        PedidoService.gerarPDF(pedido, usuarioLogado);
     }
 }
 

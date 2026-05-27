@@ -14,6 +14,7 @@ public class Pedido {
     private Endereco endereco;
     private double frete;
     private OrdemMontagem ordemMontagem;
+    private Cliente cliente;
     public Pedido() {
         this.data = LocalDateTime.now();
         this.status = "AGUARDANDO_PAGAMENTO";
@@ -39,6 +40,14 @@ public class Pedido {
 
     public OrdemMontagem getOrdemMontagem() {
         return ordemMontagem;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void setOrdemMontagem(OrdemMontagem ordemMontagem) {

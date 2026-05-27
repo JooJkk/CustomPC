@@ -160,7 +160,7 @@ controller.setUsuario(usuario);*/
             pagamento.setValor(carrinhoService.calcularTotal());
 
             Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
-            Pedido pedido = pedidoService.finalizarCompra(carrinhoService.getCarrinho(),  endereco, pagamento);
+            Pedido pedido = pedidoService.finalizarCompra(carrinhoService.getCarrinho(),  endereco, pagamento, usuarioLogado);
             //Carrega tela de pagamento, passando o cliente logado e o pedido feito
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConfirmacaoPagamento.fxml"));
 
@@ -168,6 +168,7 @@ controller.setUsuario(usuario);*/
             ConfirmacaoController controller =
                     loader.getController();
             controller.setPedido(pedido);
+            controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) btnConfirmar.getScene().getWindow();
 
             stage.setScene(new Scene(root));

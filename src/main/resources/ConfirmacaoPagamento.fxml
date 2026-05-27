@@ -137,7 +137,7 @@
                               <Insets right="10.0" />
                            </VBox.margin>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Gerar nota fiscal">
+                        <Button mnemonicParsing="false" text="Gerar nota fiscal" onAction="#gerarNota">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>

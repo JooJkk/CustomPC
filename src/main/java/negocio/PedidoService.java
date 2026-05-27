@@ -2,7 +2,16 @@ package negocio;
 import dados.IRepositorioPedido;
 import model.*;
 import exception.*;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
+import model.ItemPedido;
+import model.Pedido;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class PedidoService {
     private IRepositorioPedido repositorio;
@@ -25,15 +34,39 @@ public class PedidoService {
         repositorio.deletar(id);
         System.out.println("Pedido " + id + " foi cancelado com sucesso.");
     }
+    public static void gerarPDF(Pedido pedido, Cliente usuario) {
+
+        try {
+            Files.createDirectories(Paths.get("notas"));
+            String destino = "notas/nota_pedido_" + pedido.getId() + ".pdf";
+            PdfWriter writer = new PdfWriter(destino);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+            document.add(new Paragraph("NOTA FISCAL"));
+            document.add(new Paragraph("Pedido #" + pedido.getId()));
+            document.add(new Paragraph("Cliente: " + pedido.getCliente().getNome()));
+            document.add(new Paragraph("Valor Total: R$ " + pedido.getValorTotal()));
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Itens:"));
+            for(ItemPedido item : pedido.getItens()) {
+                document.add(new Paragraph(item.getComponente().getNome() + " - Qtd: " + item.getQuantidade()));
+            }
+            document.close();
+            System.out.println("PDF gerado com sucesso!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public double calcularFrete(Endereco endereco) {
         return 25.0;
     }
-    public Pedido finalizarCompra(Carrinho carrinho, Endereco endereco, Pagamento pagamento) throws CarrinhoVazioException {
+    public Pedido finalizarCompra(Carrinho carrinho, Endereco endereco, Pagamento pagamento, Cliente cliente) throws CarrinhoVazioException {
         if (carrinho.getItens() == null || carrinho.getItens().isEmpty()) {
             throw new CarrinhoVazioException();
         }
 
         Pedido novoPedido = new Pedido();
+        novoPedido.setCliente(cliente);
         novoPedido.setId(carrinho.getId());
         novoPedido.setEndereco(endereco);
         double subtotal = carrinho.getValorTotal();
