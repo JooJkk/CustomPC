@@ -32,7 +32,8 @@ Parent root = loader.load();
 CheckoutController controller =
         loader.getController();
 
-controller.setCarrinhoService(carrinhoService); */
+controller.setCarrinhoService(carrinhoService);
+controller.setUsuario(usuario);*/
     private CarrinhoService carrinhoService;
     private PedidoService pedidoService;
     private Cliente usuarioLogado;
