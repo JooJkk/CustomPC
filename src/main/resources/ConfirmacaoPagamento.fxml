@@ -36,7 +36,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Área do pedido">
+                  <Button mnemonicParsing="false" fx:id="btnPedido" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Área do pedido" onAction="#irPraAreaDoPedido">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
