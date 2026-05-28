@@ -1,4 +1,4 @@
-package negocio;
+package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 // importando a classe do meu pedido real
-import main.java.model.Pedido;
+import model.Pedido;
 
 public class HelloController {
 
