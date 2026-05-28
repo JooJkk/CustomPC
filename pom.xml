@@ -58,7 +58,7 @@
                 <version>0.0.8</version>
 
                 <configuration>
-                    <mainClass>App</mainClass>
+                    <mainClass>Main</mainClass>
                 </configuration>
 
             </plugin>

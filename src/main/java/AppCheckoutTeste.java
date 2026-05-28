@@ -11,7 +11,7 @@ import model.componentes.PlacaVideo;
 import model.componentes.Processador;
 import negocio.CarrinhoService;
 
-public class MainCheckoutTeste extends Application {
+public class AppCheckoutTeste extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
