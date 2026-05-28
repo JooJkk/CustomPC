@@ -1,5 +1,3 @@
-package negocio;
-
 import gui.HelloController;
 import gui.HomeController;
 
