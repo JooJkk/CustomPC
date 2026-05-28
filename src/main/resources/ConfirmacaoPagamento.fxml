@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ConfirmacaoController">
    <children>
       <BorderPane prefHeight="800.0" prefWidth="1200.0">
@@ -29,15 +28,21 @@
                         <Font size="27.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" text="Home">
+                  <Button mnemonicParsing="false" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Home">
                      <HBox.margin>
                         <Insets left="80.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Área do pedido">
+                  <Button mnemonicParsing="false" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Área do pedido">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
@@ -137,10 +142,13 @@
                               <Insets right="10.0" />
                            </VBox.margin>
                         </TableView>
-                        <Button mnemonicParsing="false" text="Gerar nota fiscal" onAction="#gerarNota">
+                        <Button mnemonicParsing="false" onAction="#gerarNota" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Gerar nota fiscal">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                         </Button>
                      </children>
                      <padding>

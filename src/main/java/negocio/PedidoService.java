@@ -6,7 +6,18 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
 
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+
+import com.itextpdf.layout.properties.TextAlignment;
 import model.ItemPedido;
 import model.Pedido;
 
@@ -42,15 +53,62 @@ public class PedidoService {
             PdfWriter writer = new PdfWriter(destino);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
-            document.add(new Paragraph("NOTA FISCAL"));
-            document.add(new Paragraph("Pedido #" + pedido.getId()));
-            document.add(new Paragraph("Cliente: " + pedido.getCliente().getNome()));
-            document.add(new Paragraph("Valor Total: R$ " + pedido.getValorTotal()));
-            document.add(new Paragraph(" "));
-            document.add(new Paragraph("Itens:"));
+            // FONTES
+            PdfFont bold = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+            PdfFont normal = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+
+            // TÍTULO
+            Paragraph titulo = new Paragraph("NOTA FISCAL").setFont(bold).setFontSize(20).setTextAlignment(TextAlignment.CENTER);
+
+            document.add(titulo);
+
+            document.add(new Paragraph("\n"));
+
+            // DADOS DO PEDIDO
+            document.add(new Paragraph("Pedido #" + pedido.getId()).setFont(bold));
+
+            document.add(new Paragraph("Cliente: " + usuario.getNome()).setFont(normal));
+
+            document.add(new Paragraph("Data: " + pedido.getData()).setFont(normal));
+
+            document.add(new Paragraph("Endereço: " + pedido.getEndereco()).setFont(normal));
+
+            document.add(new Paragraph("\n"));
+
+            // TABELA DE ITENS
+            float[] colunas = {300f, 100f, 100f};
+            Table tabela = new Table(colunas);
+
+            tabela.addHeaderCell(new Cell().add(new Paragraph("Produto").setFont(bold)));
+            tabela.addHeaderCell(new Cell().add(new Paragraph("Qtd").setFont(bold)));
+            tabela.addHeaderCell(new Cell().add(new Paragraph("Preço").setFont(bold)));
+
             for(ItemPedido item : pedido.getItens()) {
-                document.add(new Paragraph(item.getComponente().getNome() + " - Qtd: " + item.getQuantidade()));
+
+                tabela.addCell(item.getComponente().getNome());
+
+                tabela.addCell(String.valueOf(item.getQuantidade()));
+
+                tabela.addCell(String.format(
+                        "R$ %.2f",
+                        item.getComponente().getPreco()
+                ));
             }
+
+            document.add(tabela);
+
+            document.add(new Paragraph("\n"));
+
+            // TOTAL
+            Paragraph total = new Paragraph(String.format("TOTAL: R$ %.2f", pedido.getValorTotal())).setFont(bold).setFontSize(16).setTextAlignment(TextAlignment.RIGHT);
+            document.add(total);
+
+            document.add(new Paragraph("\n"));
+
+            // RODAPÉ
+            Paragraph rodape = new Paragraph("Obrigado pela preferência!").setTextAlignment(TextAlignment.CENTER);
+            document.add(rodape);
+
             document.close();
             System.out.println("PDF gerado com sucesso!");
         } catch (Exception e) {
