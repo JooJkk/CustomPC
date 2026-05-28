@@ -11,6 +11,6 @@ public class Main {
           //AppTelaClienteTeste.main(args);
 
           //para rodar a tela de checkout
-          //AppCheckoutTeste.main(args);
+          // AppCheckoutTeste.main(args);
      }
 }

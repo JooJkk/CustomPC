@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 // importando a classe do meu pedido real
 import model.Pedido;
 
-public class HelloController {
+public class ClienteController {
 
     @FXML
     public BorderPane painelPrincipal;
