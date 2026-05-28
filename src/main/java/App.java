@@ -1,63 +1,54 @@
 package negocio;
 
 import gui.HelloController;
+import gui.HomeController;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class App extends Application {
 
-    @Override
     public void start(Stage stage) throws IOException {
-        // menu lateral
-        FXMLLoader loaderPrincipal = new FXMLLoader(getClass().getResource("/hello-view.fxml"));
+
+        FXMLLoader loaderPrincipal =
+                new FXMLLoader(
+                        getClass().getResource("/hello-view.fxml")
+                );
+
         Parent raiz = loaderPrincipal.load();
 
-        // controller do menu lateral
-        HelloController controllerPrincipal = loaderPrincipal.getController();
+        HelloController controllerPrincipal =
+                loaderPrincipal.getController();
 
-        // carrega o cadastro
-        String[] caminhosPossiveis = {
-                "/cadastro-view.fxml", "cadastro-view.fxml",
-                "/negocio/cadastro-view.fxml", "negocio/cadastro-view.fxml"
-        };
-        java.net.URL recursoCadastro = null;
+        FXMLLoader loaderHome =
+                new FXMLLoader(
+                        getClass().getResource("/Home.fxml")
+                );
 
-        for (String caminho : caminhosPossiveis) {
-            recursoCadastro = getClass().getResource(caminho);
-            if (recursoCadastro != null) {
-                System.out.println("Sucesso! cadastro.fxml encontrado usando o caminho: " + caminho);
-                break;
-            }
-        }
+        Parent telaHome = loaderHome.load();
 
-        if (recursoCadastro != null) {
-            FXMLLoader loaderCadastro = new FXMLLoader(recursoCadastro);
-            Parent telaCadastro = loaderCadastro.load();
+        HomeController controllerHome =
+                loaderHome.getController();
 
-            // controller do javafx para fzr o cadastro
-            HelloController controllerCadastro = loaderCadastro.getController();
+        controllerHome.painelPrincipal =
+                controllerPrincipal.painelPrincipal;
 
-            // passa o painel principal pra o cadastro
-            if (controllerPrincipal != null && controllerCadastro != null) {
-                controllerCadastro.painelPrincipal = controllerPrincipal.painelPrincipal;
-            }
-
-
-            if (controllerPrincipal != null && controllerPrincipal.painelPrincipal != null) {
-                controllerPrincipal.painelPrincipal.setCenter(telaCadastro);
-            }
-        } else {
-            System.out.println("Aviso: O arquivo cadastro-view.fxml nao foi encontrado de jeito nenhum!");
-        }
-
+        controllerPrincipal.painelPrincipal
+                .setCenter(telaHome);
 
         Scene scene = new Scene(raiz, 1200, 800);
-        stage.setTitle("Meu Sistema JavaFX");
+
+        stage.setTitle("CustomPC");
+
         stage.setScene(scene);
+
+        stage.setResizable(false);
+
         stage.show();
     }
 
