@@ -71,6 +71,8 @@ public class ConfirmacaoController {
     @FXML
     private TableColumn<ItemPedido, Double> colunaTotal;
 
+    @FXML
+    private Button btnPedido;
 
     public void initialize() {
 
@@ -86,6 +88,21 @@ public class ConfirmacaoController {
     @FXML
     public void gerarNota(){
         PedidoService.gerarPDF(pedido, usuarioLogado);
+    }
+
+    @FXML
+    public void irPraAreaDoPedido(){
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("/pedido-view.fxml"));
+
+            Parent root = loader.load();
+            CheckoutController controller = loader.getController();
+            Stage stage = (Stage) btnPedido.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

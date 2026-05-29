@@ -1,4 +1,4 @@
-package negocio;
+package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,12 +13,11 @@ import java.time.format.DateTimeFormatter;
 // importando a classe do meu pedido real
 import model.Pedido;
 
-public class HelloController {
+public class ClienteController {
 
     @FXML
     public BorderPane painelPrincipal;
 
-    // Elementos da tela de pedidos
     @FXML
     private Label lblNumeroPedido;
     @FXML
@@ -36,7 +35,6 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        // 1. Lógica da Home (Mantida)
         if (lblBoasVindas != null) {
             String nomeUsuario = "Brenna";
             lblBoasVindas.setText("SEJA BEM-VINDO(A), " + nomeUsuario.toUpperCase() + "!");
@@ -54,7 +52,6 @@ public class HelloController {
             // Pedido pedidoExemplo = CarrinhoService.getPedidoAtual();
 
 
-            // usando localdatetime para ficar mais formal
             DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String dataFormatada = pedidoExemplo.getData().format(formatador);
 

@@ -12,6 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.*;
 import negocio.*;
@@ -96,6 +100,9 @@ controller.setUsuario(usuario);*/
     @FXML
     private ToggleGroup grupoPagamento;
 
+    @FXML
+    private VBox painelPagamento;
+
     // Finalizar (e dados da compra finais)
     @FXML
     private Button btnConfirmar;
@@ -130,8 +137,55 @@ controller.setUsuario(usuario);*/
         colunaQuantidade.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantidade()).asObject());
         colunaPreco.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrecoUnitario()).asObject());
 
+        grupoPagamento.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
+
+            painelPagamento.getChildren().clear();
+
+            if (newToggle == btnPix) {
+                mostrarPix();
+
+            } else if (newToggle == btnCartao) {
+                mostrarCartao();
+
+            } else if (newToggle == btnBoleto) {
+                mostrarBoleto();
+            }
+        });
     }
 
+    private void mostrarPix() {
+
+        ImageView qrCode = new ImageView(new Image(getClass().getResourceAsStream("/PIX.png")));
+
+        qrCode.setFitWidth(200);
+        qrCode.setFitHeight(200);
+        Label lblQr = new Label("QR CODE");
+        lblQr.setFont(new Font(20));
+        painelPagamento.getChildren().add(qrCode);
+        painelPagamento.getChildren().add(lblQr);
+    }
+
+    private void mostrarCartao() {
+
+        TextField numeroCartao = new TextField();
+        numeroCartao.setPromptText("Número do cartão");
+
+        TextField nome = new TextField();
+        nome.setPromptText("Nome no cartão");
+
+        TextField cvv = new TextField();
+        cvv.setPromptText("CVV");
+
+        painelPagamento.getChildren().addAll(numeroCartao, nome, cvv);
+    }
+
+    private void mostrarBoleto() {
+
+        Label lblBoleto = new Label("O boleto será gerado após confirmar a compra.");
+        lblBoleto.setFont(new Font(20));
+        lblBoleto.setWrapText(true);
+        painelPagamento.getChildren().add(lblBoleto);
+    }
     @FXML
     private void finalizarCompra() {
 
