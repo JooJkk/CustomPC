@@ -23,6 +23,7 @@ import model.Pedido;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class PedidoService {
     private IRepositorioPedido repositorio;
@@ -153,5 +154,9 @@ public class PedidoService {
         carrinho.limpar();
 
         return novoPedido;
+    }
+
+    public List<Pedido> listarPedidosDoCliente(Cliente cliente) {
+        return repositorio.buscarPorCliente(cliente);
     }
 }

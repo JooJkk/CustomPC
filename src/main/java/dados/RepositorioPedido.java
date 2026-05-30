@@ -1,6 +1,8 @@
 package dados;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Cliente;
 import model.Pedido;
 import exception.*;
 
@@ -37,6 +39,17 @@ public class RepositorioPedido implements IRepositorioPedido {
     }
 
 
+    public List<Pedido> buscarPorCliente(Cliente cliente) {
 
+        List<Pedido> resultado = new ArrayList<>();
+
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCliente().equals(cliente)) {
+                resultado.add(pedido);
+            }
+        }
+
+        return resultado;
+    }
 
 }
