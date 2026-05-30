@@ -38,18 +38,12 @@ CheckoutController controller =
 
 controller.setCarrinhoService(carrinhoService);
 controller.setUsuario(usuario);*/
-    private CarrinhoService carrinhoService;
+    private CarrinhoService carrinhoService = CarrinhoService.getInstance();
     private PedidoService pedidoService;
     private Cliente usuarioLogado;
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
     }
-    public void setCarrinhoService(CarrinhoService carrinhoService
-    ) {
-        this.carrinhoService = carrinhoService;
-        carregarDados();
-    }
-
 
     //tabela com dados dos produtos comprados
     @FXML
@@ -128,8 +122,9 @@ controller.setUsuario(usuario);*/
 
     @FXML
     public void initialize() {
+        carregarDados();
         IRepositorioPedido repositorio = new RepositorioPedido();
-        pedidoService = new PedidoService(repositorio);
+        pedidoService = PedidoService.getInstance();
         //Tabela
         colunaTotal.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
 
