@@ -42,6 +42,9 @@ public class ConfirmacaoController {
     }
 
     @FXML
+    private Button btnHome;
+
+    @FXML
     private Label lblStatus;
     @FXML
     private Label lblIdPedido;
@@ -97,12 +100,25 @@ public class ConfirmacaoController {
                     new FXMLLoader(getClass().getResource("/pedido-view.fxml"));
 
             Parent root = loader.load();
-            CheckoutController controller = loader.getController();
             Stage stage = (Stage) btnPedido.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    @FXML
+    public void irPraHome(){
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("/Home.fxml"));
+
+            Parent root = loader.load();
+            Stage stage = (Stage) btnHome.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
