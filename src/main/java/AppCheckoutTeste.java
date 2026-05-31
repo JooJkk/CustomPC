@@ -17,8 +17,7 @@ public class AppCheckoutTeste extends Application {
     public void start(Stage stage) throws Exception {
 
         // Service
-        CarrinhoService carrinhoService =
-                new CarrinhoService();
+        CarrinhoService carrinhoService = CarrinhoService.getInstance();
 
         // Produtos fake
         PlacaVideo gpu = new PlacaVideo(
@@ -63,7 +62,6 @@ public class AppCheckoutTeste extends Application {
         Cliente cliente = new Cliente("Nome qualquer", "email@teste.com", "123");
         // Injeta service
         controller.setUsuario(cliente);
-        controller.setCarrinhoService(carrinhoService);
 
         // Cena
         Scene scene = new Scene(root, 1200, 800);

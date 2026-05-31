@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException; // 🌟 Import do IOException garantido aqui
+import java.io.IOException;
 
 // Importando as classes do seu modelo e negócio
 import model.Pedido;
@@ -81,63 +81,59 @@ public class PedidoController {
 
     @FXML
     public void onBotaoVoltarClick(ActionEvent event) {
-        System.out.println("🤖 Clique detectado! Testando o botão voltar...");
+        System.out.println("🤖 Clique detectado! Redirecionando para a área do cliente...");
 
-        // Cenário A: Se foi aberto pelo menu lateral da Área do Cliente
-        if (clienteControllerPai != null) {
-            System.out.println("🤖 Entrou no Cenário A (Veio pelo menu lateral)");
-            clienteControllerPai.voltarParaAreaCliente();
-        }
-        // Cenário B: Se veio direto do Checkout do seu amigo (janela isolada)
-        else {
-            System.out.println("🤖 Entrou no Cenário B (Veio do Checkout)");
-            try {
-                java.net.URL recursoMenu = getClass().getResource("/cliente-view.fxml");
-                if (recursoMenu == null) {
-                    recursoMenu = getClass().getResource("cliente-view.fxml");
-                }
-
-                if (recursoMenu == null) {
-                    System.out.println("❌ ERRO: O arquivo cliente-view.fxml NÃO foi encontrado!");
-                    return;
-                }
-
-                FXMLLoader loaderMenu = new FXMLLoader(recursoMenu);
-                Parent rootMenu = loaderMenu.load();
-                ClienteController clienteController = loaderMenu.getController();
-
-                java.net.URL recursoBoasVindas = getClass().getResource("/cadastro-view.fxml");
-                if (recursoBoasVindas == null) {
-                    recursoBoasVindas = getClass().getResource("cadastro-view.fxml");
-                }
-
-                if (recursoBoasVindas == null) {
-                    System.out.println("❌ ERRO: O arquivo cadastro-view.fxml NÃO foi encontrado!");
-                    return;
-                }
-
-                Parent rootBoasVindas = FXMLLoader.load(recursoBoasVindas);
-
-                if (clienteController != null && clienteController.painelPrincipal != null) {
-                    clienteController.painelPrincipal.setCenter(rootBoasVindas);
-                    System.out.println("✅ Centro injetado com sucesso no painelPrincipal!");
-                } else {
-                    System.out.println("❌ ERRO: clienteController ou painelPrincipal estão NULOS!");
-                }
-
-                javafx.scene.Scene novaCena = new javafx.scene.Scene(rootMenu);
-                javafx.scene.Node componente = (javafx.scene.Node) event.getSource();
-                javafx.stage.Stage janelaAtual = (javafx.stage.Stage) componente.getScene().getWindow();
-
-                janelaAtual.setScene(novaCena);
-                janelaAtual.setTitle("Área do Cliente - Custom PC");
-                janelaAtual.centerOnScreen();
-                System.out.println("🚀 Transição de tela concluída!");
-
-            } catch (Exception e) {
-                System.out.println("💥 CORRE AQUI! Deu erro no carregamento das telas:");
-                e.printStackTrace(); // Isso vai cuspir o erro real em vermelho no terminal
+        try {
+            // Buscando o arquivo da tela principal do cliente
+            java.net.URL recursoMenu = getClass().getResource("/cliente-view.fxml");
+            if (recursoMenu == null) {
+                recursoMenu = getClass().getResource("cliente-view.fxml");
             }
+
+            if (recursoMenu == null) {
+                System.out.println("❌ ERRO: O arquivo cliente-view.fxml NÃO foi encontrado!");
+                return;
+            }
+
+            FXMLLoader loaderMenu = new FXMLLoader(recursoMenu);
+            Parent rootMenu = loaderMenu.load();
+            ClienteController clienteController = loaderMenu.getController();
+
+            // Buscando a tela inicial de cadastro/boas-vindas para embutir no centro
+            java.net.URL recursoBoasVindas = getClass().getResource("/cadastro-view.fxml");
+            if (recursoBoasVindas == null) {
+                recursoBoasVindas = getClass().getResource("cadastro-view.fxml");
+            }
+
+            if (recursoBoasVindas == null) {
+                System.out.println("❌ ERRO: O arquivo cadastro-view.fxml NÃO foi encontrado!");
+                return;
+            }
+
+            Parent rootBoasVindas = FXMLLoader.load(recursoBoasVindas);
+
+            // Se veio pelo painel lateral (Cenário A), podemos usar a referência existente ou reinjetar
+            if (clienteControllerPai != null && clienteControllerPai.painelPrincipal != null) {
+                clienteControllerPai.painelPrincipal.setCenter(rootBoasVindas);
+                System.out.println("✅ Centro atualizado no painelPrincipal existente!");
+            } else if (clienteController != null && clienteController.painelPrincipal != null) {
+                clienteController.painelPrincipal.setCenter(rootBoasVindas);
+                System.out.println("✅ Centro injetado com sucesso no novo painelPrincipal!");
+            }
+
+            // Realiza a troca da cena na janela atual de forma suave
+            javafx.scene.Scene novaCena = new javafx.scene.Scene(rootMenu);
+            javafx.scene.Node componente = (javafx.scene.Node) event.getSource();
+            javafx.stage.Stage janelaAtual = (javafx.stage.Stage) componente.getScene().getWindow();
+
+            janelaAtual.setScene(novaCena);
+            janelaAtual.setTitle("Área do Cliente - Custom PC");
+            janelaAtual.centerOnScreen();
+            System.out.println("🚀 Transição de tela concluída com sucesso!");
+
+        } catch (Exception e) {
+            System.out.println("💥 ERRO no carregamento da transição de telas:");
+            e.printStackTrace();
         }
     }
 }

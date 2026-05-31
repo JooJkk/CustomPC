@@ -9,10 +9,18 @@ public class CarrinhoService {
 
     private Carrinho carrinho;
 
-    public CarrinhoService() {
+    private static CarrinhoService instancia;
+
+    private CarrinhoService() {
         carrinho = new Carrinho();
     }
 
+    public static synchronized CarrinhoService getInstance() {
+        if (instancia == null) {
+            instancia = new CarrinhoService();
+        }
+        return instancia;
+    }
     public void adicionarItem(Componente componente, int quantidade) {
 
         if (componente.getEstoque() < quantidade) {
