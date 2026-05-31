@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PedidoController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
@@ -41,6 +41,6 @@
 
         <ProgressBar fx:id="barraProgresso" prefWidth="300.0" progress="0.25" />
 
-        <Button text="Voltar para a Home" onAction="#onBotaoVoltarClick" style="-fx-padding: 8 15 8 15;" />
+        <Button text="Voltar para a Área do Cliente" onAction="#onBotaoVoltarClick" style="-fx-padding: 8 15 8 15;" />
     </children>
 </VBox>

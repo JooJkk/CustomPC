@@ -27,8 +27,18 @@ import java.nio.file.Paths;
 public class PedidoService {
     private IRepositorioPedido repositorio;
 
+    private static Pedido pedidoAtual; //guardar o pedido
+
     public PedidoService(IRepositorioPedido repositorio) {
         this.repositorio = repositorio;
+    }
+
+    public static Pedido getPedidoAtual() {
+        return pedidoAtual;
+    }
+
+    public static void setPedidoAtual(Pedido pedido) {
+        pedidoAtual = pedido;
     }
 
     public void cancelarPedido(int id) throws PedidoNaoEncontradoException, PedidoEnviadoException {
@@ -53,18 +63,18 @@ public class PedidoService {
             PdfWriter writer = new PdfWriter(destino);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
-            // FONTES
+
             PdfFont bold = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
             PdfFont normal = PdfFontFactory.createFont(StandardFonts.HELVETICA);
 
-            // TÍTULO
+
             Paragraph titulo = new Paragraph("NOTA FISCAL").setFont(bold).setFontSize(20).setTextAlignment(TextAlignment.CENTER);
 
             document.add(titulo);
 
             document.add(new Paragraph("\n"));
 
-            // DADOS DO PEDIDO
+
             document.add(new Paragraph("Pedido #" + pedido.getId()).setFont(bold));
 
             document.add(new Paragraph("Cliente: " + usuario.getNome()).setFont(normal));
@@ -75,7 +85,7 @@ public class PedidoService {
 
             document.add(new Paragraph("\n"));
 
-            // TABELA DE ITENS
+
             float[] colunas = {300f, 100f, 100f};
             Table tabela = new Table(colunas);
 
@@ -99,13 +109,13 @@ public class PedidoService {
 
             document.add(new Paragraph("\n"));
 
-            // TOTAL
+
             Paragraph total = new Paragraph(String.format("TOTAL: R$ %.2f", pedido.getValorTotal())).setFont(bold).setFontSize(16).setTextAlignment(TextAlignment.RIGHT);
             document.add(total);
 
             document.add(new Paragraph("\n"));
 
-            // RODAPÉ
+
             Paragraph rodape = new Paragraph("Obrigado pela preferência!").setTextAlignment(TextAlignment.CENTER);
             document.add(rodape);
 
@@ -151,7 +161,7 @@ public class PedidoService {
         repositorio.salvar(novoPedido);
 
         carrinho.limpar();
-
+        setPedidoAtual(novoPedido);
         return novoPedido;
     }
 }
