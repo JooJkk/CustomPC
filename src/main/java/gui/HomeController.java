@@ -58,7 +58,7 @@ public class HomeController implements Initializable {
 
     @FXML
     void irParaCatalogo(ActionEvent event) {
-        trocarTela("/Catalogo.fxml", btnCatalogo);
+        trocarTela("/catalogo-view.fxml", btnCatalogo);
     }
 
     @FXML

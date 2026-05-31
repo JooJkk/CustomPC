@@ -45,6 +45,8 @@ controller.setUsuario(usuario);*/
         this.usuarioLogado = usuario;
     }
 
+    @FXML
+    private Button btnVoltar;
     //tabela com dados dos produtos comprados
     @FXML
     private TableView<ItemCarrinho> tabelaCheckout;
@@ -233,7 +235,16 @@ controller.setUsuario(usuario);*/
         }
 
     }
-
+    @FXML
+    private void voltar(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/Carrinho.fxml"));
+            Stage stage = (Stage) btnVoltar.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     private void atualizarFrete() {
 
