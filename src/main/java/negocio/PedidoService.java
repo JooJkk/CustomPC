@@ -1,5 +1,6 @@
 package negocio;
 import dados.IRepositorioPedido;
+import dados.RepositorioPedido;
 import model.*;
 import exception.*;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -23,14 +24,25 @@ import model.Pedido;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class PedidoService {
     private IRepositorioPedido repositorio;
 
-    public PedidoService(IRepositorioPedido repositorio) {
-        this.repositorio = repositorio;
+    private static PedidoService instancia;
+
+
+    private PedidoService() {this.repositorio = new RepositorioPedido();
     }
 
+    public static synchronized PedidoService getInstance() {
+
+        if (instancia == null) {
+            instancia = new PedidoService();
+        }
+
+        return instancia;
+    }
     public void cancelarPedido(int id) throws PedidoNaoEncontradoException, PedidoEnviadoException {
         Pedido p = repositorio.buscarPorId(id);
 
@@ -153,5 +165,9 @@ public class PedidoService {
         carrinho.limpar();
 
         return novoPedido;
+    }
+
+    public List<Pedido> listarPedidosDoCliente(Cliente cliente) {
+        return repositorio.buscarPorCliente(cliente);
     }
 }

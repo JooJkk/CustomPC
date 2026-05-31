@@ -1,4 +1,4 @@
-import gui.HelloController;
+import gui.ClienteController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +11,11 @@ public class AppTelaClienteTeste extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // menu lateral
-        FXMLLoader loaderPrincipal = new FXMLLoader(getClass().getResource("/hello-view.fxml"));
+        FXMLLoader loaderPrincipal = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
         Parent raiz = loaderPrincipal.load();
 
         // controller do menu lateral
-        HelloController controllerPrincipal = loaderPrincipal.getController();
+        ClienteController controllerPrincipal = loaderPrincipal.getController();
 
         // carrega o cadastro
         String[] caminhosPossiveis = {
@@ -37,7 +37,7 @@ public class AppTelaClienteTeste extends Application {
             Parent telaCadastro = loaderCadastro.load();
 
             // controller do javafx para fzr o cadastro
-            HelloController controllerCadastro = loaderCadastro.getController();
+            ClienteController controllerCadastro = loaderCadastro.getController();
 
             // passa o painel principal pra o cadastro
             if (controllerPrincipal != null && controllerCadastro != null) {

@@ -179,38 +179,50 @@
                               <Insets />
                            </HBox.margin>
                         </VBox>
-                        <VBox prefHeight="270.0" prefWidth="593.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label text="Forma de Pagamento">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Label>
-                              <RadioButton fx:id="btnPix" mnemonicParsing="false" text="Pix">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="grupoPagamento" />
-                                 </toggleGroup>
-                                 <VBox.margin>
-                                    <Insets left="15.0" top="20.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </RadioButton>
-                              <RadioButton fx:id="btnCartao" mnemonicParsing="false" text="Cartão" toggleGroup="$grupoPagamento">
-                                 <VBox.margin>
-                                    <Insets left="15.0" top="20.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></RadioButton>
-                              <RadioButton fx:id="btnBoleto" mnemonicParsing="false" text="Boleto" toggleGroup="$grupoPagamento">
-                                 <VBox.margin>
-                                    <Insets left="15.0" top="20.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></RadioButton>
+                              <VBox prefHeight="270.0" prefWidth="593.0">
+                                 <children>
+                                    <Label text="Forma de Pagamento">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <RadioButton fx:id="btnPix" mnemonicParsing="false" text="Pix">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="grupoPagamento" />
+                                       </toggleGroup>
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="20.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton fx:id="btnCartao" mnemonicParsing="false" text="Cartão" toggleGroup="$grupoPagamento">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="20.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton fx:id="btnBoleto" mnemonicParsing="false" text="Boleto" toggleGroup="$grupoPagamento">
+                                       <VBox.margin>
+                                          <Insets left="15.0" top="20.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children>
+                              </VBox>
                            </children>
+                        </HBox>
+                        <VBox fx:id="painelPagamento" prefWidth="400.0" spacing="10">
+                           <padding>
+                              <Insets right="30.0" top="30.0" />
+                           </padding>
                         </VBox>
                      </children>
                      <VBox.margin>
