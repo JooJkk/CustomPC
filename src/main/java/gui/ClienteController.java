@@ -35,22 +35,19 @@ public class ClienteController {
 
     @FXML
     public void initialize() {
+        // 1. Lógica da Home (Mantida)
         if (lblBoasVindas != null) {
             String nomeUsuario = "Brenna";
             lblBoasVindas.setText("SEJA BEM-VINDO(A), " + nomeUsuario.toUpperCase() + "!");
         }
 
-        // logica de pedido  e usando a minha classe real, algo TEMPORARIO até substituir por outro
+        // logica de pedido e usando a minha classe real, algo TEMPORARIO até substituir por outro
         if (lblNumeroPedido != null) {
 
             // pedido TEMPORARIO
             Pedido pedidoExemplo = new Pedido(); //criando um objeto
             pedidoExemplo.setId(45219); // ID
             pedidoExemplo.setStatus("PREPARANDO_COMPONENTE 🛠️"); // muda o status
-
-            // depois vai ficar assim:
-            // Pedido pedidoExemplo = CarrinhoService.getPedidoAtual();
-
 
             DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String dataFormatada = pedidoExemplo.getData().format(formatador);
@@ -63,18 +60,15 @@ public class ClienteController {
             // calcula o valor total
             lblTotalPedido.setText(String.format("Valor Total: R$ %.2f", pedidoExemplo.getValorTotal()));
 
-
             if (barraProgresso != null) {
                 barraProgresso.setProgress(0.5);
             }
         }
     }
 
-
-
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
-        System.out.println("aguardandoo");   //depois eu vou trocar esse por carregarTela(aqui eu vou colocar o fxml da tela q eu quero que apareça)
+        System.out.println("aguardandoo");
     }
 
     @FXML
@@ -107,21 +101,31 @@ public class ClienteController {
                 if (recurso != null) break;
             }
 
-            if (recurso == null) return;
+            if (recurso == null) {
+                System.out.println("❌ ERRO: Não foi possível encontrar o arquivo FXML: " + fxml);
+                return;
+            }
 
             FXMLLoader loader = new FXMLLoader(recurso);
 
-            if (!fxml.contains("cadastro")) {
-                loader.setController(this);
-            }
-
+            // 🌟 O JavaFX agora carrega a tela usando o Controller definido no próprio FXML!
             Parent novaTela = loader.load();
+
+            // 🌟 Se for a tela de Pedido, passa a referência deste ClienteController (Pai) para o botão voltar funcionar!
+            if ("pedido-view.fxml".equals(fxml)) {
+                PedidoController pc = loader.getController();
+                if (pc != null) {
+                    pc.setClienteControllerPai(this);
+                }
+            }
 
             if (painelPrincipal != null) {
                 painelPrincipal.setCenter(novaTela);
+                System.out.println("✅ Tela " + fxml + " carregada com sucesso no centro!");
             }
 
         } catch (IOException e) {
+            System.out.println("💥 ERRO crítico ao dar .load() na tela " + fxml + ":");
             e.printStackTrace();
         }
     }
