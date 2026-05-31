@@ -8,9 +8,9 @@ public class Main {
           //App.main(args);
 
           //para rodar a tela do cliente
-          //AppTelaClienteTeste.main(args);
+          AppTelaClienteTeste.main(args);
 
           //para rodar a tela de checkout
-          // AppCheckoutTeste.main(args);
+          //AppCheckoutTeste.main(args);
      }
 }
