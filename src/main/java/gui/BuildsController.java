@@ -3,6 +3,7 @@ package gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import model.Cliente;
 import model.componentes.Build;
 import model.componentes.Fonte;
 import model.componentes.MemoriaRam;
@@ -12,7 +13,10 @@ import negocio.CompatibilidadeService;
 import exception.BuildIncompativelException;
 
 public class BuildsController {
-
+    private Cliente usuarioLogado;
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+    }
     @FXML private ComboBox<Processador> comboProcessador;
     @FXML private ComboBox<PlacaMae> comboPlacaMae;
     @FXML private ComboBox<MemoriaRam> comboRam;

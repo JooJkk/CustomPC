@@ -10,10 +10,16 @@ import java.time.format.DateTimeFormatter;
 import java.io.IOException;
 
 // Importando as classes do seu modelo e negócio
+import model.Cliente;
 import model.Pedido;
 import negocio.PedidoService;
 
 public class PedidoController {
+
+    private Cliente usuarioLogado;
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+    }
 
     @FXML
     private Label lblNumeroPedido;

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.BorderPane;
@@ -11,9 +12,16 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 // importando a classe do meu pedido real
+import javafx.stage.Stage;
+import model.Cliente;
 import model.Pedido;
 
 public class ClienteController {
+
+    private Cliente usuarioLogado;
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+    }
 
     @FXML
     public BorderPane painelPrincipal;
@@ -68,12 +76,33 @@ public class ClienteController {
 
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
-        carregarTela("Home.fxml");
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("/Home.fxml"));
+            Parent root = loader.load();
+            HomeController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     public void onBotaoCatalogoClick(ActionEvent event) {
-        carregarTela("catalogo-view.fxml");
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
+            Parent root = loader.load();
+            CatalogoController controller = loader.getController();
+            Stage stage =
+                    (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -83,7 +112,26 @@ public class ClienteController {
 
     @FXML
     public void onBotaoCarrinhoClick(ActionEvent event) {
-        carregarTela("Carrinho.fxml");
+        try {
+
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass().getResource("/Carrinho.fxml")
+                    );
+
+            Parent root = loader.load();
+
+            CarrinhoController controller =
+                    loader.getController();
+
+            controller.setUsuario(usuarioLogado);
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

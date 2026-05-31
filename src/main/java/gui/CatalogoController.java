@@ -5,12 +5,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Cliente;
 import model.componentes.Componente;
 import model.componentes.*;
 import negocio.CarrinhoService;
 
 public class CatalogoController {
-
+    private Cliente usuarioLogado;
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+    }
     @FXML private TableView<Componente> tabelaComponentes;
     @FXML private TableColumn<Componente, String> colunaNome;
     @FXML private TableColumn<Componente, String> colunaMarca;

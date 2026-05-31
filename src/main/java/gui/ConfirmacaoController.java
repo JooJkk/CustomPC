@@ -109,8 +109,7 @@ public class ConfirmacaoController {
     @FXML
     public void irPraHome(){
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
 
             Parent root = loader.load();
             Stage stage = (Stage) btnHome.getScene().getWindow();
