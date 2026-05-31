@@ -68,7 +68,7 @@ public class ClienteController {
 
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
-        System.out.println("aguardandoo");
+        carregarTela("Home.fxml");
     }
 
     @FXML
@@ -83,7 +83,7 @@ public class ClienteController {
 
     @FXML
     public void onBotaoCarrinhoClick(ActionEvent event) {
-        carregarTela("carrinho-view.fxml");
+        carregarTela("Carrinho.fxml");
     }
 
     @FXML
