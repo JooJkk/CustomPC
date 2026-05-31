@@ -21,7 +21,7 @@
          <top>
             <HBox prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnVoltar" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Voltar">
+                  <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#voltarHome" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="HOME">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

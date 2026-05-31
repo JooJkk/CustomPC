@@ -102,6 +102,21 @@ public class CarrinhoController {
         }
     }
 
+    @FXML
+    private void voltarHome() {
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("/Home.fxml"));
+            Parent root = loader.load();
+            HomeController controller = loader.getController();
+            Stage stage = (Stage) btnVoltar.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+            alert("Erro: " + e.getMessage());
+        }
+    }
+
     private void alert(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(mensagem);
