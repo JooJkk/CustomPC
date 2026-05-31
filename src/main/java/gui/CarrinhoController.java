@@ -25,11 +25,6 @@ public class CarrinhoController {
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
     }
-    public void setCarrinhoService(CarrinhoService carrinhoService) {
-        this.carrinhoService = carrinhoService;
-        carregarDados();
-    }
-
     //Tabela de itens
     @FXML
     private TableView<ItemCarrinho> tabelaCarrinho;
@@ -57,6 +52,7 @@ public class CarrinhoController {
     private Label txtValorTotal;
 
     private void carregarDados() {
+        carrinhoService = CarrinhoService.getInstance();
         ObservableList<ItemCarrinho> itens =
                 FXCollections.observableArrayList(carrinhoService.getCarrinho().getItens());
         tabelaCarrinho.setItems(itens);
@@ -65,8 +61,6 @@ public class CarrinhoController {
 
     @FXML
     public void initialize() {
-        IRepositorioPedido repositorio = new RepositorioPedido();
-        pedidoService = new PedidoService(repositorio);
 
         colunaTotal.setCellValueFactory(cellData
                 -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
@@ -76,6 +70,8 @@ public class CarrinhoController {
                 -> new SimpleIntegerProperty(cellData.getValue().getQuantidade()).asObject());
         colunaUnd.setCellValueFactory(cellData
                 -> new SimpleDoubleProperty(cellData.getValue().getPrecoUnitario()).asObject());
+        carregarDados();
+        pedidoService = PedidoService.getInstance();
     }
 
     @FXML
@@ -93,7 +89,6 @@ public class CarrinhoController {
             CheckoutController controller =
                     loader.getController();
 
-            controller.setCarrinhoService(carrinhoService);
             controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) btnContinuar.getScene().getWindow();
             stage.setScene(new Scene(root));

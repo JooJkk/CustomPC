@@ -5,8 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,30 +37,32 @@ public class HomeController implements Initializable {
         }
     }
 
-    private void trocarTela(String caminhoFxml) {
+    private void trocarTela(
+            String caminhoFxml,
+            Button botaoOrigem
+    ) {
         try {
-            Parent novaTela = FXMLLoader.load(getClass().getResource(caminhoFxml));
-            if (painelPrincipal != null) {
-                painelPrincipal.setCenter(novaTela);
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao carregar a tela: " + caminhoFxml);
+            Parent root = FXMLLoader.load(getClass().getResource(caminhoFxml));
+            Stage stage = (Stage) botaoOrigem.getScene().getWindow();
+            stage.setScene(new Scene(root));
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void irParaCatalogo(ActionEvent event) {
-        trocarTela("/Catalogo.fxml");
+    void irParaCarrinho(ActionEvent event) {
+        trocarTela("/Carrinho.fxml", btnCarrinho);
     }
 
     @FXML
-    void irParaCarrinho(ActionEvent event) {
-        trocarTela("/Carrinho.fxml");
+    void irParaCatalogo(ActionEvent event) {
+        trocarTela("/Catalogo.fxml", btnCatalogo);
     }
 
     @FXML
     void irParaLogin(ActionEvent event) {
-        trocarTela("/Login.fxml");
+        trocarTela("/Login.fxml", btnLogin);
     }
 }

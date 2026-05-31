@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Componente;
+import model.componentes.Componente;
 import model.componentes.*;
 import negocio.CarrinhoService;
 
