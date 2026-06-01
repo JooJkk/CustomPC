@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import java.time.format.DateTimeFormatter;
-import java.io.IOException;
 
 // Importando as classes do seu modelo e negócio
 import model.Cliente;
@@ -106,13 +105,13 @@ public class PedidoController {
             ClienteController clienteController = loaderMenu.getController();
 
             // Buscando a tela inicial de cadastro/boas-vindas para embutir no centro
-            java.net.URL recursoBoasVindas = getClass().getResource("/cadastro-view.fxml");
+            java.net.URL recursoBoasVindas = getClass().getResource("/hello-view.fxml");
             if (recursoBoasVindas == null) {
-                recursoBoasVindas = getClass().getResource("cadastro-view.fxml");
+                recursoBoasVindas = getClass().getResource("hello-view.fxml");
             }
 
             if (recursoBoasVindas == null) {
-                System.out.println("❌ ERRO: O arquivo cadastro-view.fxml NÃO foi encontrado!");
+                System.out.println("❌ ERRO: O arquivo hello-view.fxml NÃO foi encontrado!");
                 return;
             }
 

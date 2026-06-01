@@ -32,10 +32,10 @@ public class AppTelaClienteTeste extends Application {
         controllerPrincipal.setUsuario(cliente);
 
         String[] caminhosPossiveis = {
-                "/cadastro-view.fxml",
-                "cadastro-view.fxml",
-                "/negocio/cadastro-view.fxml",
-                "negocio/cadastro-view.fxml"
+                "/hello-view.fxml",
+                "hello-view.fxml",
+                "/negocio/hello-view.fxml",
+                "negocio/hello-view.fxml"
         };
 
         java.net.URL recursoCadastro = null;

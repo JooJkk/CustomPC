@@ -157,7 +157,7 @@ public class ClienteController {
 
     @FXML
     public void onBotaoVoltarClick(ActionEvent event) {
-        carregarTela("cadastro-view.fxml");
+        carregarTela("hello-view.fxml");
     }
 
     private void carregarTela(String fxml) {
