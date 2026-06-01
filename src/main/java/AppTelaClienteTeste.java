@@ -1,4 +1,5 @@
 import gui.ClienteController;
+import model.Cliente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,50 +12,68 @@ public class AppTelaClienteTeste extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // menu lateral
-        FXMLLoader loaderPrincipal = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
+        FXMLLoader loaderPrincipal =
+                new FXMLLoader(
+                        getClass().getResource("/cliente-view.fxml")
+                );
+
         Parent raiz = loaderPrincipal.load();
 
-        // controller do menu lateral
-        ClienteController controllerPrincipal = loaderPrincipal.getController();
+        ClienteController controllerPrincipal =
+                loaderPrincipal.getController();
 
-        // carrega o cadastro
+        Cliente cliente =
+                new Cliente(
+                        "Nome teste",
+                        "email@teste.com",
+                        "123"
+                );
+
+        controllerPrincipal.setUsuario(cliente);
+
         String[] caminhosPossiveis = {
-                "/cadastro-view.fxml", "cadastro-view.fxml",
-                "/negocio/cadastro-view.fxml", "negocio/cadastro-view.fxml"
+                "/cadastro-view.fxml",
+                "cadastro-view.fxml",
+                "/negocio/cadastro-view.fxml",
+                "negocio/cadastro-view.fxml"
         };
+
         java.net.URL recursoCadastro = null;
 
         for (String caminho : caminhosPossiveis) {
-            recursoCadastro = getClass().getResource(caminho);
+
+            recursoCadastro =
+                    getClass().getResource(caminho);
+
             if (recursoCadastro != null) {
-                System.out.println("Sucesso! cadastro.fxml encontrado usando o caminho: " + caminho);
                 break;
             }
         }
 
         if (recursoCadastro != null) {
-            FXMLLoader loaderCadastro = new FXMLLoader(recursoCadastro);
-            Parent telaCadastro = loaderCadastro.load();
 
-            // controller do javafx para fzr o cadastro
-            ClienteController controllerCadastro = loaderCadastro.getController();
+            FXMLLoader loaderCadastro =
+                    new FXMLLoader(recursoCadastro);
 
-            // passa o painel principal pra o cadastro
-            if (controllerPrincipal != null && controllerCadastro != null) {
-                controllerCadastro.painelPrincipal = controllerPrincipal.painelPrincipal;
-            }
+            Parent telaCadastro =
+                    loaderCadastro.load();
 
+            ClienteController controllerCadastro =
+                    loaderCadastro.getController();
 
-            if (controllerPrincipal != null && controllerPrincipal.painelPrincipal != null) {
-                controllerPrincipal.painelPrincipal.setCenter(telaCadastro);
-            }
-        } else {
-            System.out.println("Aviso: O arquivo cadastro-view.fxml nao foi encontrado de jeito nenhum!");
+            // PASSA O USUÁRIO PARA A TELA INTERNA
+            controllerCadastro.setUsuario(cliente);
+
+            controllerCadastro.painelPrincipal =
+                    controllerPrincipal.painelPrincipal;
+
+            controllerPrincipal
+                    .painelPrincipal
+                    .setCenter(telaCadastro);
         }
 
-
         Scene scene = new Scene(raiz, 1200, 800);
-        stage.setTitle("Meu Sistema JavaFX");
+
         stage.setScene(scene);
         stage.show();
     }

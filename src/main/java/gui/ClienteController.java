@@ -21,8 +21,31 @@ public class ClienteController {
     private Cliente usuarioLogado;
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
+        System.out.println(
+                "Recebi usuário: " +
+                        (usuario == null ? "NULL" : usuario.getNome())
+        );
+        atualizarTela();
     }
 
+    private void atualizarTela() {
+
+        System.out.println(
+                "lblBoasVindas = " + lblBoasVindas
+        );
+        if (lblBoasVindas != null) {
+
+            if (usuarioLogado != null) {
+                lblBoasVindas.setText(
+                        "SEJA BEM-VINDO(A), "
+                                + usuarioLogado.getNome().toUpperCase()
+                                + "!"
+                );
+            } else {
+                lblBoasVindas.setText("SEJA BEM-VINDO(A)!");
+            }
+        }
+    }
     @FXML
     public BorderPane painelPrincipal;
 
@@ -44,10 +67,7 @@ public class ClienteController {
     @FXML
     public void initialize() {
         // 1. Lógica da Home (Mantida)
-        if (lblBoasVindas != null) {
-            String nomeUsuario = "Brenna";
-            lblBoasVindas.setText("SEJA BEM-VINDO(A), " + nomeUsuario.toUpperCase() + "!");
-        }
+        atualizarTela();
 
         // logica de pedido e usando a minha classe real, algo TEMPORARIO até substituir por outro
         if (lblNumeroPedido != null) {
@@ -97,6 +117,7 @@ public class ClienteController {
                     new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
             Parent root = loader.load();
             CatalogoController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
             Stage stage =
                     (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -163,6 +184,7 @@ public class ClienteController {
             if ("pedido-view.fxml".equals(fxml)) {
                 PedidoController pc = loader.getController();
                 if (pc != null) {
+                    pc.setUsuario(usuarioLogado);
                     pc.setClienteControllerPai(this);
                 }
             }
