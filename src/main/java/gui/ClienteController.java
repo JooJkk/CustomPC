@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,29 +22,18 @@ public class ClienteController {
     private Cliente usuarioLogado;
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
-        System.out.println(
-                "Recebi usuário: " +
-                        (usuario == null ? "NULL" : usuario.getNome())
-        );
-        atualizarTela();
+
+        // Agora sim carrega a sub-tela, pois já temos o usuário
+        carregarTela("hello-view.fxml");
     }
 
     private void atualizarTela() {
+        if (lblBoasVindas == null) return;
 
-        System.out.println(
-                "lblBoasVindas = " + lblBoasVindas
-        );
-        if (lblBoasVindas != null) {
-
-            if (usuarioLogado != null) {
-                lblBoasVindas.setText(
-                        "SEJA BEM-VINDO(A), "
-                                + usuarioLogado.getNome().toUpperCase()
-                                + "!"
-                );
-            } else {
-                lblBoasVindas.setText("SEJA BEM-VINDO(A)!");
-            }
+        if (usuarioLogado == null) {
+            lblBoasVindas.setText("SEJA BEM-VINDO(A)!");
+        } else {
+            lblBoasVindas.setText("SEJA BEM-VINDO(A), " + usuarioLogado.getNome().toUpperCase() + "!");
         }
     }
     @FXML
@@ -67,7 +57,6 @@ public class ClienteController {
     @FXML
     public void initialize() {
         // 1. Lógica da Home (Mantida)
-        atualizarTela();
 
         // logica de pedido e usando a minha classe real, algo TEMPORARIO até substituir por outro
         if (lblNumeroPedido != null) {
@@ -97,8 +86,7 @@ public class ClienteController {
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
             Parent root = loader.load();
             HomeController controller = loader.getController();
             controller.setUsuario(usuarioLogado);
@@ -113,13 +101,11 @@ public class ClienteController {
     @FXML
     public void onBotaoCatalogoClick(ActionEvent event) {
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
             Parent root = loader.load();
             CatalogoController controller = loader.getController();
             controller.setUsuario(usuarioLogado);
-            Stage stage =
-                    (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,21 +120,11 @@ public class ClienteController {
     @FXML
     public void onBotaoCarrinhoClick(ActionEvent event) {
         try {
-
-            FXMLLoader loader =
-                    new FXMLLoader(
-                            getClass().getResource("/Carrinho.fxml")
-                    );
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
             Parent root = loader.load();
-
-            CarrinhoController controller =
-                    loader.getController();
-
+            CarrinhoController controller = loader.getController();
             controller.setUsuario(usuarioLogado);
-
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-
             stage.setScene(new Scene(root));
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,10 +152,13 @@ public class ClienteController {
             }
 
             FXMLLoader loader = new FXMLLoader(recurso);
-
-            // 🌟 O JavaFX agora carrega a tela usando o Controller definido no próprio FXML!
             Parent novaTela = loader.load();
 
+            Object controller = loader.getController();
+            if (controller instanceof ClienteController subController) {
+                subController.usuarioLogado = this.usuarioLogado;
+                subController.atualizarTela(); // chama direto pois lblBoasVindas já foi injetado
+            }
             // 🌟 Se for a tela de Pedido, passa a referência deste ClienteController (Pai) para o botão voltar funcionar!
             if ("pedido-view.fxml".equals(fxml)) {
                 PedidoController pc = loader.getController();

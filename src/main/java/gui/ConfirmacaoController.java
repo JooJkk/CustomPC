@@ -96,10 +96,10 @@ public class ConfirmacaoController {
     @FXML
     public void irPraAreaDoPedido(){
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/pedido-view.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pedido-view.fxml"));
             Parent root = loader.load();
+            PedidoController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) btnPedido.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {

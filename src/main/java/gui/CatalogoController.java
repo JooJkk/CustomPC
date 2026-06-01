@@ -127,7 +127,12 @@ public class CatalogoController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
-
+            Object controller = loader.getController();
+            if (controller instanceof BuildsController c) c.setUsuario(usuarioLogado);
+            if (controller instanceof ClienteController c) c.setUsuario(usuarioLogado);
+            if (controller instanceof HomeController c)     c.setUsuario(usuarioLogado);
+            if (controller instanceof CatalogoController c) c.setUsuario(usuarioLogado);
+            if (controller instanceof CarrinhoController c) c.setUsuario(usuarioLogado);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

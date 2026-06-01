@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,20 +64,11 @@ public class HomeController implements Initializable {
     void irParaCarrinho(ActionEvent event) {
         try {
 
-            FXMLLoader loader =
-                    new FXMLLoader(
-                            getClass().getResource("/Carrinho.fxml")
-                    );
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
             Parent root = loader.load();
-
-            CarrinhoController controller =
-                    loader.getController();
-
+            CarrinhoController controller = loader.getController();
             controller.setUsuario(usuarioLogado);
-
-            Stage stage =
-                    (Stage) btnCarrinho.getScene().getWindow();
+            Stage stage = (Stage) btnCarrinho.getScene().getWindow();
 
             stage.setScene(new Scene(root));
 
@@ -89,20 +81,13 @@ public class HomeController implements Initializable {
     void irParaCatalogo(ActionEvent event) {
         try {
 
-            FXMLLoader loader =
-                    new FXMLLoader(
-                            getClass().getResource("/catalogo-view.fxml")
-                    );
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
 
             Parent root = loader.load();
 
-            CatalogoController controller =
-                    loader.getController();
-
+            CatalogoController controller = loader.getController();
             controller.setUsuario(usuarioLogado);
-
-            Stage stage =
-                    (Stage) btnCatalogo.getScene().getWindow();
+            Stage stage = (Stage) btnCatalogo.getScene().getWindow();
 
             stage.setScene(new Scene(root));
 
@@ -110,51 +95,26 @@ public class HomeController implements Initializable {
             e.printStackTrace();
         }
     }
-    
+
     @FXML
-public void irParaAreaCliente(ActionEvent event) {
+    public void irParaAreaCliente(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
+            Parent root = loader.load();
 
-    try {
+            ClienteController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
 
-        Cliente usuario = usuarioLogado;
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
+                    .getScene()
+                    .getWindow();
 
-        FXMLLoader loaderCliente =
-                new FXMLLoader(
-                        getClass().getResource("/cliente-view.fxml")
-                );
+            stage.setScene(new Scene(root));
 
-        Parent rootCliente =
-                loaderCliente.load();
-
-        ClienteController clienteController =
-                loaderCliente.getController();
-
-        clienteController.setUsuario(usuario);
-
-        FXMLLoader loaderCadastro =
-                new FXMLLoader(
-                        getClass().getResource("/hello-view.fxml")
-                );
-
-        Parent telaCadastro =
-                loaderCadastro.load();
-
-        clienteController.painelPrincipal.setCenter(
-                telaCadastro
-        );
-
-        Stage stage =
-                (Stage) ((javafx.scene.Node) event.getSource())
-                        .getScene()
-                        .getWindow();
-
-        stage.setScene(new Scene(rootCliente));
-
-    } catch (Exception e) {
-        e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
-
     @FXML
     void irParaLogin(ActionEvent event) {
 

@@ -4,11 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import java.time.format.DateTimeFormatter;
 
 // Importando as classes do seu modelo e negócio
+import javafx.stage.Stage;
 import model.Cliente;
 import model.Pedido;
 import negocio.PedidoService;
@@ -89,55 +91,19 @@ public class PedidoController {
         System.out.println("🤖 Clique detectado! Redirecionando para a área do cliente...");
 
         try {
-            // Buscando o arquivo da tela principal do cliente
-            java.net.URL recursoMenu = getClass().getResource("/cliente-view.fxml");
-            if (recursoMenu == null) {
-                recursoMenu = getClass().getResource("cliente-view.fxml");
-            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
+            Parent root = loader.load();
 
-            if (recursoMenu == null) {
-                System.out.println("❌ ERRO: O arquivo cliente-view.fxml NÃO foi encontrado!");
-                return;
-            }
+            ClienteController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
 
-            FXMLLoader loaderMenu = new FXMLLoader(recursoMenu);
-            Parent rootMenu = loaderMenu.load();
-            ClienteController clienteController = loaderMenu.getController();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
+                    .getScene()
+                    .getWindow();
 
-            // Buscando a tela inicial de cadastro/boas-vindas para embutir no centro
-            java.net.URL recursoBoasVindas = getClass().getResource("/hello-view.fxml");
-            if (recursoBoasVindas == null) {
-                recursoBoasVindas = getClass().getResource("hello-view.fxml");
-            }
-
-            if (recursoBoasVindas == null) {
-                System.out.println("❌ ERRO: O arquivo hello-view.fxml NÃO foi encontrado!");
-                return;
-            }
-
-            Parent rootBoasVindas = FXMLLoader.load(recursoBoasVindas);
-
-            // Se veio pelo painel lateral (Cenário A), podemos usar a referência existente ou reinjetar
-            if (clienteControllerPai != null && clienteControllerPai.painelPrincipal != null) {
-                clienteControllerPai.painelPrincipal.setCenter(rootBoasVindas);
-                System.out.println("✅ Centro atualizado no painelPrincipal existente!");
-            } else if (clienteController != null && clienteController.painelPrincipal != null) {
-                clienteController.painelPrincipal.setCenter(rootBoasVindas);
-                System.out.println("✅ Centro injetado com sucesso no novo painelPrincipal!");
-            }
-
-            // Realiza a troca da cena na janela atual de forma suave
-            javafx.scene.Scene novaCena = new javafx.scene.Scene(rootMenu);
-            javafx.scene.Node componente = (javafx.scene.Node) event.getSource();
-            javafx.stage.Stage janelaAtual = (javafx.stage.Stage) componente.getScene().getWindow();
-
-            janelaAtual.setScene(novaCena);
-            janelaAtual.setTitle("Área do Cliente - Custom PC");
-            janelaAtual.centerOnScreen();
-            System.out.println("🚀 Transição de tela concluída com sucesso!");
+            stage.setScene(new Scene(root));
 
         } catch (Exception e) {
-            System.out.println("💥 ERRO no carregamento da transição de telas:");
             e.printStackTrace();
         }
     }

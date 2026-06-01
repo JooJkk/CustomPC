@@ -238,7 +238,10 @@ controller.setUsuario(usuario);*/
     @FXML
     private void voltar(){
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/Carrinho.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
+            Parent root = loader.load();
+            CarrinhoController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) btnVoltar.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {

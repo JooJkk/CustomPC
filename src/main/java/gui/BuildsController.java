@@ -145,6 +145,8 @@ public class BuildsController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/home.fxml"));
             Parent root = loader.load();
+            HomeController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

@@ -1,9 +1,12 @@
+import gui.ClienteController;
 import gui.HomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Cliente;
+
 import java.io.IOException;
 
 public class App extends Application {
@@ -19,7 +22,14 @@ public class App extends Application {
         Parent telaHome = loaderHome.load();
 
         HomeController controllerHome = loaderHome.getController();
+        Cliente cliente =
+                new Cliente(
+                        "Nome teste",
+                        "email@teste.com",
+                        "123"
+                );
 
+        controllerHome.setUsuario(cliente);
         Scene scene = new Scene(telaHome, 1200, 800);
 
         stage.setTitle("CustomPC - Home");
