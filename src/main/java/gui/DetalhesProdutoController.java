@@ -82,9 +82,9 @@ public class DetalhesProdutoController {
         try {
             carrinhoService.adicionarItem(produto, 1);
             FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/Checkout.fxml"));
+                    new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
             Parent root = loader.load();
-            CheckoutController controller =
+            CarrinhoController controller =
                     loader.getController();
             controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) btnCarrinho.getScene().getWindow();
