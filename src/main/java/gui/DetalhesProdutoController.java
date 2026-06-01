@@ -20,7 +20,23 @@ public class DetalhesProdutoController {
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
     }
+    public void setComponente(Componente produto) {
+        this.produto = produto;
+        atualizarTela();
+    }
+    private void atualizarTela() {
 
+        if (produto == null) {
+            return;
+        }
+
+        txtQntProduto.setText(String.valueOf(produto.getEstoque()));
+        txtConsumoWatt.setText(String.valueOf(produto.getConsumoWatts()));
+        txtNivelDesem.setText(String.valueOf(produto.getNivelDesempenho()));
+        txtMarcaProduto.setText(produto.getMarca());
+        txtNomeProduto.setText(produto.getNome());
+        txtPrecoProduto.setText("R$ " + produto.getPreco());
+    }
     //Buttons
     @FXML
     private Button btnVoltar;
@@ -58,12 +74,7 @@ public class DetalhesProdutoController {
 
     @FXML
     public void initialize() {
-        txtQntProduto.setText(String.valueOf(produto.getEstoque()));
-        txtConsumoWatt.setText(String.valueOf(produto.getConsumoWatts()));
-        txtNivelDesem.setText(String.valueOf(produto.getNivelDesempenho()));
-        txtMarcaProduto.setText(produto.getMarca());
-        txtNomeProduto.setText(produto.getNome());
-        txtPrecoProduto.setText("R$ "+ produto.getPreco());
+        atualizarTela();
     }
 
     @FXML
