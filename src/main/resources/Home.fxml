@@ -29,7 +29,12 @@
                 <Button fx:id="btnCarrinho" onAction="#irParaCarrinho" text="Carrinho">
                     <font>
                         <Font size="14.0" />
-                    </font>
+                   </font>
+                </Button> 
+                <Button fx:id="btnAreaCliente" onAction="#irParaAreaCliente" text="Área do Cliente">
+                    <font>
+                        <Font size="14.0" />
+                   </font>
                 </Button>
                 <Button fx:id="btnLogin" onAction="#irParaLogin" text="Login">
                     <font>

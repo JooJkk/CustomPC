@@ -28,6 +28,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button btnCarrinho;
+    
+    @FXML
+    private Button btnAreaCliente;
 
     @FXML
     private Button btnLogin;
@@ -107,6 +110,50 @@ public class HomeController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+public void irParaAreaCliente(ActionEvent event) {
+
+    try {
+
+        Cliente usuario = usuarioLogado;
+
+        FXMLLoader loaderCliente =
+                new FXMLLoader(
+                        getClass().getResource("/cliente-view.fxml")
+                );
+
+        Parent rootCliente =
+                loaderCliente.load();
+
+        ClienteController clienteController =
+                loaderCliente.getController();
+
+        clienteController.setUsuario(usuario);
+
+        FXMLLoader loaderCadastro =
+                new FXMLLoader(
+                        getClass().getResource("/hello-view.fxml")
+                );
+
+        Parent telaCadastro =
+                loaderCadastro.load();
+
+        clienteController.painelPrincipal.setCenter(
+                telaCadastro
+        );
+
+        Stage stage =
+                (Stage) ((javafx.scene.Node) event.getSource())
+                        .getScene()
+                        .getWindow();
+
+        stage.setScene(new Scene(rootCliente));
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
     @FXML
     void irParaLogin(ActionEvent event) {
