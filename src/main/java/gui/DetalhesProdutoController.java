@@ -102,10 +102,10 @@ public class DetalhesProdutoController {
     @FXML
     private void voltarHome() {
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/Home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
             Parent root = loader.load();
             HomeController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
             Stage stage = (Stage) btnVoltar.getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {

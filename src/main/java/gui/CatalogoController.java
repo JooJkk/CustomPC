@@ -35,7 +35,7 @@ public class CatalogoController {
     @FXML private Button btnVoltar;
     @FXML private Button btnIrCarrinho;
     @FXML private Button btnEnviarBuild;
-
+    @FXML private Button btnDetalhes;
     private CarrinhoService carrinhoService = CarrinhoService.getInstance();
     private BuildService buildService = BuildService.getInstance();
 
@@ -104,6 +104,27 @@ public class CatalogoController {
         // Abre a tela direto de qualquer forma
         trocarTela("/builds-view.fxml", event);
     }
+    @FXML
+    private void abrirDetalhes(ActionEvent event) {
+        Componente selecionado = tabelaComponentes.getSelectionModel().getSelectedItem();
+
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetalhesProduto.fxml"));
+            Parent root = loader.load();
+
+            DetalhesProdutoController controller = loader.getController();
+            controller.setUsuario(usuarioLogado);
+            controller.setComponente(selecionado);
+            Stage stage = (Stage) btnDetalhes.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception e) {
+            e.printStackTrace();
+            alert("Erro ao abrir detalhes: " + e.getMessage());
+        }
+    }
+
 
     @FXML
     private void irParaCarrinho(ActionEvent event) {
