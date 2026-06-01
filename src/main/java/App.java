@@ -23,11 +23,7 @@ public class App extends Application {
 
         HomeController controllerHome = loaderHome.getController();
         Cliente cliente =
-                new Cliente(
-                        "Nome teste",
-                        "email@teste.com",
-                        "123"
-                );
+                new Cliente("Nome teste", "email@teste.com", "123");
 
         controllerHome.setUsuario(cliente);
         Scene scene = new Scene(telaHome, 1200, 800);
