@@ -93,8 +93,27 @@ public class BuildsController {
                 comboFonte.setValue(f);
             }
         }
+        configurarCombo(comboProcessador);
+        configurarCombo(comboPlacaMae);
+        configurarCombo(comboRam);
+        configurarCombo(comboFonte);
     }
-
+    private <T extends Componente> void configurarCombo(ComboBox<T> combo) {
+        combo.setCellFactory(lv -> new javafx.scene.control.ListCell<>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome());
+            }
+        });
+        combo.setButtonCell(new javafx.scene.control.ListCell<>() {
+            @Override
+            protected void updateItem(T item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.getNome());
+            }
+        });
+    }
     @FXML
     public void validarBuild() {
         Processador cpu = comboProcessador.getValue();
