@@ -6,7 +6,6 @@ public class Pagamento {
     private String formaPagamento;
     private String status;
     private static long proximoId = 1;
-    private Pedido pedido; //
     private  CupomDesconto cupom;
     public Pagamento(){
         this.id = proximoId++;
@@ -14,15 +13,13 @@ public class Pagamento {
 
     public Pagamento(double valor,
                      String formaPagamento,
-                     String status,
-                     Pedido pedido) {
+                     String status) {
 
         this.id = proximoId++;
 
         setValor(valor);
         setFormaPagamento(formaPagamento);
         setStatus(status);
-        setPedido(pedido);
     }
 
     public CupomDesconto getCupom(){
@@ -71,11 +68,4 @@ public class Pagamento {
         this.status = status;
     }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
 }

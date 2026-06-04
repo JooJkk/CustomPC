@@ -1,0 +1,139 @@
+[
+  {
+    "id": 1,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 4
+      },
+      "time": {
+        "hour": 20,
+        "minute": 32,
+        "second": 39,
+        "nano": 299320800
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 436.6,
+    "pagamento": {
+      "id": 1,
+      "valor": 436.6,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 2,
+        "precoUnitario": 210.0,
+        "componente": {
+          "tipoRam": "DDR4",
+          "capacidadeGB": 8,
+          "frequenciaMHz": 2666,
+          "id": 13,
+          "nome": "8GB Kingston Fury",
+          "marca": "Kingston",
+          "preco": 210.0,
+          "peso": 0.1,
+          "volume": 0.0,
+          "estoque": 48,
+          "consumoWatts": 5,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "aaa",
+      "numero": "1",
+      "bairro": "aa",
+      "cidade": "aa",
+      "cep": "12345678",
+      "estado": "a"
+    },
+    "frete": 16.6,
+    "cliente": {
+      "id": 1,
+      "nome": "Nome teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 1,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 4
+      },
+      "time": {
+        "hour": 20,
+        "minute": 56,
+        "second": 34,
+        "nano": 437791400
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 1394.6,
+    "pagamento": {
+      "id": 3,
+      "valor": 1394.6,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 2,
+        "precoUnitario": 210.0,
+        "componente": {
+          "tipoRam": "DDR4",
+          "capacidadeGB": 8,
+          "frequenciaMHz": 2666,
+          "id": 14,
+          "nome": "8GB Kingston Fury",
+          "marca": "Kingston",
+          "preco": 210.0,
+          "peso": 0.1,
+          "volume": 0.0,
+          "estoque": 48,
+          "consumoWatts": 5,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 950.0,
+        "componente": {
+          "socket": "AM4",
+          "tipoRamSuportada": "DDR4",
+          "slotsRam": 4,
+          "formato": "Micro-ATX",
+          "id": 7,
+          "nome": "B550M Aorus Elite",
+          "marca": "Gigabyte",
+          "preco": 950.0,
+          "peso": 1.0,
+          "volume": 0.0,
+          "estoque": 7,
+          "consumoWatts": 30,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "a",
+      "numero": "1",
+      "bairro": "aa",
+      "cidade": "a",
+      "cep": "12345678",
+      "estado": "a"
+    },
+    "frete": 24.6,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste2",
+      "email": "email2@teste.com",
+      "senha": "123"
+    }
+  }
+]

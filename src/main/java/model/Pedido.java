@@ -10,7 +10,7 @@ public class Pedido {
     private String status;
     private double valorTotal;
     private Pagamento pagamento;
-    private final List<ItemPedido> itens = new ArrayList<>();
+    private List<ItemPedido> itens = new ArrayList<>();
     private Endereco endereco;
     private double frete;
     private OrdemMontagem ordemMontagem;
@@ -34,7 +34,6 @@ public class Pedido {
         if (item == null) return;
 
         itens.add(item);
-        item.setPedido(this);
         atualizarTotalInterno();
     }
 
@@ -73,7 +72,7 @@ public class Pedido {
             throw new IllegalStateException("Este pedido já possui um pagamento associado.");
         }
         this.pagamento = pagamento;
-        pagamento.setPedido(this);
+
     }
 
 
