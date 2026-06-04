@@ -29,7 +29,14 @@ public class CarrinhoService {
                     "Estoque insuficiente"
             );
         }
-
+        for (ItemCarrinho item : carrinho.getItens()) {
+            if (item.getComponente().equals(componente)) {
+                item.setQuantidade(item.getQuantidade() + quantidade);
+                componente.setEstoque(componente.getEstoque() - quantidade);
+                System.out.println("Item adicionado");
+                return;
+            }
+        }
         ItemCarrinho item =
                 new ItemCarrinho(componente, quantidade);
 
