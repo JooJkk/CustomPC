@@ -1,12 +1,27 @@
 package negocio;
 
 import dados.IRepositorioComponente;
+import dados.RepositorioComponente;
+import dados.RepositorioPedido;
 import model.componentes.Componente;
 import exception.*;
 import java.util.List;
 
 public class ComponenteService {
     IRepositorioComponente repositorio;
+    private static ComponenteService instancia;
+    private ComponenteService() {
+        this.repositorio = new RepositorioComponente();
+    }
+
+    // Método para pegar a instância do Singleton
+    public static synchronized ComponenteService getInstance() {
+        if (instancia == null) {
+            instancia = new ComponenteService();
+        }
+        return instancia;
+    }
+
     public ComponenteService(IRepositorioComponente repositorio) {
         if(repositorio != null) {
             this.repositorio = repositorio;

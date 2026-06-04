@@ -5,8 +5,8 @@ public class PlacaMae extends Componente{
     private String tipoRamSuportada;
     private int slotsRam;
     private String formato;
-    public PlacaMae(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, String socket, int slotsRam, String tipoRamSuportada, String formato){
-        super(nome, marca, preco, peso, estoque, consumoWatts);
+    public PlacaMae(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts, String socket, int slotsRam, String tipoRamSuportada, String formato){
+        super(nome, marca, preco, peso, volume, estoque, consumoWatts);
         setFormato(formato);
         setSlotsRam(slotsRam);
         setSocket(socket);

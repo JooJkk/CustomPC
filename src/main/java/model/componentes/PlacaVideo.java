@@ -3,9 +3,9 @@ package model.componentes;
 public class PlacaVideo extends Componente{
     private int comprimentoMM;
     private int memoriaGB;
-    public PlacaVideo(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, int comprimentoMM, int memoriaGB) {
+    public PlacaVideo(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts, int comprimentoMM, int memoriaGB) {
 
-        super(nome, marca, preco, peso, estoque, consumoWatts);
+        super(nome, marca, preco, peso, volume, estoque, consumoWatts);
 
         setComprimentoMM(comprimentoMM);
         setMemoriaGB(memoriaGB);

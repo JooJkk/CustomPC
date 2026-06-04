@@ -3,8 +3,8 @@ package model.componentes;
 public class Processador extends Componente{
     private String socket;
     private int tdp;
-    public Processador(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, String socket, int tdp){
-        super(nome, marca, preco, peso, estoque, consumoWatts);
+    public Processador(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts, String socket, int tdp){
+        super(nome, marca, preco, peso, volume, estoque, consumoWatts);
         setSocket(socket);
         setTdp(tdp);
     }

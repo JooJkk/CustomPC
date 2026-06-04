@@ -116,8 +116,23 @@ public class PedidoService {
         }
     }
 
-    public double calcularFrete(Endereco endereco) {
-        return 25.0;
+    public double calcularFrete(Carrinho carrinho) {
+        double pesoTotal = 0;
+        double volumeTotal = 0;
+
+        for (ItemCarrinho item : carrinho.getItens()) {
+            int qtd = item.getQuantidade();
+            pesoTotal  += item.getComponente().getPeso()   * qtd;
+            volumeTotal += item.getComponente().getVolume() * qtd;
+        }
+
+        // Peso cubado: transportadoras usam 300kg/m³ como fator padrão
+        double pesoCubado = volumeTotal * 300;
+        double pesoCobravel = Math.max(pesoTotal, pesoCubado);
+
+        double frete = 15.0 + (pesoCobravel * 8.0);
+
+        return frete;
     }
 
     public Pedido finalizarCompra(Carrinho carrinho, Endereco endereco, Pagamento pagamento, Cliente cliente) throws CarrinhoVazioException {
@@ -130,7 +145,7 @@ public class PedidoService {
         novoPedido.setId(carrinho.getId());
         novoPedido.setEndereco(endereco);
         double subtotal = carrinho.getValorTotal();
-        double frete = calcularFrete(endereco);
+        double frete = calcularFrete(carrinho);
         double total = subtotal + frete;
         novoPedido.setFrete(frete);
         novoPedido.setValorTotal(total);

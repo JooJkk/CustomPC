@@ -277,7 +277,7 @@ controller.setUsuario(usuario);*/
             );
 
             double frete =
-                    pedidoService.calcularFrete(endereco);
+                    pedidoService.calcularFrete(carrinhoService.getCarrinho());
 
             double total = subtotal + frete;
 

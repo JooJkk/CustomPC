@@ -6,6 +6,7 @@ public abstract class Componente {
     private String marca;
     private double preco;
     private double peso;
+    private double volume;
     private int estoque;
     private int consumoWatts;
     private static long proximoId = 1;
@@ -14,7 +15,7 @@ public abstract class Componente {
         this.id = proximoId;
         proximoId++;
     }
-    protected Componente(String nome, String marca, double preco, double peso, int estoque, int consumoWatts){
+    protected Componente(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts){
         this.id = proximoId;
         proximoId++;
         setNome(nome);
@@ -23,6 +24,17 @@ public abstract class Componente {
         setPeso(peso);
         setEstoque(estoque);
         setConsumoWatts(consumoWatts);
+        setVolume(volume);
+    }
+
+    public double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(double volume) {
+        if(volume < 0){
+            throw new IllegalArgumentException("volume não pode ser negativo");
+        }
     }
 
     public String getNome() {

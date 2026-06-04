@@ -4,8 +4,8 @@ public class Fonte extends Componente{
     private int potenciaWatts;
     private String certificacao;
 
-    public Fonte(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, int potenciaWatts, String certificacao){
-        super(nome, marca, preco, peso, estoque, consumoWatts);
+    public Fonte(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts, int potenciaWatts, String certificacao){
+        super(nome, marca, preco, peso, volume, estoque, consumoWatts);
         setPotenciaWatts(potenciaWatts);
         setCertificacao(certificacao);
     }

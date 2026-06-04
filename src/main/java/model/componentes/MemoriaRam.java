@@ -4,8 +4,8 @@ public class MemoriaRam extends Componente {
     private String tipoRam;
     private int capacidadeGB;
     private int frequenciaMHz;
-    public MemoriaRam(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, String tipoRam, int capacidadeGB, int frequenciaMHz){
-        super(nome, marca, preco, peso, estoque, consumoWatts);
+    public MemoriaRam(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts, String tipoRam, int capacidadeGB, int frequenciaMHz){
+        super(nome, marca, preco, peso, volume, estoque, consumoWatts);
         setCapacidadeGB(capacidadeGB);
         setTipoRam(tipoRam);
         setFrequenciaMHz(frequenciaMHz);

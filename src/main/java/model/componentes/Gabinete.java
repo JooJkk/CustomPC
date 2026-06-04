@@ -3,8 +3,8 @@ package model.componentes;
 public class Gabinete extends Componente {
     private String formatoPlacaMaeSuportado;
     private int comprimentoMaxGpuMM;
-    public Gabinete(String nome, String marca, double preco, double peso, int estoque, int consumoWatts, String formatoPlacaMaeSuportado, int comprimentoMaxGpuMM) {
-        super(nome, marca, preco, peso, estoque, consumoWatts);
+    public Gabinete(String nome, String marca, double preco, double peso, double volume, int estoque, int consumoWatts, String formatoPlacaMaeSuportado, int comprimentoMaxGpuMM) {
+        super(nome, marca, preco, peso, volume, estoque, consumoWatts);
         this.formatoPlacaMaeSuportado = formatoPlacaMaeSuportado;
         this.comprimentoMaxGpuMM = comprimentoMaxGpuMM;
     }

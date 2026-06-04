@@ -44,31 +44,30 @@ public class BuildsController {
         // 1. CARREGA TODOS OS MESMOS ITENS DO CATÁLOGO NAS CAIXINHAS (21 ITENS)
 
         // --- PROCESSADORES ---
-        comboProcessador.getItems().add(new Processador("Ryzen 5 5600", "AMD", 1000.0, 0.5, 10, 65, "AM4", 65));
-        comboProcessador.getItems().add(new Processador("Intel i7-12700K", "Intel", 2100.0, 0.6, 5, 125, "LGA1700", 125));
-        comboProcessador.getItems().add(new Processador("Ryzen 9 7950X", "AMD", 3500.0, 0.5, 3, 170, "AM5", 170));
-        comboProcessador.getItems().add(new Processador("Core i5-13600K", "Intel", 1900.0, 0.6, 8, 125, "LGA1700", 125));
-        comboProcessador.getItems().add(new Processador("Core i3-12100F", "Intel", 650.0, 0.4, 20, 58, "LGA1700", 60));
+        comboProcessador.getItems().add(new Processador("Ryzen 5 5600", "AMD", 1000.0, 0.5, 0.3, 10, 65, "AM4", 65));
+        comboProcessador.getItems().add(new Processador("Intel i7-12700K", "Intel", 2100.0, 0.6, 0.4, 5, 125, "LGA1700", 125));
+        comboProcessador.getItems().add(new Processador("Ryzen 9 7950X", "AMD", 3500.0, 0.5, 0.5, 3, 170, "AM5", 170));
+        comboProcessador.getItems().add(new Processador("Core i5-13600K", "Intel", 1900.0, 0.6, 0.4, 8, 125, "LGA1700", 125));
+        comboProcessador.getItems().add(new Processador("Core i3-12100F", "Intel", 650.0, 0.4, 0.3, 20, 58, "LGA1700", 60));
 
-        // --- PLACAS-MÃE ---
-        comboPlacaMae.getItems().add(new PlacaMae("B550M Aorus Elite", "Gigabyte", 950.0, 1.0, 8, 30, "AM4", 4, "DDR4", "Micro-ATX"));
-        comboPlacaMae.getItems().add(new PlacaMae("X670E ASUS ROG", "ASUS", 2800.0, 1.2, 4, 40, "AM5", 4, "DDR5", "ATX"));
-        comboPlacaMae.getItems().add(new PlacaMae("H610M-E", "MSI", 620.0, 0.8, 12, 25, "LGA1700", 2, "DDR4", "Micro-ATX"));
-        comboPlacaMae.getItems().add(new PlacaMae("A520M-K", "ASUS", 480.0, 0.7, 15, 20, "AM4", 2, "DDR4", "Micro-ATX"));
-        comboPlacaMae.getItems().add(new PlacaMae("Z790 MSI Pro", "MSI", 2100.0, 1.1, 6, 45, "LGA1700", 4, "DDR5", "ATX"));
+// --- PLACAS-MÃE ---
+        comboPlacaMae.getItems().add(new PlacaMae("B550M Aorus Elite", "Gigabyte", 950.0, 1.0, 0.6, 8, 30, "AM4", 4, "DDR4", "Micro-ATX"));
+        comboPlacaMae.getItems().add(new PlacaMae("X670E ASUS ROG", "ASUS", 2800.0, 1.2, 0.8, 4, 40, "AM5", 4, "DDR5", "ATX"));
+        comboPlacaMae.getItems().add(new PlacaMae("H610M-E", "MSI", 620.0, 0.8, 0.5, 12, 25, "LGA1700", 2, "DDR4", "Micro-ATX"));
+        comboPlacaMae.getItems().add(new PlacaMae("A520M-K", "ASUS", 480.0, 0.7, 0.4, 15, 20, "AM4", 2, "DDR4", "Micro-ATX"));
+        comboPlacaMae.getItems().add(new PlacaMae("Z790 MSI Pro", "MSI", 2100.0, 1.1, 0.7, 6, 45, "LGA1700", 4, "DDR5", "ATX"));
 
-        // --- MEMÓRIAS RAM ---
-        comboRam.getItems().add(new MemoriaRam("16GB Corsair Vengeance", "Corsair", 380.0, 0.1, 30, 5, "DDR4", 16, 3200));
-        comboRam.getItems().add(new MemoriaRam("32GB G.Skill Trident", "G.Skill", 1250.0, 0.2, 10, 10, "DDR5", 32, 6000));
-        comboRam.getItems().add(new MemoriaRam("8GB Kingston Fury", "Kingston", 210.0, 0.1, 50, 5, "DDR4", 8, 2666));
-        comboRam.getItems().add(new MemoriaRam("16GB XPG Spectrix", "XPG", 440.0, 0.1, 25, 8, "DDR4", 16, 3600));
+// --- MEMÓRIAS RAM ---
+        comboRam.getItems().add(new MemoriaRam("16GB Corsair Vengeance", "Corsair", 380.0, 0.1, 0.1, 30, 5, "DDR4", 16, 3200));
+        comboRam.getItems().add(new MemoriaRam("32GB G.Skill Trident", "G.Skill", 1250.0, 0.2, 0.15, 10, 10, "DDR5", 32, 6000));
+        comboRam.getItems().add(new MemoriaRam("8GB Kingston Fury", "Kingston", 210.0, 0.1, 0.08, 50, 5, "DDR4", 8, 2666));
+        comboRam.getItems().add(new MemoriaRam("16GB XPG Spectrix", "XPG", 440.0, 0.1, 0.1, 25, 8, "DDR4", 16, 3600));
 
-        // --- FONTES ---
-        comboFonte.getItems().add(new Fonte("650W Corsair CV", "Corsair", 460.0, 2.0, 15, 0, 650, "80 Plus Bronze"));
-        comboFonte.getItems().add(new Fonte("850W EVGA SuperNova", "EVGA", 850.0, 2.5, 10, 0, 850, "80 Plus Gold"));
-        comboFonte.getItems().add(new Fonte("500W Redragon RGPS", "Redragon", 290.0, 1.5, 22, 0, 500, "80 Plus Bronze"));
-        comboFonte.getItems().add(new Fonte("1000W Seasonic Prime", "Seasonic", 1600.0, 3.0, 5, 0, 1000, "80 Plus Platinum"));
-
+// --- FONTES ---
+        comboFonte.getItems().add(new Fonte("650W Corsair CV", "Corsair", 460.0, 2.0, 1.5, 15, 0, 650, "80 Plus Bronze"));
+        comboFonte.getItems().add(new Fonte("850W EVGA SuperNova", "EVGA", 850.0, 2.5, 2.0, 10, 0, 850, "80 Plus Gold"));
+        comboFonte.getItems().add(new Fonte("500W Redragon RGPS", "Redragon", 290.0, 1.5, 1.2, 22, 0, 500, "80 Plus Bronze"));
+        comboFonte.getItems().add(new Fonte("1000W Seasonic Prime", "Seasonic", 1600.0, 3.0, 2.5, 5, 0, 1000, "80 Plus Platinum"));
         // 2. SELEÇÃO AUTOMÁTICA EM TEMPO REAL (Vindo do catálogo)
         List<Componente> compartilhados = buildService.getComponentesSelecionadosParaMontagem();
 
