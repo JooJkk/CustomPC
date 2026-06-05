@@ -7,7 +7,6 @@ public class ItemPedido {
     private int quantidade;
     private double precoUnitario;
 
-    private Pedido pedido;
     private Componente componente;
 
     public ItemPedido() {
@@ -47,21 +46,6 @@ public class ItemPedido {
 
     public double getPrecoUnitario() {
         return precoUnitario;
-    }
-
-    public void setPedido(Pedido pedido) {
-
-        if(pedido == null){
-            throw new IllegalArgumentException(
-                    "pedido não pode ser nulo"
-            );
-        }
-
-        this.pedido = pedido;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
     }
 
     public void setComponente(Componente componente) {
