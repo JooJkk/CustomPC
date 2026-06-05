@@ -1,12 +1,19 @@
+import model.Cliente;
 import model.componentes.Fonte;
 import model.componentes.MemoriaRam;
 import model.componentes.PlacaMae;
 import model.componentes.Processador;
+import negocio.ClienteService;
 import negocio.ComponenteService;
 
 public class Main {
 
      public static void main(String[] args) {
+          App.main(args);
+
+          ClienteService clienteService = ClienteService.getInstance();
+          clienteService.cadastrar(new Cliente("Nome qualquer", "email@teste.com", "123"));
+
           /*USADO PARA COLOCAR OS COMPONENTES NO JSON
           ComponenteService componenteService = ComponenteService.getInstance();
           componenteService.cadastrar(new Processador("Ryzen 5 5600", "AMD", 1000.0, 0.5, 0.3, 10, 65, "AM4", 65));
@@ -35,6 +42,6 @@ public class Main {
           componenteService.cadastrar(new Processador("RX 6750 XT", "AMD", 2300.0, 1.3, 3.0, 5, 0, "PCIe", 250));
           componenteService.cadastrar(new Processador("RTX 3060", "MSI", 1850.0, 1.1, 2.5, 12, 0, "PCIe", 170));
 */
-          App.main(args);
+
      }
 }

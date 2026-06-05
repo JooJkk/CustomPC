@@ -195,5 +195,83 @@
       "email": "email@teste.com",
       "senha": "123"
     }
+  },
+  {
+    "id": 1,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 4
+      },
+      "time": {
+        "hour": 21,
+        "minute": 38,
+        "second": 52,
+        "nano": 578218700
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 2519.4,
+    "pagamento": {
+      "id": 10,
+      "valor": 2519.4,
+      "formaPagamento": "Cartão",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 2,
+        "precoUnitario": 620.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tipoRamSuportada": "DDR4",
+          "slotsRam": 2,
+          "formato": "Micro-ATX",
+          "id": 8,
+          "nome": "H610M-E",
+          "marca": "MSI",
+          "preco": 620.0,
+          "peso": 0.8,
+          "volume": 0.0,
+          "estoque": 10,
+          "consumoWatts": 25,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 1250.0,
+        "componente": {
+          "tipoRam": "DDR5",
+          "capacidadeGB": 32,
+          "frequenciaMHz": 6000,
+          "id": 12,
+          "nome": "32GB G.Skill Trident",
+          "marca": "G.Skill",
+          "preco": 1250.0,
+          "peso": 0.2,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 10,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "Rua",
+      "numero": "321",
+      "bairro": "bairro",
+      "cidade": "recife",
+      "cep": "12341234",
+      "estado": "PE"
+    },
+    "frete": 29.4,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
   }
 ]

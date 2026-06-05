@@ -51,7 +51,7 @@ public class RepositorioCliente implements IRepositorioCliente {
     }
 
     @Override
-    public Cliente buscar(int id) {
+    public Cliente buscar(long id) {
         for (Cliente c : carregar()) {
             if (c.getId() == id) return c;
         }
@@ -84,7 +84,7 @@ public class RepositorioCliente implements IRepositorioCliente {
     }
 
     @Override
-    public void remover(int id) {
+    public void remover(long id) {
         List<Cliente> clientes = carregar();
         for (int i = 0; i < clientes.size(); i++) {
             if (clientes.get(i).getId() == id) {
