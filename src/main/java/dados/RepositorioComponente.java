@@ -16,10 +16,13 @@ public class RepositorioComponente implements IRepositorioComponente {
     private final Gson gson = new GsonBuilder().registerTypeAdapter(Componente.class, new JsonDeserializer<Componente>() {
         @Override public Componente deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) {JsonObject obj = json.getAsJsonObject();
             if (obj.has("tipoRam")) {return context.deserialize(obj, MemoriaRam.class);}
-            if (obj.has("chipset")) {return context.deserialize(obj, PlacaMae.class);}
-            if (obj.has("vram") || obj.has("memoriaVideo")) {return context.deserialize(obj, PlacaVideo.class);}
-            if (obj.has("potencia")) {return context.deserialize(obj, Fonte.class);}if (obj.has("formFactor")) {return context.deserialize(obj, Gabinete.class);}
-            if (obj.has("socket")) {return context.deserialize(obj, Processador.class);}if (obj.has("componentes")) {return context.deserialize(obj, Build.class);}throw new JsonParseException("Tipo de componente desconhecido: " + obj);
+            if (obj.has("formato")) {return context.deserialize(obj, PlacaMae.class);}
+            if (obj.has("comprimentoMM")) {return context.deserialize(obj, PlacaVideo.class);}
+            if (obj.has("certificacao")) {return context.deserialize(obj, Fonte.class);}
+            if (obj.has("comprimentoMaxGpuMM")) {return context.deserialize(obj, Gabinete.class);}
+            if (obj.has("socket")) {return context.deserialize(obj, Processador.class);}
+            throw new JsonParseException(
+                    "Tipo de componente desconhecido");
         }}).setPrettyPrinting().create();
     private List<Componente> componentes;
 
