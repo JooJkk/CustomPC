@@ -5,12 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import java.time.format.DateTimeFormatter;
-
-// Importando as classes do seu modelo e negócio
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import model.Cliente;
 import model.Pedido;
 import negocio.PedidoService;
@@ -18,78 +20,116 @@ import negocio.PedidoService;
 public class PedidoController {
 
     private Cliente usuarioLogado;
-    public void setUsuario(Cliente usuario) {
-        this.usuarioLogado = usuario;
-    }
-
-    @FXML
-    private Label lblNumeroPedido;
-    @FXML
-    private Label lblDataPedido;
-    @FXML
-    private Label lblTotalPedido;
-    @FXML
-    private Label lblStatusPedido;
-    @FXML
-    private ProgressBar barraProgresso;
-
-    // Guarda a referência da Área do Cliente
     private ClienteController clienteControllerPai;
 
-    // Para o ClienteController se passar para cá
+    @FXML
+    private VBox containerPedidos;
+
     public void setClienteControllerPai(ClienteController pai) {
         this.clienteControllerPai = pai;
     }
 
-    @FXML
-    public void initialize() {
-        // Puxa o pedido que o seu amigo acabou de guardar no Service após o checkout
-        Pedido pedidoReal = PedidoService.getPedidoAtual();
+    public void setUsuario(Cliente usuario) {
+        this.usuarioLogado = usuario;
+        carregarPedidos();
+    }
 
-        // Segurança: Se a tela abrir sem nenhum pedido feito, evita estourar erro
-        if (pedidoReal != null) {
+    private void carregarPedidos() {
+        // Limpa a tela por precaução
+        containerPedidos.getChildren().clear();
 
-            // 1. Preenche o número do Pedido
-            lblNumeroPedido.setText("Número do Pedido: #" + pedidoReal.getId());
+        // Puxamos TODOS os pedidos do banco/JSON para a fase de testes
+        List<Pedido> meusPedidos = PedidoService.getInstance().listarTodos();
 
-            // 2. Formata e preenche a data de forma segura
-            if (pedidoReal.getData() != null) {
-                DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-                String dataFormatada = pedidoReal.getData().format(formatador);
-                lblDataPedido.setText("Data do Pedido: " + dataFormatada);
-            } else {
-                lblDataPedido.setText("Data do Pedido: --/--/----");
-            }
+        if (meusPedidos == null || meusPedidos.isEmpty()) {
+            containerPedidos.getChildren().add(new Label("Nenhum pedido encontrado."));
+            return;
+        }
 
-            // 3. Preenche o Status
-            lblStatusPedido.setText("Status: " + pedidoReal.getStatus());
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-            // 4. Preenche o Valor Total
-            lblTotalPedido.setText(String.format("Valor Total: R$ %.2f", pedidoReal.getValorTotal()));
+        // Loop: Para cada pedido na lista, cria um "quadradinho" (VBox) na tela
+        for (Pedido p : meusPedidos) {
+            VBox cardPedido = new VBox(5);
+            cardPedido.setStyle("-fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 10; -fx-background-color: #f9f9f9;");
 
-            // 5. Controla a barra de progresso baseado no status do pedido
-            if (barraProgresso != null) {
-                if ("PENDENTE".equalsIgnoreCase(pedidoReal.getStatus())) {
-                    barraProgresso.setProgress(0.25);
-                } else if ("PREPARANDO_COMPONENTE 🛠️".equalsIgnoreCase(pedidoReal.getStatus())) {
-                    barraProgresso.setProgress(0.50);
-                } else if ("ENVIADO".equalsIgnoreCase(pedidoReal.getStatus())) {
-                    barraProgresso.setProgress(1.0);
+            Label lblId = new Label("Pedido #" + p.getId());
+            lblId.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+
+            String dataStr = (p.getData() != null) ? p.getData().format(formatador) : "--/--/----";
+            Label lblData = new Label("Data: " + dataStr);
+
+            Label lblTotal = new Label(String.format("Total: R$ %.2f", p.getValorTotal()));
+            lblTotal.setStyle("-fx-font-weight: bold;");
+
+            Label lblStatus = new Label("Status: " + p.getStatus());
+            lblStatus.setStyle("-fx-text-fill: #2ecc71; -fx-font-weight: bold;");
+
+            // Cria a barra de progresso
+            ProgressBar barra = new ProgressBar(0);
+            barra.setPrefWidth(250);
+            if ("PENDENTE".equalsIgnoreCase(p.getStatus()) || "AGUARDANDO_PAGAMENTO".equalsIgnoreCase(p.getStatus())) barra.setProgress(0.25);
+            else if ("PREPARANDO_COMPONENTE 🛠️".equalsIgnoreCase(p.getStatus())) barra.setProgress(0.50);
+            else if ("ENVIADO".equalsIgnoreCase(p.getStatus())) barra.setProgress(1.0);
+
+            // =========================================================================
+            // LISTA DE ITENS
+            // =========================================================================
+            Label lblTituloItens = new Label("Itens Comprados:");
+            lblTituloItens.setStyle("-fx-font-weight: bold; -fx-padding: 10 0 2 0;");
+
+            VBox caixaDeItens = new VBox(2);
+            caixaDeItens.setStyle("-fx-padding: 0 0 10 10;");
+
+            if (p.getItens() != null && !p.getItens().isEmpty()) {
+                for (var item : p.getItens()) {
+                    var comp = item.getComponente();
+
+                    String textoItem = String.format("• %s - R$ %.2f",
+                            comp.getNome(),
+                            comp.getPreco());
+
+                    Label lblItem = new Label(textoItem);
+                    lblItem.setStyle("-fx-text-fill: #555555; -fx-font-size: 12px;");
+                    caixaDeItens.getChildren().add(lblItem);
                 }
+            } else {
+                Label lblVazio = new Label("Nenhum item detalhado.");
+                lblVazio.setStyle("-fx-text-fill: #999999; -fx-font-size: 12px;");
+                caixaDeItens.getChildren().add(lblVazio);
             }
-        } else {
-            lblNumeroPedido.setText("Nenhum pedido ativo encontrado.");
-            lblTotalPedido.setText("Valor Total: R$ 0,00");
-            if (barraProgresso != null) {
-                barraProgresso.setProgress(0.0);
+
+            // =========================================================================
+            // BOTÃO CANCELAR
+            // =========================================================================
+            Button btnCancelar = new Button("Cancelar Pedido");
+            btnCancelar.setStyle("-fx-background-color: #ff4c4c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
+
+            if ("CANCELADO".equalsIgnoreCase(p.getStatus()) ||
+                    "PREPARANDO_COMPONENTE 🛠️".equalsIgnoreCase(p.getStatus()) ||
+                    "ENVIADO".equalsIgnoreCase(p.getStatus())) {
+                btnCancelar.setDisable(true);
             }
+
+            btnCancelar.setOnAction(event -> {
+                System.out.println("Clicou em cancelar no pedido #" + p.getId());
+
+                p.setStatus("CANCELADO");
+
+                PedidoService.getInstance().atualizarPedido(p);
+
+                carregarPedidos();
+            });
+            // =========================================================================
+
+            cardPedido.getChildren().addAll(lblId, lblData, lblStatus, barra, lblTituloItens, caixaDeItens, lblTotal, btnCancelar);
+
+            containerPedidos.getChildren().add(cardPedido);
         }
     }
 
     @FXML
     public void onBotaoVoltarClick(ActionEvent event) {
-        System.out.println("🤖 Clique detectado! Redirecionando para a área do cliente...");
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
             Parent root = loader.load();
@@ -97,12 +137,8 @@ public class PedidoController {
             ClienteController controller = loader.getController();
             controller.setUsuario(usuarioLogado);
 
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
-                    .getScene()
-                    .getWindow();
-
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
-
         } catch (Exception e) {
             e.printStackTrace();
         }

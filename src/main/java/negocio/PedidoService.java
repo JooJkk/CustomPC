@@ -142,7 +142,6 @@ public class PedidoService {
 
         Pedido novoPedido = new Pedido();
         novoPedido.setCliente(cliente);
-        novoPedido.setId(carrinho.getId());
         novoPedido.setEndereco(endereco);
         double subtotal = carrinho.getValorTotal();
         double frete = calcularFrete(carrinho);
@@ -171,5 +170,12 @@ public class PedidoService {
 
     public List<Pedido> listarPedidosDoCliente(Cliente cliente) {
         return repositorio.buscarPorCliente(cliente);
+    }
+    public List<Pedido> listarTodos() {
+        // Pede para o repositório puxar a lista completa e devolve para o Controller
+        return repositorio.listarTodos();
+    }
+    public void atualizarPedido(Pedido pedido) {
+        repositorio.atualizar(pedido);
     }
 }

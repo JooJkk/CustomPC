@@ -11,8 +11,8 @@ public class Main {
      public static void main(String[] args) {
           App.main(args);
 
-          ClienteService clienteService = ClienteService.getInstance();
-          clienteService.cadastrar(new Cliente("Nome qualquer", "email@teste.com", "123"));
+          //ClienteService clienteService = ClienteService.getInstance();
+          //clienteService.cadastrar(new Cliente("Nome qualquer", "email@teste.com", "123"));
 
           /*USADO PARA COLOCAR OS COMPONENTES NO JSON
           ComponenteService componenteService = ComponenteService.getInstance();

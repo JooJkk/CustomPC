@@ -6,41 +6,47 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClienteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClienteController">
    <children>
-      <BorderPane fx:id="painelPrincipal" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="painelPrincipal" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="60.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBotaoHomeClick" text="HOME">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBotaoHomeClick" prefHeight="35.0" prefWidth="100.0" text="HOME">
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets top="60.0" />
                      </VBox.margin></Button>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBotaoCatalogoClick" text="CATALOGO">
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                      </padding>
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin></Button>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBotaoPedidoClick" text="PEDIDO">
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                      </padding>
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin></Button>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBotaoCarrinhoClick" text="CARRINHO">
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                      </padding>
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin></Button>
                </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
             </VBox>
          </left>
          <center>
