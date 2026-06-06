@@ -5,412 +5,20 @@
       "date": {
         "year": 2026,
         "month": 6,
-        "day": 4
+        "day": 6
       },
       "time": {
-        "hour": 20,
-        "minute": 32,
-        "second": 39,
-        "nano": 299320800
+        "hour": 18,
+        "minute": 51,
+        "second": 1,
+        "nano": 591322100
       }
     },
     "status": "CANCELADO",
-    "valorTotal": 436.6,
+    "valorTotal": 4986.6,
     "pagamento": {
       "id": 1,
-      "valor": 436.6,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 2,
-        "precoUnitario": 210.0,
-        "componente": {
-          "tipoRam": "DDR4",
-          "capacidadeGB": 8,
-          "frequenciaMHz": 2666,
-          "id": 13,
-          "nome": "8GB Kingston Fury",
-          "marca": "Kingston",
-          "preco": 210.0,
-          "peso": 0.1,
-          "volume": 0.0,
-          "estoque": 48,
-          "consumoWatts": 5,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "aaa",
-      "numero": "1",
-      "bairro": "aa",
-      "cidade": "aa",
-      "cep": "12345678",
-      "estado": "a"
-    },
-    "frete": 16.6,
-    "cliente": {
-      "id": 1,
-      "nome": "Nome teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 1,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 4
-      },
-      "time": {
-        "hour": 20,
-        "minute": 56,
-        "second": 34,
-        "nano": 437791400
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 1394.6,
-    "pagamento": {
-      "id": 3,
-      "valor": 1394.6,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 2,
-        "precoUnitario": 210.0,
-        "componente": {
-          "tipoRam": "DDR4",
-          "capacidadeGB": 8,
-          "frequenciaMHz": 2666,
-          "id": 14,
-          "nome": "8GB Kingston Fury",
-          "marca": "Kingston",
-          "preco": 210.0,
-          "peso": 0.1,
-          "volume": 0.0,
-          "estoque": 48,
-          "consumoWatts": 5,
-          "nivelDesempenho": 0
-        }
-      },
-      {
-        "quantidade": 1,
-        "precoUnitario": 950.0,
-        "componente": {
-          "socket": "AM4",
-          "tipoRamSuportada": "DDR4",
-          "slotsRam": 4,
-          "formato": "Micro-ATX",
-          "id": 7,
-          "nome": "B550M Aorus Elite",
-          "marca": "Gigabyte",
-          "preco": 950.0,
-          "peso": 1.0,
-          "volume": 0.0,
-          "estoque": 7,
-          "consumoWatts": 30,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "a",
-      "numero": "1",
-      "bairro": "aa",
-      "cidade": "a",
-      "cep": "12345678",
-      "estado": "a"
-    },
-    "frete": 24.6,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste2",
-      "email": "email2@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 1,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 4
-      },
-      "time": {
-        "hour": 21,
-        "minute": 9,
-        "second": 23,
-        "nano": 869575400
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 4232.6,
-    "pagamento": {
-      "id": 5,
-      "valor": 4232.6,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 2,
-        "precoUnitario": 2100.0,
-        "componente": {
-          "socket": "LGA1700",
-          "tipoRamSuportada": "DDR5",
-          "slotsRam": 4,
-          "formato": "ATX",
-          "id": 10,
-          "nome": "Z790 MSI Pro",
-          "marca": "MSI",
-          "preco": 2100.0,
-          "peso": 1.1,
-          "volume": 0.0,
-          "estoque": 4,
-          "consumoWatts": 45,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "aa",
-      "numero": "1",
-      "bairro": "ss",
-      "cidade": "ss",
-      "cep": "12345678",
-      "estado": "aa"
-    },
-    "frete": 32.6,
-    "cliente": {
-      "id": 1,
-      "nome": "Nome teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 1,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 4
-      },
-      "time": {
-        "hour": 21,
-        "minute": 38,
-        "second": 52,
-        "nano": 578218700
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 2519.4,
-    "pagamento": {
-      "id": 10,
-      "valor": 2519.4,
-      "formaPagamento": "Cartão",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 2,
-        "precoUnitario": 620.0,
-        "componente": {
-          "socket": "LGA1700",
-          "tipoRamSuportada": "DDR4",
-          "slotsRam": 2,
-          "formato": "Micro-ATX",
-          "id": 8,
-          "nome": "H610M-E",
-          "marca": "MSI",
-          "preco": 620.0,
-          "peso": 0.8,
-          "volume": 0.0,
-          "estoque": 10,
-          "consumoWatts": 25,
-          "nivelDesempenho": 0
-        }
-      },
-      {
-        "quantidade": 1,
-        "precoUnitario": 1250.0,
-        "componente": {
-          "tipoRam": "DDR5",
-          "capacidadeGB": 32,
-          "frequenciaMHz": 6000,
-          "id": 12,
-          "nome": "32GB G.Skill Trident",
-          "marca": "G.Skill",
-          "preco": 1250.0,
-          "peso": 0.2,
-          "volume": 0.0,
-          "estoque": 9,
-          "consumoWatts": 10,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "Rua",
-      "numero": "321",
-      "bairro": "bairro",
-      "cidade": "recife",
-      "cep": "12341234",
-      "estado": "PE"
-    },
-    "frete": 29.4,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 1,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 14,
-        "minute": 18,
-        "second": 26,
-        "nano": 171305300
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 668.2,
-    "pagamento": {
-      "id": 9,
-      "valor": 668.2,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 650.0,
-        "componente": {
-          "socket": "LGA1700",
-          "tdp": 60,
-          "id": 5,
-          "nome": "Core i3-12100F",
-          "marca": "Intel",
-          "preco": 650.0,
-          "peso": 0.4,
-          "volume": 0.0,
-          "estoque": 19,
-          "consumoWatts": 58,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "uhfueh",
-      "numero": "22222222",
-      "bairro": "elnrfnjk",
-      "cidade": "ihdeihueh",
-      "cep": "22222222",
-      "estado": "pe"
-    },
-    "frete": 18.2,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 1,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 14,
-        "minute": 19,
-        "second": 0,
-        "nano": 890454600
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 395.8,
-    "pagamento": {
-      "id": 15,
-      "valor": 395.8,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 380.0,
-        "componente": {
-          "tipoRam": "DDR4",
-          "capacidadeGB": 16,
-          "frequenciaMHz": 3200,
-          "id": 11,
-          "nome": "16GB Corsair Vengeance",
-          "marca": "Corsair",
-          "preco": 380.0,
-          "peso": 0.1,
-          "volume": 0.0,
-          "estoque": 29,
-          "consumoWatts": 5,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "efnewkjn",
-      "numero": "77777777",
-      "bairro": "ejdjken",
-      "cidade": "nfne",
-      "cep": "22222222",
-      "estado": "pe"
-    },
-    "frete": 15.8,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 2,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 14,
-        "minute": 44,
-        "second": 51,
-        "nano": 224388500
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 2123.8,
-    "pagamento": {
-      "id": 13,
-      "valor": 2123.8,
+      "valor": 4986.6,
       "formaPagamento": "Pix",
       "status": "PENDENTE"
     },
@@ -433,17 +41,113 @@
           "consumoWatts": 45,
           "nivelDesempenho": 0
         }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 1900.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 125,
+          "id": 4,
+          "nome": "Core i5-13600K",
+          "marca": "Intel",
+          "preco": 1900.0,
+          "peso": 0.6,
+          "volume": 0.0,
+          "estoque": 7,
+          "consumoWatts": 125,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 950.0,
+        "componente": {
+          "socket": "AM4",
+          "tipoRamSuportada": "DDR4",
+          "slotsRam": 4,
+          "formato": "Micro-ATX",
+          "id": 6,
+          "nome": "B550M Aorus Elite",
+          "marca": "Gigabyte",
+          "preco": 950.0,
+          "peso": 1.0,
+          "volume": 0.0,
+          "estoque": 7,
+          "consumoWatts": 30,
+          "nivelDesempenho": 0
+        }
       }
     ],
     "endereco": {
-      "rua": "dsjfesu",
-      "numero": "2222222",
-      "bairro": "www",
-      "cidade": "tftss",
-      "cep": "22222222",
+      "rua": "rua qualquer",
+      "numero": "1",
+      "bairro": "bairro",
+      "cidade": "recife",
+      "cep": "12345678",
       "estado": "pe"
     },
-    "frete": 23.8,
+    "frete": 36.6,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 2,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 6
+      },
+      "time": {
+        "hour": 18,
+        "minute": 51,
+        "second": 34,
+        "nano": 334144500
+      }
+    },
+    "status": "CANCELADO",
+    "valorTotal": 2824.6,
+    "pagamento": {
+      "id": 3,
+      "valor": 2824.6,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 2800.0,
+        "componente": {
+          "socket": "AM5",
+          "tipoRamSuportada": "DDR5",
+          "slotsRam": 4,
+          "formato": "ATX",
+          "id": 7,
+          "nome": "X670E ASUS ROG",
+          "marca": "ASUS",
+          "preco": 2800.0,
+          "peso": 1.2,
+          "volume": 0.0,
+          "estoque": 3,
+          "consumoWatts": 40,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "a",
+      "numero": "1",
+      "bairro": "aa",
+      "cidade": "aa",
+      "cep": "43214321",
+      "estado": "a"
+    },
+    "frete": 24.6,
     "cliente": {
       "id": 1,
       "nome": "Teste",
@@ -460,408 +164,71 @@
         "day": 6
       },
       "time": {
-        "hour": 14,
-        "minute": 45,
-        "second": 26,
-        "nano": 561650900
-      }
-    },
-    "status": "CANCELADO",
-    "valorTotal": 500.6,
-    "pagamento": {
-      "id": 21,
-      "valor": 500.6,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 480.0,
-        "componente": {
-          "socket": "AM4",
-          "tipoRamSuportada": "DDR4",
-          "slotsRam": 2,
-          "formato": "Micro-ATX",
-          "id": 9,
-          "nome": "A520M-K",
-          "marca": "ASUS",
-          "preco": 480.0,
-          "peso": 0.7,
-          "volume": 0.0,
-          "estoque": 14,
-          "consumoWatts": 20,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "eenie",
-      "numero": "55555555",
-      "bairro": "ee",
-      "cidade": "ee",
-      "cep": "55555555",
-      "estado": "eee"
-    },
-    "frete": 20.6,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 4,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 14,
-        "minute": 47,
-        "second": 48,
-        "nano": 928529500
-      }
-    },
-    "status": "CANCELADO",
-    "valorTotal": 395.8,
-    "pagamento": {
-      "id": 17,
-      "valor": 395.8,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 380.0,
-        "componente": {
-          "tipoRam": "DDR4",
-          "capacidadeGB": 16,
-          "frequenciaMHz": 3200,
-          "id": 11,
-          "nome": "16GB Corsair Vengeance",
-          "marca": "Corsair",
-          "preco": 380.0,
-          "peso": 0.1,
-          "volume": 0.0,
-          "estoque": 29,
-          "consumoWatts": 5,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "kfdfnd",
-      "numero": "99999999",
-      "bairro": "jewndfkjwe",
-      "cidade": "ejkwfnjew",
-      "cep": "99999999",
-      "estado": "pe"
-    },
-    "frete": 15.8,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 5,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 15,
-        "minute": 17,
-        "second": 39,
-        "nano": 333258800
-      }
-    },
-    "status": "CANCELADO",
-    "valorTotal": 395.8,
-    "pagamento": {
-      "id": 19,
-      "valor": 395.8,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 380.0,
-        "componente": {
-          "tipoRam": "DDR4",
-          "capacidadeGB": 16,
-          "frequenciaMHz": 3200,
-          "id": 11,
-          "nome": "16GB Corsair Vengeance",
-          "marca": "Corsair",
-          "preco": 380.0,
-          "peso": 0.1,
-          "volume": 0.0,
-          "estoque": 29,
-          "consumoWatts": 5,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "erkfber",
-      "numero": "99999999",
-      "bairro": "d",
-      "cidade": "enfien",
-      "cep": "99999999",
-      "estado": "pe"
-    },
-    "frete": 15.8,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 6,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 17,
-        "minute": 19,
-        "second": 48,
-        "nano": 369496800
+        "hour": 18,
+        "minute": 56,
+        "second": 35,
+        "nano": 243263400
       }
     },
     "status": "PENDENTE",
-    "valorTotal": 641.4,
+    "valorTotal": 4028.6,
     "pagamento": {
-      "id": 21,
-      "valor": 641.4,
+      "id": 5,
+      "valor": 4028.6,
       "formaPagamento": "Pix",
       "status": "PENDENTE"
     },
     "itens": [
       {
         "quantidade": 1,
-        "precoUnitario": 620.0,
+        "precoUnitario": 1900.0,
         "componente": {
           "socket": "LGA1700",
-          "tipoRamSuportada": "DDR4",
-          "slotsRam": 2,
-          "formato": "Micro-ATX",
-          "id": 8,
-          "nome": "H610M-E",
+          "tdp": 125,
+          "id": 4,
+          "nome": "Core i5-13600K",
+          "marca": "Intel",
+          "preco": 1900.0,
+          "peso": 0.6,
+          "volume": 0.0,
+          "estoque": 7,
+          "consumoWatts": 125,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tipoRamSuportada": "DDR5",
+          "slotsRam": 4,
+          "formato": "ATX",
+          "id": 10,
+          "nome": "Z790 MSI Pro",
           "marca": "MSI",
-          "preco": 620.0,
-          "peso": 0.8,
+          "preco": 2100.0,
+          "peso": 1.1,
           "volume": 0.0,
-          "estoque": 11,
-          "consumoWatts": 25,
+          "estoque": 5,
+          "consumoWatts": 45,
           "nivelDesempenho": 0
         }
       }
     ],
     "endereco": {
-      "rua": "ejkdb",
-      "numero": "22222222",
-      "bairro": "fkrnfker",
-      "cidade": "klfnvlr",
-      "cep": "22222222",
-      "estado": "klvnfv"
+      "rua": "a",
+      "numero": "1",
+      "bairro": "aaa",
+      "cidade": "a",
+      "cep": "12345678",
+      "estado": "a"
     },
-    "frete": 21.4,
+    "frete": 28.6,
     "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 7,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 17,
-        "minute": 20,
-        "second": 33,
-        "nano": 521038800
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 1266.6,
-    "pagamento": {
-      "id": 33,
-      "valor": 1266.6,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 1250.0,
-        "componente": {
-          "tipoRam": "DDR5",
-          "capacidadeGB": 32,
-          "frequenciaMHz": 6000,
-          "id": 12,
-          "nome": "32GB G.Skill Trident",
-          "marca": "G.Skill",
-          "preco": 1250.0,
-          "peso": 0.2,
-          "volume": 0.0,
-          "estoque": 9,
-          "consumoWatts": 10,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "vfdkgkl",
-      "numero": "22222222",
-      "bairro": "kfmrkl",
-      "cidade": "kdsfe",
-      "cep": "22222222",
-      "estado": "klrgnk"
-    },
-    "frete": 16.6,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 8,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 17,
-        "minute": 45,
-        "second": 25,
-        "nano": 378291400
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 395.8,
-    "pagamento": {
-      "id": 25,
-      "valor": 395.8,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 380.0,
-        "componente": {
-          "tipoRam": "DDR4",
-          "capacidadeGB": 16,
-          "frequenciaMHz": 3200,
-          "id": 11,
-          "nome": "16GB Corsair Vengeance",
-          "marca": "Corsair",
-          "preco": 380.0,
-          "peso": 0.1,
-          "volume": 0.0,
-          "estoque": 29,
-          "consumoWatts": 5,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "f vkj",
-      "numero": "22222222",
-      "bairro": "lkmflker",
-      "cidade": "jfve",
-      "cep": "22222222",
-      "estado": "pe"
-    },
-    "frete": 15.8,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
-      "senha": "123"
-    }
-  },
-  {
-    "id": 9,
-    "data": {
-      "date": {
-        "year": 2026,
-        "month": 6,
-        "day": 6
-      },
-      "time": {
-        "hour": 17,
-        "minute": 48,
-        "second": 15,
-        "nano": 970870400
-      }
-    },
-    "status": "PENDENTE",
-    "valorTotal": 1019.0,
-    "pagamento": {
-      "id": 27,
-      "valor": 1019.0,
-      "formaPagamento": "Pix",
-      "status": "PENDENTE"
-    },
-    "itens": [
-      {
-        "quantidade": 1,
-        "precoUnitario": 1000.0,
-        "componente": {
-          "socket": "AM4",
-          "tdp": 65,
-          "id": 1,
-          "nome": "Ryzen 5 5600",
-          "marca": "AMD",
-          "preco": 1000.0,
-          "peso": 0.5,
-          "volume": 0.0,
-          "estoque": 9,
-          "consumoWatts": 65,
-          "nivelDesempenho": 0
-        }
-      }
-    ],
-    "endereco": {
-      "rua": "elkwfm",
-      "numero": "22222222",
-      "bairro": "pe",
-      "cidade": "kldemw",
-      "cep": "22222222",
-      "estado": "pe"
-    },
-    "frete": 19.0,
-    "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
+      "id": 2,
+      "nome": "Teste2",
+      "email": "email2@teste.com",
       "senha": "123"
     }
   }

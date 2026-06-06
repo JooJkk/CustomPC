@@ -38,8 +38,8 @@ public class PedidoController {
         // Limpa a tela por precaução
         containerPedidos.getChildren().clear();
 
-        // Puxamos TODOS os pedidos do banco/JSON para a fase de testes
-        List<Pedido> meusPedidos = PedidoService.getInstance().listarTodos();
+        // Puxamos TODOS os pedidos cujo cliente relacionado seja o usuario logado
+        List<Pedido> meusPedidos = PedidoService.getInstance().listarTodos().stream().filter(p -> p.getCliente() != null && p.getCliente().getId() == usuarioLogado.getId()).toList();
 
         if (meusPedidos == null || meusPedidos.isEmpty()) {
             containerPedidos.getChildren().add(new Label("Nenhum pedido encontrado."));
