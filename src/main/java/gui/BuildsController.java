@@ -22,6 +22,8 @@ import negocio.BuildService;
 import negocio.CarrinhoService;
 import negocio.CompatibilidadeService;
 import exception.BuildIncompativelException;
+import negocio.ComponenteService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,7 @@ public class BuildsController {
 
     @FXML
     public void initialize() {
-        inicializarBancoDeDadosPecas();
+        carregarPecas();
 
         configurarCombo(comboProcessador);
         configurarCombo(comboPlacaMae);
@@ -207,10 +209,10 @@ public class BuildsController {
             return;
         }
 
-        if (cpu != null) carrinhoService.adicionarItem(cpu, 1);
-        if (mobo != null) carrinhoService.adicionarItem(mobo, 1);
-        if (ram != null) carrinhoService.adicionarItem(ram, 1);
-        if (fonte != null) carrinhoService.adicionarItem(fonte, 1);
+        adicionarComEstoque(cpu);
+        adicionarComEstoque(mobo);
+        adicionarComEstoque(ram);
+        adicionarComEstoque(fonte);
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
@@ -225,7 +227,16 @@ public class BuildsController {
             exibirErro("Erro ao abrir a tela de carrinho: " + e.getMessage());
         }
     }
-
+    private void adicionarComEstoque(Componente comp) {
+        if (comp == null) return;
+        if (comp.getEstoque() <= 0) {
+            lblResultado.setText("⚠️ " + comp.getNome() + " está sem estoque!");
+            return;
+        }
+        carrinhoService.adicionarItem(comp, 1);
+        comp.setEstoque(comp.getEstoque() - 1);
+        componenteService.atualizar(comp);
+    }
     @FXML
     public void limparBancada() {
         buildService.limparComponentesMontagem();
@@ -302,29 +313,14 @@ public class BuildsController {
             }
         }
     }
-
-    private void inicializarBancoDeDadosPecas() {
-        todosProcessadores.add(new Processador("Ryzen 5 5600", "AMD", 1000.0, 0.5, 0.3, 10, 65, "AM4", 65));
-        todosProcessadores.add(new Processador("Intel i7-12700K", "Intel", 2100.0, 0.6, 0.4, 5, 125, "LGA1700", 125));
-        todosProcessadores.add(new Processador("Ryzen 9 7950X", "AMD", 3500.0, 0.5, 0.5, 3, 170, "AM5", 170));
-        todosProcessadores.add(new Processador("Core i5-13600K", "Intel", 1900.0, 0.6, 0.4, 8, 125, "LGA1700", 125));
-        todosProcessadores.add(new Processador("Core i3-12100F", "Intel", 650.0, 0.4, 0.3, 20, 58, "LGA1700", 60));
-
-        todasPlacasMae.add(new PlacaMae("B550M Aorus Elite", "Gigabyte", 950.0, 1.0, 0.6, 8, 30, "AM4", 4, "DDR4", "Micro-ATX"));
-        todasPlacasMae.add(new PlacaMae("X670E ASUS ROG", "ASUS", 2800.0, 1.2, 0.8, 4, 40, "AM5", 4, "DDR5", "ATX"));
-        todasPlacasMae.add(new PlacaMae("H610M-E", "MSI", 620.0, 0.8, 0.5, 12, 25, "LGA1700", 2, "DDR4", "Micro-ATX"));
-        todasPlacasMae.add(new PlacaMae("A520M-K", "ASUS", 480.0, 0.7, 0.4, 15, 20, "AM4", 2, "DDR4", "Micro-ATX"));
-        todasPlacasMae.add(new PlacaMae("Z790 MSI Pro", "MSI", 2100.0, 1.1, 0.7, 6, 45, "LGA1700", 4, "DDR5", "ATX"));
-
-        todasMemorias.add(new MemoriaRam("16GB Corsair Vengeance", "Corsair", 380.0, 0.1, 0.1, 30, 5, "DDR4", 16, 3200));
-        todasMemorias.add(new MemoriaRam("32GB G.Skill Trident", "G.Skill", 1250.0, 0.2, 0.15, 10, 10, "DDR5", 32, 6000));
-        todasMemorias.add(new MemoriaRam("8GB Kingston Fury", "Kingston", 210.0, 0.1, 0.08, 50, 5, "DDR4", 8, 2666));
-        todasMemorias.add(new MemoriaRam("16GB XPG Spectrix", "XPG", 440.0, 0.1, 0.1, 25, 8, "DDR4", 16, 3600));
-
-        todasFontes.add(new Fonte("650W Corsair CV", "Corsair", 460.0, 2.0, 1.5, 15, 0, 650, "80 Plus Bronze"));
-        todasFontes.add(new Fonte("850W EVGA SuperNova", "EVGA", 850.0, 2.5, 2.0, 10, 0, 850, "80 Plus Gold"));
-        todasFontes.add(new Fonte("500W Redragon RGPS", "Redragon", 290.0, 1.5, 1.2, 22, 0, 500, "80 Plus Bronze"));
-        todasFontes.add(new Fonte("1000W Seasonic Prime", "Seasonic", 1600.0, 3.0, 2.5, 5, 0, 1000, "80 Plus Platinum"));
+    private ComponenteService componenteService = ComponenteService.getInstance();
+    private void carregarPecas() {
+        for (Componente c : componenteService.listar()) {
+            if (c instanceof Processador) todosProcessadores.add((Processador) c);
+            else if (c instanceof PlacaMae) todasPlacasMae.add((PlacaMae) c);
+            else if (c instanceof MemoriaRam) todasMemorias.add((MemoriaRam) c);
+            else if (c instanceof Fonte) todasFontes.add((Fonte) c);
+        }
     }
 
     private void exibirErro(String mensagem) {

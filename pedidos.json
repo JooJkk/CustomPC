@@ -231,5 +231,600 @@
       "email": "email2@teste.com",
       "senha": "123"
     }
+  },
+  {
+    "id": 4,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 7
+      },
+      "time": {
+        "hour": 13,
+        "minute": 20,
+        "second": 4,
+        "nano": 100960100
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 6582.6,
+    "pagamento": {
+      "id": 7,
+      "valor": 6582.6,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 620.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tipoRamSuportada": "DDR4",
+          "slotsRam": 2,
+          "formato": "Micro-ATX",
+          "id": 14,
+          "nome": "H610M-E",
+          "marca": "MSI",
+          "preco": 620.0,
+          "peso": 0.8,
+          "volume": 0.0,
+          "estoque": 11,
+          "consumoWatts": 25,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 125,
+          "id": 29,
+          "nome": "Intel i7-12700K",
+          "marca": "Intel",
+          "preco": 2100.0,
+          "peso": 0.6,
+          "volume": 0.0,
+          "estoque": 4,
+          "consumoWatts": 125,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tipoRamSuportada": "DDR5",
+          "slotsRam": 4,
+          "formato": "ATX",
+          "id": 37,
+          "nome": "Z790 MSI Pro",
+          "marca": "MSI",
+          "preco": 2100.0,
+          "peso": 1.1,
+          "volume": 0.0,
+          "estoque": 5,
+          "consumoWatts": 45,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 1250.0,
+        "componente": {
+          "tipoRam": "DDR5",
+          "capacidadeGB": 32,
+          "frequenciaMHz": 6000,
+          "id": 39,
+          "nome": "32GB G.Skill Trident",
+          "marca": "G.Skill",
+          "preco": 1250.0,
+          "peso": 0.2,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 10,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 460.0,
+        "componente": {
+          "potenciaWatts": 650,
+          "certificacao": "80 Plus Bronze",
+          "id": 42,
+          "nome": "650W Corsair CV",
+          "marca": "Corsair",
+          "preco": 460.0,
+          "peso": 2.0,
+          "volume": 0.0,
+          "estoque": 14,
+          "consumoWatts": 0,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "a",
+      "numero": "2",
+      "bairro": "a",
+      "cidade": "aa",
+      "cep": "12345678",
+      "estado": "a"
+    },
+    "frete": 52.6,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste2",
+      "email": "email2@teste.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 5,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 7
+      },
+      "time": {
+        "hour": 13,
+        "minute": 36,
+        "second": 47,
+        "nano": 24231900
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 967.0,
+    "pagamento": {
+      "id": 9,
+      "valor": 967.0,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 2,
+        "precoUnitario": 460.0,
+        "componente": {
+          "potenciaWatts": 650,
+          "certificacao": "80 Plus Bronze",
+          "id": 15,
+          "nome": "650W Corsair CV",
+          "marca": "Corsair",
+          "preco": 460.0,
+          "peso": 2.0,
+          "volume": 0.0,
+          "estoque": 13,
+          "consumoWatts": 0,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "qq",
+      "numero": "1",
+      "bairro": "q",
+      "cidade": "q",
+      "cep": "12345678",
+      "estado": "q"
+    },
+    "frete": 47.0,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 6,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 7
+      },
+      "time": {
+        "hour": 13,
+        "minute": 41,
+        "second": 12,
+        "nano": 375780100
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 6731.0,
+    "pagamento": {
+      "id": 11,
+      "valor": 6731.0,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 380.0,
+        "componente": {
+          "tipoRam": "DDR4",
+          "capacidadeGB": 16,
+          "frequenciaMHz": 3200,
+          "id": 11,
+          "nome": "16GB Corsair Vengeance",
+          "marca": "Corsair",
+          "preco": 380.0,
+          "peso": 0.1,
+          "volume": 0.0,
+          "estoque": 29,
+          "consumoWatts": 5,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 125,
+          "id": 2,
+          "nome": "Intel i7-12700K",
+          "marca": "Intel",
+          "preco": 2100.0,
+          "peso": 0.6,
+          "volume": 0.0,
+          "estoque": 4,
+          "consumoWatts": 125,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tipoRamSuportada": "DDR5",
+          "slotsRam": 4,
+          "formato": "ATX",
+          "id": 31,
+          "nome": "Z790 MSI Pro",
+          "marca": "MSI",
+          "preco": 2100.0,
+          "peso": 1.1,
+          "volume": 0.0,
+          "estoque": 5,
+          "consumoWatts": 45,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 1250.0,
+        "componente": {
+          "tipoRam": "DDR5",
+          "capacidadeGB": 32,
+          "frequenciaMHz": 6000,
+          "id": 33,
+          "nome": "32GB G.Skill Trident",
+          "marca": "G.Skill",
+          "preco": 1250.0,
+          "peso": 0.2,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 10,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 850.0,
+        "componente": {
+          "potenciaWatts": 850,
+          "certificacao": "80 Plus Gold",
+          "id": 16,
+          "nome": "850W EVGA SuperNova",
+          "marca": "EVGA",
+          "preco": 850.0,
+          "peso": 2.5,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 0,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "b",
+      "numero": "1",
+      "bairro": "bb",
+      "cidade": "bb",
+      "cep": "12345678",
+      "estado": "b"
+    },
+    "frete": 51.0
+  },
+  {
+    "id": 7,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 7
+      },
+      "time": {
+        "hour": 13,
+        "minute": 43,
+        "second": 4,
+        "nano": 847785500
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 3339.4,
+    "pagamento": {
+      "id": 13,
+      "valor": 3339.4,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 1000.0,
+        "componente": {
+          "socket": "AM4",
+          "tdp": 65,
+          "id": 1,
+          "nome": "Ryzen 5 5600",
+          "marca": "AMD",
+          "preco": 1000.0,
+          "peso": 0.5,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 65,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 480.0,
+        "componente": {
+          "socket": "AM4",
+          "tipoRamSuportada": "DDR4",
+          "slotsRam": 2,
+          "formato": "Micro-ATX",
+          "id": 9,
+          "nome": "A520M-K",
+          "marca": "ASUS",
+          "preco": 480.0,
+          "peso": 0.7,
+          "volume": 0.0,
+          "estoque": 14,
+          "consumoWatts": 20,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 210.0,
+        "componente": {
+          "tipoRam": "DDR4",
+          "capacidadeGB": 8,
+          "frequenciaMHz": 2666,
+          "id": 13,
+          "nome": "8GB Kingston Fury",
+          "marca": "Kingston",
+          "preco": 210.0,
+          "peso": 0.1,
+          "volume": 0.0,
+          "estoque": 49,
+          "consumoWatts": 5,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 1600.0,
+        "componente": {
+          "potenciaWatts": 1000,
+          "certificacao": "80 Plus Platinum",
+          "id": 18,
+          "nome": "1000W Seasonic Prime",
+          "marca": "Seasonic",
+          "preco": 1600.0,
+          "peso": 3.0,
+          "volume": 0.0,
+          "estoque": 4,
+          "consumoWatts": 0,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "a",
+      "numero": "123",
+      "bairro": "a",
+      "cidade": "f",
+      "cep": "87654321",
+      "estado": "a"
+    },
+    "frete": 49.4,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 8,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 7
+      },
+      "time": {
+        "hour": 13,
+        "minute": 46,
+        "second": 47,
+        "nano": 52636200
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 1019.0,
+    "pagamento": {
+      "id": 15,
+      "valor": 1019.0,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 1000.0,
+        "componente": {
+          "socket": "AM4",
+          "tdp": 65,
+          "id": 1,
+          "nome": "Ryzen 5 5600",
+          "marca": "AMD",
+          "preco": 1000.0,
+          "peso": 0.5,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 65,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "f",
+      "numero": "1",
+      "bairro": "f",
+      "cidade": "f",
+      "cep": "12345678",
+      "estado": "f"
+    },
+    "frete": 19.0,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 9,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 7
+      },
+      "time": {
+        "hour": 13,
+        "minute": 54,
+        "second": 33,
+        "nano": 315446500
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 5956.2,
+    "pagamento": {
+      "id": 17,
+      "valor": 5956.2,
+      "formaPagamento": "Cartão",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 125,
+          "id": 2,
+          "nome": "Intel i7-12700K",
+          "marca": "Intel",
+          "preco": 2100.0,
+          "peso": 0.6,
+          "volume": 0.0,
+          "estoque": 3,
+          "consumoWatts": 125,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 2100.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tipoRamSuportada": "DDR5",
+          "slotsRam": 4,
+          "formato": "ATX",
+          "id": 10,
+          "nome": "Z790 MSI Pro",
+          "marca": "MSI",
+          "preco": 2100.0,
+          "peso": 1.1,
+          "volume": 0.0,
+          "estoque": 4,
+          "consumoWatts": 45,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 1250.0,
+        "componente": {
+          "tipoRam": "DDR5",
+          "capacidadeGB": 32,
+          "frequenciaMHz": 6000,
+          "id": 33,
+          "nome": "32GB G.Skill Trident",
+          "marca": "G.Skill",
+          "preco": 1250.0,
+          "peso": 0.2,
+          "volume": 0.0,
+          "estoque": 8,
+          "consumoWatts": 10,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 460.0,
+        "componente": {
+          "potenciaWatts": 650,
+          "certificacao": "80 Plus Bronze",
+          "id": 15,
+          "nome": "650W Corsair CV",
+          "marca": "Corsair",
+          "preco": 460.0,
+          "peso": 2.0,
+          "volume": 0.0,
+          "estoque": 13,
+          "consumoWatts": 0,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "AAAAAAAAAAAAAAA",
+      "numero": "1",
+      "bairro": "a",
+      "cidade": "a",
+      "cep": "12345678",
+      "estado": "a"
+    },
+    "frete": 46.2,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
   }
 ]
