@@ -34,7 +34,7 @@
     <Label text="Escolha a Fonte de Alimentação:" />
     <ComboBox fx:id="comboFonte" prefWidth="400.0" promptText="Selecione uma Fonte..." />
 
-    <Label fx:id="lblResultado" text="Selecione os componentes e clique em Validar." textFill="#7f8c8d">
+    <Label fx:id="lblResultado" text="Escolha um Processador para iniciar a montagem da Build." textFill="#7f8c8d">
         <font>
             <Font size="14.0" />
         </font>
@@ -50,6 +50,12 @@
     </Button>
 
     <Button mnemonicParsing="false" onAction="#limparBancada" prefWidth="400.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Limpar Bancada" />
+
+    <Button mnemonicParsing="false" onAction="#adicionarEIrParaCarrinho" prefWidth="400.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="🛒 Enviar peças ao Carrinho">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
 
     <HBox alignment="CENTER" spacing="15.0">
         <VBox.margin>

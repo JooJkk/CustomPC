@@ -3,13 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CatalogoController">
+<VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CatalogoController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -20,21 +22,86 @@
             </font>
         </Label>
 
-        <TableView fx:id="tabelaComponentes" prefHeight="400.0" prefWidth="600.0">
-            <columns>
-                <TableColumn fx:id="colunaNome" prefWidth="250.0" text="Produto" />
-                <TableColumn fx:id="colunaMarca" prefWidth="150.0" text="Marca" />
-                <TableColumn fx:id="colunaPreco" prefWidth="150.0" text="Preço (R$)" />
-            </columns>
-        </TableView>
-
         <HBox alignment="CENTER" spacing="10.0">
             <children>
+                <Button mnemonicParsing="false" onAction="#filtrarTodos" style="-fx-background-color: #7f8c8d; -fx-text-fill: white;" text="📋 Todos" />
+                <Button mnemonicParsing="false" onAction="#filtrarProcessadores" style="-fx-background-color: #d35400; -fx-text-fill: white;" text="💻 Processadores" />
+                <Button mnemonicParsing="false" onAction="#filtrarPlacasMae" style="-fx-background-color: #2c3e50; -fx-text-fill: white;" text="🔌 Placas-Mãe" />
+                <Button mnemonicParsing="false" onAction="#filtrarMemorias" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="💾 Memórias RAM" />
+                <Button mnemonicParsing="false" onAction="#filtrarPlacasDeVideo" style="-fx-background-color: #16a085; -fx-text-fill: white;" text="🎮 Placas de Vídeo" />
+                <Button mnemonicParsing="false" onAction="#filtrarFontes" style="-fx-background-color: #8e44ad; -fx-text-fill: white;" text="⚡ Fontes" />
+            </children>
+        </HBox>
+
+        <HBox spacing="20.0" alignment="CENTER">
+            <children>
+                <TableView fx:id="tabelaComponentes" prefHeight="400.0" prefWidth="680.0">
+                    <columns>
+                        <TableColumn fx:id="colunaImagem" prefWidth="70.0" text="Ícone" />
+                        <TableColumn fx:id="colunaNome" prefWidth="200.0" text="Produto" />
+                        <TableColumn fx:id="colunaMarca" prefWidth="110.0" text="Marca" />
+                        <TableColumn fx:id="colunaPreco" prefWidth="110.0" text="Preço (R$)" />
+                        <TableColumn fx:id="colunaConsumo" prefWidth="160.0" text="Consumo Estimado" />
+                    </columns>
+                </TableView>
+
+                <VBox fx:id="painelDetalhes" prefHeight="400.0" prefWidth="280.0" spacing="10.0"
+                      style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 8; -fx-background-radius: 8;">
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                    </padding>
+                    <children>
+                        <Label text="Detalhes do Produto" textFill="#2c3e50">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <HBox alignment="CENTER" prefHeight="110.0">
+                            <children>
+                                <ImageView fx:id="imgDetalheGrande" fitHeight="100.0" fitWidth="100.0" preserveRatio="true" />
+                            </children>
+                        </HBox>
+
+                        <Label fx:id="lblDetalheNome" text="Selecione um item..." wrapText="true">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblDetalheMarca" text="Marca: -" textFill="#7f8c8d" />
+                        <Label fx:id="lblDetalhePreco" text="Preço: R$ 0.00" textFill="#27ae60">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="lblDetalheConsumo" text="Consumo: -" textFill="#34495e" />
+
+                        <Label fx:id="lblDetalheEstoque" text="Disponível em Estoque: -" textFill="#7f8c8d" style="-fx-font-weight: bold;" />
+
+                        <VBox alignment="BOTTOM_CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER" spacing="10.0">
+                                    <children>
+                                        <Label text="Qtd:" />
+                                        <Spinner fx:id="spinQuantidade" prefWidth="100.0" />
+                                    </children>
+                                </HBox>
+
+                                <Button fx:id="btnAdicionar" mnemonicParsing="false" prefWidth="250.0"
+                                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;"
+                                        text="🛒 Adicionar ao Carrinho" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER" spacing="15.0">
+            <children>
                 <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#voltarHome" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" text="Voltar para Menu" />
-                <Button fx:id="btnAdicionar" mnemonicParsing="false" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;" text="Adicionar" />
                 <Button fx:id="btnEnviarBuild" mnemonicParsing="false" onAction="#enviarParaBuild" style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-font-weight: bold;" text="Levar para o Build 🛠️" />
                 <Button fx:id="btnIrCarrinho" mnemonicParsing="false" onAction="#irParaCarrinho" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;" text="Ver Carrinho 🛒" />
-            <Button fx:id="btnDetalhes" layoutX="205.0" layoutY="10.0" mnemonicParsing="false" onAction="#abrirDetalhes" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;" text="Ver detalhes" />
             </children>
         </HBox>
     </children>
