@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -184,7 +185,7 @@ controller.setUsuario(usuario);*/
         painelPagamento.getChildren().add(lblBoleto);
     }
     @FXML
-    private void finalizarCompra() {
+    private void finalizarCompra(ActionEvent event) {
 
 
         String rua = txtRua.getText();
@@ -206,23 +207,19 @@ controller.setUsuario(usuario);*/
         String formaPagamento = ((RadioButton) selecionado).getText();
 
         try {
-            Pagamento pagamento = new Pagamento();
-            pagamento.setFormaPagamento(formaPagamento);
-            pagamento.setValor(carrinhoService.calcularTotal());
+            if(usuarioLogado != null) {
+                Pagamento pagamento = new Pagamento();
+                pagamento.setFormaPagamento(formaPagamento);
+                pagamento.setValor(carrinhoService.calcularTotal());
 
-            Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
-            Pedido pedido = pedidoService.finalizarCompra(carrinhoService.getCarrinho(),  endereco, pagamento, usuarioLogado);
-            //Carrega tela de pagamento, passando o cliente logado e o pedido feito
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ConfirmacaoPagamento.fxml"));
+                Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
+                Pedido pedido = pedidoService.finalizarCompra(carrinhoService.getCarrinho(), endereco, pagamento, usuarioLogado);
 
-            Parent root = loader.load();
-            ConfirmacaoController controller =
-                    loader.getController();
-            controller.setPedido(pedido);
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnConfirmar.getScene().getWindow();
-
-            stage.setScene(new Scene(root));
+                NavegacaoController.trocarTelaConfirmacao("/ConfirmacaoPagamento.fxml", event, usuarioLogado, pedido);
+            }
+            else {
+                alert("Faça o Login antes de finalizar o pedido");
+            }
         } catch (CarrinhoVazioException e) {
             alert("Carrinho não pode estar vazio!");
         }
@@ -236,17 +233,8 @@ controller.setUsuario(usuario);*/
 
     }
     @FXML
-    private void voltar(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
-            Parent root = loader.load();
-            CarrinhoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnVoltar.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void voltar(ActionEvent event){
+        NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
     @FXML
     private void atualizarFrete() {

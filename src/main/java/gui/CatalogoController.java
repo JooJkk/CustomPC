@@ -218,29 +218,9 @@ public class CatalogoController {
     @FXML private void filtrarPlacasDeVideo() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { String n = c.getNome().toUpperCase(); if (n.contains("RTX") || n.contains("RX ") || n.contains("GTX")) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
     @FXML private void filtrarFontes() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof Fonte) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
 
-    @FXML private void voltarHome(ActionEvent event) { trocarTela("/home.fxml", event); }
-    @FXML private void enviarParaBuild(ActionEvent event) { Componente s = tabelaComponentes.getSelectionModel().getSelectedItem(); if (s != null) buildService.adicionarComponenteParaMontagem(s); trocarTela("/builds-view.fxml", event); }
-    @FXML private void irParaCarrinho(ActionEvent event) { try { FXMLLoader l = new FXMLLoader(getClass().getResource("/Carrinho.fxml")); Parent r = l.load(); CarrinhoController c = l.getController(); c.setUsuario(usuarioLogado); Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow(); s.setScene(new Scene(r)); s.show(); } catch (IOException e) { e.printStackTrace(); alert("Erro ao abrir a tela de carrinho."); } }
+    @FXML private void voltarHome(ActionEvent event) { NavegacaoController.trocarTela("/home.fxml", event, usuarioLogado); }
+    @FXML private void enviarParaBuild(ActionEvent event) { Componente s = tabelaComponentes.getSelectionModel().getSelectedItem(); if (s != null) buildService.adicionarComponenteParaMontagem(s); NavegacaoController.trocarTela("/builds-view.fxml", event, usuarioLogado); }
+    @FXML private void irParaCarrinho(ActionEvent event) {NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);}
 
-    private void trocarTela(String fxml, ActionEvent event) {
-        try {
-            FXMLLoader l = new FXMLLoader(getClass().getResource(fxml));
-            Parent r = l.load();
-            Object controller = l.getController();
-            if (controller instanceof HomeController) {
-                ((HomeController) controller).setUsuario(usuarioLogado);
-            } else if (controller instanceof CatalogoController) {
-                ((CatalogoController) controller).setUsuario(usuarioLogado);
-            }
-            else if (controller instanceof BuildsController) {
-                ((BuildsController) controller).setUsuario(usuarioLogado);
-            }
-            Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            s.setScene(new Scene(r));
-            s.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            alert("Erro na navegação: Não foi possível carregar " + fxml);
-        }
-    } private void alert(String message) { Alert a = new Alert(Alert.AlertType.INFORMATION); a.setHeaderText(null); a.setContentText(message); a.showAndWait(); }
+    private void alert(String message) { Alert a = new Alert(Alert.AlertType.INFORMATION); a.setHeaderText(null); a.setContentText(message); a.showAndWait(); }
 }

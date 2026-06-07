@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -75,38 +76,13 @@ public class CarrinhoController {
     }
 
     @FXML
-    private void continuarCheckout() {
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Checkout.fxml"));
-            Parent root = loader.load();
-            CheckoutController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnContinuar.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        }
-        catch (IllegalArgumentException e){
-            alert(e.getMessage());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            alert("Erro: " + e.getMessage());
-        }
+    private void continuarCheckout(ActionEvent event) {
+        NavegacaoController.trocarTela("/Checkout.fxml", event, usuarioLogado);
     }
 
     @FXML
-    private void voltarHome() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-            Parent root = loader.load();
-            HomeController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnVoltar.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-            alert("Erro: " + e.getMessage());
-        }
+    private void voltarHome(ActionEvent event) {
+        NavegacaoController.trocarTela("/Home.fxml", event, usuarioLogado);
     }
 
     private void alert(String mensagem) {

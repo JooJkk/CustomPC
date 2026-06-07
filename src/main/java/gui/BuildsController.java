@@ -214,18 +214,7 @@ public class BuildsController {
         adicionarComEstoque(ram);
         adicionarComEstoque(fonte);
 
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
-            Parent root = loader.load();
-            CarrinhoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            exibirErro("Erro ao abrir a tela de carrinho: " + e.getMessage());
-        }
+        NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
     private void adicionarComEstoque(Componente comp) {
         if (comp == null) return;
@@ -260,18 +249,7 @@ public class BuildsController {
 
     @FXML
     public void voltarHome(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/home.fxml"));
-            Parent root = loader.load();
-            HomeController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            exibirErro("Erro ao ir para a Home: " + e.getMessage());
-        }
+        NavegacaoController.trocarTela("/Home.fxml", event, usuarioLogado);
     }
 
     @FXML
