@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.Cursor?>
 <VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="20.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PedidoController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
@@ -25,5 +26,12 @@
         </content>
     </ScrollPane>
 
-    <Button onAction="#onBotaoVoltarClick" style="-fx-padding: 8 15 8 15;" text="Voltar para a Área do Cliente" />
+    <Button mnemonicParsing="false" onAction="#onBotaoVoltarClick" prefHeight="30.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Voltar para Área do Cliente 👤">
+        <font>
+            <Font size="14.0" />
+        </font>
+        <cursor>
+            <Cursor fx:constant="HAND" />
+        </cursor>
+    </Button>
 </VBox>

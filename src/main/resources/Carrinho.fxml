@@ -15,106 +15,117 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800" prefWidth="1200" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CarrinhoController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CarrinhoController">
    <children>
-      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="800.0" prefWidth="1200.0">
+      <BorderPane prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <HBox prefHeight="22.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" spacing="15.0" style="-fx-background-color: #ffffff; -fx-border-color: #e2e8f0; -fx-border-width: 0 0 1 0;" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#voltarHome" prefHeight="26.0" prefWidth="62.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="HOME">
+                  <Button fx:id="btnVoltar" mnemonicParsing="false" onAction="#voltarHome" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="HOME 🏠">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font size="14.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Label prefHeight="18.0" prefWidth="265.0" text=" Carrinho">
+
+                  <Label text="Carrinho 🛒" textFill="#2c3e50">
                      <font>
-                        <Font size="33.0" />
+                        <Font name="System Bold" size="32.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin>
                   </Label>
-                  <Button fx:id="btnLogar" mnemonicParsing="false" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="Login">
+
+                  <HBox HBox.hgrow="ALWAYS" />
+
+                  <Button fx:id="btnAreaCliente" mnemonicParsing="false" onAction="#irParaAreaCliente" prefHeight="35.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Área do Cliente 👤">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font size="14.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="775.0" />
-                     </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+
+                  <Button fx:id="btnLogar" mnemonicParsing="false" prefHeight="35.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Login 🔑">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
                </children>
                <padding>
-                  <Insets left="15.0" top="5.0" />
+                  <Insets left="20.0" right="20.0" />
                </padding>
             </HBox>
          </top>
          <center>
-            <HBox prefHeight="100.0" prefWidth="1167.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="730.0" prefWidth="1200.0" spacing="20.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="100.0" prefWidth="1111.0">
+
+                  <VBox prefHeight="690.0" prefWidth="820.0">
                      <children>
-                        <TableView fx:id="tabelaCarrinho" prefHeight="722.0" prefWidth="866.0">
+                        <TableView fx:id="tabelaCarrinho" prefHeight="670.0" prefWidth="820.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                            <columns>
-                              <TableColumn fx:id="colunaItem" prefWidth="289.0" text="Item" />
-                              <TableColumn fx:id="colunaQnt" minWidth="0.0" prefWidth="197.0" text="Quantidade" />
-                              <TableColumn fx:id="colunaUnd" minWidth="0.0" prefWidth="197.0" text="Preço Unitário" />
-                              <TableColumn fx:id="colunaTotal" prefWidth="182.0" text="Total" />
+                              <TableColumn fx:id="colunaItem" prefWidth="320.0" text="Item" />
+                              <TableColumn fx:id="colunaQnt" minWidth="0.0" prefWidth="140.0" text="Quantidade" />
+                              <TableColumn fx:id="colunaUnd" minWidth="0.0" prefWidth="160.0" text="Preço Unitário" />
+                              <TableColumn fx:id="colunaTotal" prefWidth="180.0" text="Total" />
                            </columns>
-                           <VBox.margin>
-                              <Insets right="15.0" top="10.0" />
-                           </VBox.margin>
                         </TableView>
                      </children>
                   </VBox>
-                  <VBox prefHeight="589.0" prefWidth="549.0">
+
+                  <VBox prefHeight="690.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 4);">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
                      <children>
-                        <Label text="Resumo:">
+                        <Label text="Resumo da Compra" textFill="#2c3e50">
                            <font>
-                              <Font name="System Bold" size="22.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <GridPane prefHeight="77.0" prefWidth="281.0">
+
+                        <GridPane prefHeight="40.0" prefWidth="280.0">
                            <columnConstraints>
-                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
-                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="55.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="160.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="146.0" minWidth="10.0" prefWidth="120.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label text="Valor dos produtos:">
+                              <Label text="Valor Total:" textFill="#7f8c8d">
                                  <font>
-                                    <Font size="14.0" />
-                                 </font></Label>
-                              <Label fx:id="txtValorTotal" text="--" GridPane.columnIndex="1">
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="txtValorTotal" text="R$ 0.00" textFill="#2ec76e" GridPane.columnIndex="1">
                                  <font>
-                                    <Font size="14.0" />
-                                 </font></Label>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
-                           <VBox.margin>
-                              <Insets top="-15.0" />
-                           </VBox.margin>
                         </GridPane>
-                        <Button fx:id="btnContinuar" mnemonicParsing="false" onAction="#continuarCheckout" prefHeight="25.0" prefWidth="320.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10;" text="CONTINUAR">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets right="20.0" />
-                           </VBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
+
+                        <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="btnContinuar" mnemonicParsing="false" onAction="#continuarCheckout" prefHeight="45.0" prefWidth="280.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-font-size: 14;" text="FINALIZAR COMPRA 🚀">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
             </HBox>
          </center>
       </BorderPane>

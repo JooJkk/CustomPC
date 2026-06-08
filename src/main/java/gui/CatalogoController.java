@@ -1,5 +1,7 @@
 package gui;
 
+import javafx.scene.layout.HBox;
+import javafx.geometry.Pos;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -223,4 +225,28 @@ public class CatalogoController {
     @FXML private void irParaCarrinho(ActionEvent event) {NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);}
 
     private void alert(String message) { Alert a = new Alert(Alert.AlertType.INFORMATION); a.setHeaderText(null); a.setContentText(message); a.showAndWait(); }
+    @FXML
+    private void irParaAreaCliente(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
+            Parent rootCliente = loader.load();
+
+            // Pega o controller que acabamos de ajustar acima
+            ClienteController clienteController = loader.getController();
+
+            // Passa o usuário de volta para ele. Isso vai disparar o 'carregarTela("hello-view.fxml")'
+            // automaticamente lá de dentro, montando o centro do layout!
+            clienteController.setUsuario(this.usuarioLogado);
+            clienteController.atualizarTela();
+
+            // Aplica a cena restaurada perfeitamente no tamanho original do seu sistema
+            Scene cenaAreaCliente = new Scene(rootCliente, 1200.0, 800.0);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(cenaAreaCliente);
+            window.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -12,7 +12,6 @@ import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
-// importando a classe do meu pedido real
 import javafx.stage.Stage;
 import model.Cliente;
 import model.Pedido;
@@ -20,14 +19,17 @@ import model.Pedido;
 public class ClienteController {
 
     private Cliente usuarioLogado;
+
+    // Método essencial para que o CatalogoController injete o usuário de volta ao retornar!
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
 
-        // Agora sim carrega a sub-tela, pois já temos o usuário
+        // Carrega a sub-tela de boas-vindas no centro do painel principal
         carregarTela("hello-view.fxml");
     }
 
-    private void atualizarTela() {
+    // Mudado para PUBLIC para que o CatalogoController consiga atualizar o texto ao voltar
+    public void atualizarTela() {
         if (lblBoasVindas == null) return;
 
         if (usuarioLogado == null) {
@@ -36,6 +38,7 @@ public class ClienteController {
             lblBoasVindas.setText("SEJA BEM-VINDO(A), " + usuarioLogado.getNome().toUpperCase() + "!");
         }
     }
+
     @FXML
     public BorderPane painelPrincipal;
 
@@ -50,31 +53,22 @@ public class ClienteController {
     @FXML
     private ProgressBar barraProgresso;
 
-    // frase que vai aparecer na minha tela home
     @FXML
     private Label lblBoasVindas;
 
     @FXML
     public void initialize() {
-        // 1. Lógica da Home (Mantida)
-
-        // logica de pedido e usando a minha classe real, algo TEMPORARIO até substituir por outro
         if (lblNumeroPedido != null) {
-
-            // pedido TEMPORARIO
-            Pedido pedidoExemplo = new Pedido(); //criando um objeto
-            pedidoExemplo.setId(45219); // ID
-            pedidoExemplo.setStatus("PREPARANDO_COMPONENTE 🛠️"); // muda o status
+            Pedido pedidoExemplo = new Pedido();
+            pedidoExemplo.setId(45219);
+            pedidoExemplo.setStatus("PREPARANDO_COMPONENTE 🛠️");
 
             DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
             String dataFormatada = pedidoExemplo.getData().format(formatador);
 
-            // colocando dados no meu objeto
             lblNumeroPedido.setText("Número do Pedido: #" + pedidoExemplo.getId());
             lblDataPedido.setText("Data do Pedido: " + dataFormatada);
             lblStatusPedido.setText("Status: " + pedidoExemplo.getStatus());
-
-            // calcula o valor total
             lblTotalPedido.setText(String.format("Valor Total: R$ %.2f", pedidoExemplo.getValorTotal()));
 
             if (barraProgresso != null) {
@@ -85,12 +79,13 @@ public class ClienteController {
 
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
+        // 🔥 CORRIGIDO: Sai da área do cliente e volta para a tela inicial limpa (Home.fxml)
         NavegacaoController.trocarTela("/Home.fxml", event, usuarioLogado);
     }
 
-
     @FXML
     public void onBotaoCatalogoClick(ActionEvent event) {
+        // Volta a usar o NavegacaoController para abrir o catálogo em tela cheia isolada!
         NavegacaoController.trocarTela("/catalogo-view.fxml", event, usuarioLogado);
     }
 
@@ -130,9 +125,10 @@ public class ClienteController {
             Object controller = loader.getController();
             if (controller instanceof ClienteController subController) {
                 subController.usuarioLogado = this.usuarioLogado;
-                subController.atualizarTela(); // chama direto pois lblBoasVindas já foi injetado
+                subController.atualizarTela();
             }
-            // 🌟 Se for a tela de Pedido, passa a referência deste ClienteController (Pai) para o botão voltar funcionar!
+
+            // Tratamento da sub-tela de Pedidos
             if ("pedido-view.fxml".equals(fxml)) {
                 PedidoController pc = loader.getController();
                 if (pc != null) {
@@ -151,4 +147,4 @@ public class ClienteController {
             e.printStackTrace();
         }
     }
-}
+} // Chave final que fecha a classe e resolve o erro da linha 131!

@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import model.*;
 import negocio.*;
+import java.io.IOException;
 
 public class CarrinhoController {
     private CarrinhoService carrinhoService;
@@ -89,5 +90,32 @@ public class CarrinhoController {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(mensagem);
         alert.showAndWait();
+    }
+    @FXML
+    private void irParaAreaCliente(ActionEvent event) {
+        try {
+            // 1. Carrega a "casca" da Área do Cliente
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
+            Parent rootCliente = loader.load();
+
+            // 2. Pega o controller dela para injetar o usuário de volta
+            ClienteController clienteController = loader.getController();
+
+            // 3. Passa o usuário atual. Isso faz o ClienteController renderizar a Home interna automaticamente
+            clienteController.setUsuario(this.usuarioLogado);
+            clienteController.atualizarTela();
+
+            // 4. Cria a cena respeitando rigidamente o tamanho padrão de 1200x800
+            Scene cenaAreaCliente = new Scene(rootCliente, 1200.0, 800.0);
+
+            // 5. Redireciona na mesma janela sem alterar as proporções do monitor
+            Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            window.setScene(cenaAreaCliente);
+            window.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Erro crítico ao tentar voltar para a Área do Cliente a partir do Carrinho.");
+        }
     }
 }
