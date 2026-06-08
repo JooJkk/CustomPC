@@ -130,17 +130,6 @@ public class PedidoController {
 
     @FXML
     public void onBotaoVoltarClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
-            Parent root = loader.load();
-
-            ClienteController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/cliente-view.fxml", event, usuarioLogado);
     }
 }

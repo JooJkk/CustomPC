@@ -20,6 +20,8 @@ import model.componentes.Componente;
 import model.componentes.*;
 import negocio.CarrinhoService;
 import negocio.BuildService;
+import negocio.ComponenteService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +113,7 @@ public class CatalogoController {
 
         tabelaComponentes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> exibirDetalhesProduto(newValue));
 
-        gerarBancoDeDadosCatalogo();
+        carregarCatalogo();
         filtrarTodos();
 
         btnAdicionar.setOnAction(event -> {
@@ -124,9 +126,9 @@ public class CatalogoController {
 
                 if (qtdDesejada <= estoqueAtual) {
                     carrinhoService.adicionarItem(selecionado, qtdDesejada);
-
                     // ALTERADO PARA UTILIAR .setEstoque()
                     selecionado.setEstoque(estoqueAtual - qtdDesejada);
+                    componenteService.atualizar(selecionado);
                     exibirDetalhesProduto(selecionado);
 
                     alert("✅ " + qtdDesejada + " unidade(s) de \"" + selecionado.getNome() + "\" adicionada(s) ao carrinho!");
@@ -204,34 +206,10 @@ public class CatalogoController {
             System.out.println("Aviso: Arquivos de imagem não encontrados em resources/imagens/.");
         }
     }
-
-    private void gerarBancoDeDadosCatalogo() {
-        todasPecas.add(new Processador("Ryzen 5 5600", "AMD", 1000.0, 0.5, 0.3, 10, 65, "AM4", 65));
-        todasPecas.add(new Processador("Intel i7-12700K", "Intel", 2100.0, 0.6, 0.4, 5, 125, "LGA1700", 125));
-        todasPecas.add(new Processador("Ryzen 9 7950X", "AMD", 3500.0, 0.5, 0.5, 3, 170, "AM5", 170));
-        todasPecas.add(new Processador("Core i5-13600K", "Intel", 1900.0, 0.6, 0.4, 8, 125, "LGA1700", 125));
-        todasPecas.add(new Processador("Core i3-12100F", "Intel", 650.0, 0.4, 0.3, 20, 58, "LGA1700", 60));
-
-        todasPecas.add(new PlacaMae("B550M Aorus Elite", "Gigabyte", 950.0, 1.0, 0.6, 8, 30, "AM4", 4, "DDR4", "Micro-ATX"));
-        todasPecas.add(new PlacaMae("X670E ASUS ROG", "ASUS", 2800.0, 1.2, 0.8, 4, 40, "AM5", 4, "DDR5", "ATX"));
-        todasPecas.add(new PlacaMae("H610M-E", "MSI", 620.0, 0.8, 0.5, 12, 25, "LGA1700", 2, "DDR4", "Micro-ATX"));
-        todasPecas.add(new PlacaMae("A520M-K", "ASUS", 480.0, 0.7, 0.4, 15, 20, "AM4", 2, "DDR4", "Micro-ATX"));
-        todasPecas.add(new PlacaMae("Z790 MSI Pro", "MSI", 2100.0, 1.1, 0.7, 6, 45, "LGA1700", 4, "DDR5", "ATX"));
-
-        todasPecas.add(new MemoriaRam("16GB Corsair Vengeance", "Corsair", 380.0, 0.1, 0.1, 30, 5, "DDR4", 16, 3200));
-        todasPecas.add(new MemoriaRam("32GB G.Skill Trident", "G.Skill", 1250.0, 0.2, 0.15, 10, 10, "DDR5", 32, 6000));
-        todasPecas.add(new MemoriaRam("8GB Kingston Fury", "Kingston", 210.0, 0.1, 0.08, 50, 5, "DDR4", 8, 2666));
-        todasPecas.add(new MemoriaRam("16GB XPG Spectrix", "XPG", 440.0, 0.1, 0.1, 25, 8, "DDR4", 16, 3600));
-
-        todasPecas.add(new Fonte("650W Corsair CV", "Corsair", 460.0, 2.0, 1.5, 15, 0, 650, "80 Plus Bronze"));
-        todasPecas.add(new Fonte("850W EVGA SuperNova", "EVGA", 850.0, 2.5, 2.0, 10, 0, 850, "80 Plus Gold"));
-        todasPecas.add(new Fonte("500W Redragon RGPS", "Redragon", 290.0, 1.5, 1.2, 22, 0, 500, "80 Plus Bronze"));
-        todasPecas.add(new Fonte("1000W Seasonic Prime", "Seasonic", 1600.0, 3.0, 2.5, 5, 0, 1000, "80 Plus Platinum"));
-
-        todasPecas.add(new Processador("RTX 4060 Ti", "NVIDIA", 2600.0, 1.2, 0.9, 7, 160, "PCIe", 160));
-        todasPecas.add(new Processador("RX 6750 XT", "AMD", 2300.0, 1.3, 0.95, 5, 250, "PCIe", 250));
-        todasPecas.add(new Processador("RTX 3060", "MSI", 1850.0, 1.1, 0.8, 12, 170, "PCIe", 170));
-    }
+    private ComponenteService componenteService = ComponenteService.getInstance();
+    private void carregarCatalogo() {
+        todasPecas = componenteService.listar();
+        }
 
     @FXML private void filtrarTodos() { tabelaComponentes.setItems(FXCollections.observableArrayList(todasPecas)); }
     @FXML private void filtrarProcessadores() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof Processador && !c.getNome().toUpperCase().contains("RTX") && !c.getNome().toUpperCase().contains("RX ")) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
@@ -240,10 +218,9 @@ public class CatalogoController {
     @FXML private void filtrarPlacasDeVideo() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { String n = c.getNome().toUpperCase(); if (n.contains("RTX") || n.contains("RX ") || n.contains("GTX")) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
     @FXML private void filtrarFontes() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof Fonte) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
 
-    @FXML private void voltarHome(ActionEvent event) { trocarTela("/home.fxml", event); }
-    @FXML private void enviarParaBuild(ActionEvent event) { Componente s = tabelaComponentes.getSelectionModel().getSelectedItem(); if (s != null) buildService.adicionarComponenteParaMontagem(s); trocarTela("/builds-view.fxml", event); }
-    @FXML private void irParaCarrinho(ActionEvent event) { try { FXMLLoader l = new FXMLLoader(getClass().getResource("/Carrinho.fxml")); Parent r = l.load(); CarrinhoController c = l.getController(); c.setUsuario(usuarioLogado); Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow(); s.setScene(new Scene(r)); s.show(); } catch (IOException e) { e.printStackTrace(); alert("Erro ao abrir a tela de carrinho."); } }
+    @FXML private void voltarHome(ActionEvent event) { NavegacaoController.trocarTela("/home.fxml", event, usuarioLogado); }
+    @FXML private void enviarParaBuild(ActionEvent event) { Componente s = tabelaComponentes.getSelectionModel().getSelectedItem(); if (s != null) buildService.adicionarComponenteParaMontagem(s); NavegacaoController.trocarTela("/builds-view.fxml", event, usuarioLogado); }
+    @FXML private void irParaCarrinho(ActionEvent event) {NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);}
 
-    private void trocarTela(String fxml, ActionEvent event) { try { FXMLLoader l = new FXMLLoader(getClass().getResource(fxml)); Parent r = l.load(); Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow(); s.setScene(new Scene(r)); s.show(); } catch (IOException e) { e.printStackTrace(); alert("Erro na navegação: Não foi possível carregar " + fxml); } }
     private void alert(String message) { Alert a = new Alert(Alert.AlertType.INFORMATION); a.setHeaderText(null); a.setContentText(message); a.showAndWait(); }
 }

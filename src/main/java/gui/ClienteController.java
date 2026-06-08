@@ -85,31 +85,13 @@ public class ClienteController {
 
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Home.fxml"));
-            Parent root = loader.load();
-            HomeController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/Home.fxml", event, usuarioLogado);
     }
 
 
     @FXML
     public void onBotaoCatalogoClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
-            Parent root = loader.load();
-            CatalogoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/catalogo-view.fxml", event, usuarioLogado);
     }
 
     @FXML
@@ -119,16 +101,7 @@ public class ClienteController {
 
     @FXML
     public void onBotaoCarrinhoClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
-            Parent root = loader.load();
-            CarrinhoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
 
     @FXML

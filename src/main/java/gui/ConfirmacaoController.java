@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -94,17 +95,8 @@ public class ConfirmacaoController {
     }
 
     @FXML
-    public void irPraAreaDoPedido(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pedido-view.fxml"));
-            Parent root = loader.load();
-            PedidoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnPedido.getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void irPraAreaDoPedido(ActionEvent event){
+        NavegacaoController.trocarTela("/pedido-view.fxml", event, usuarioLogado);
     }
     @FXML
     public void irPraHome(){

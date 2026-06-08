@@ -46,74 +46,19 @@ public class HomeController implements Initializable {
         }
     }
 
-    private void trocarTela(
-            String caminhoFxml,
-            Button botaoOrigem
-    ) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(caminhoFxml));
-            Stage stage = (Stage) botaoOrigem.getScene().getWindow();
-            stage.setScene(new Scene(root));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     void irParaCarrinho(ActionEvent event) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Carrinho.fxml"));
-            Parent root = loader.load();
-            CarrinhoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnCarrinho.getScene().getWindow();
-
-            stage.setScene(new Scene(root));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
 
     @FXML
     void irParaCatalogo(ActionEvent event) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/catalogo-view.fxml"));
-
-            Parent root = loader.load();
-
-            CatalogoController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-            Stage stage = (Stage) btnCatalogo.getScene().getWindow();
-
-            stage.setScene(new Scene(root));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/catalogo-view.fxml", event, usuarioLogado);
     }
 
     @FXML
     public void irParaAreaCliente(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
-            Parent root = loader.load();
-
-            ClienteController controller = loader.getController();
-            controller.setUsuario(usuarioLogado);
-
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource())
-                    .getScene()
-                    .getWindow();
-
-            stage.setScene(new Scene(root));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavegacaoController.trocarTela("/cliente-view.fxml", event, usuarioLogado);
     }
     @FXML
     void irParaLogin(ActionEvent event) {
