@@ -143,12 +143,16 @@ public class PedidoService {
         Pedido novoPedido = new Pedido();
         novoPedido.setCliente(cliente);
         novoPedido.setEndereco(endereco);
+        CupomDesconto cupom = CupomService.getInstance().verificarEGerarCupom(carrinho.getItens());
+        double desconto = 0.0;
         double subtotal = carrinho.getValorTotal();
         double frete = calcularFrete(carrinho);
-        double total = subtotal + frete;
+        if (cupom != null) {
+            desconto = cupom.calcularDesconto(subtotal) / 100.0;
+        }
+        double total = subtotal + frete - desconto;
         novoPedido.setFrete(frete);
         novoPedido.setValorTotal(total);
-
         pagamento.setValor(total);
         novoPedido.setPagamento(pagamento);
         novoPedido.getPagamento().setStatus("PENDENTE");

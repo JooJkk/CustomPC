@@ -111,6 +111,9 @@ controller.setUsuario(usuario);*/
     private Label txtFrete;
 
     @FXML
+    private Label txtDesconto;
+
+    @FXML
     private Label txtTotal;
 
     private void carregarDados() {
@@ -250,33 +253,31 @@ controller.setUsuario(usuario);*/
 
             double subtotal = carrinhoService.calcularTotal();
 
-            txtSubtotal.setText(
-                    String.format("R$ %.2f", subtotal)
-            );
-
             // só calcula frete se endereço válido
-            Endereco endereco = new Endereco(
-                    rua,
-                    numero,
-                    bairro,
-                    cidade,
-                    cep,
-                    estado
+            Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
+            double frete = pedidoService.calcularFrete(carrinhoService.getCarrinho());
+            CupomDesconto cupom = CupomService.getInstance().verificarEGerarCupom(carrinhoService.getCarrinho().getItens());
+            double desconto = 0;
+            if (cupom != null) {
+                desconto = cupom.calcularDesconto(subtotal);
+            }
+            double total = subtotal + frete - desconto;
+
+            txtSubtotal.setText(
+                    String.format("+ R$ %.2f", subtotal)
             );
 
-            double frete =
-                    pedidoService.calcularFrete(carrinhoService.getCarrinho());
-
-            double total = subtotal + frete;
+            txtDesconto.setText(
+                    String.format("- R$ %.2f", desconto)
+            );
 
             txtFrete.setText(
-                    String.format("R$ %.2f", frete)
+                    String.format("+ R$ %.2f", frete)
             );
 
             txtTotal.setText(
                     String.format("R$ %.2f", total)
             );
-
         } catch (Exception e) {
 
             // enquanto usuário digita,
