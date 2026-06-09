@@ -62,6 +62,6 @@ public class HomeController implements Initializable {
     }
     @FXML
     void irParaLogin(ActionEvent event) {
-
+        NavegacaoController.trocarTela("/Login.fxml", event, usuarioLogado);
     }
 }
