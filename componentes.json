@@ -60,7 +60,7 @@
     "preco": 650.0,
     "peso": 0.4,
     "volume": 0.0,
-    "estoque": 15,
+    "estoque": 13,
     "consumoWatts": 58,
     "nivelDesempenho": 0
   },
@@ -217,7 +217,7 @@
     "preco": 850.0,
     "peso": 2.5,
     "volume": 0.0,
-    "estoque": 2,
+    "estoque": 0,
     "consumoWatts": 0,
     "nivelDesempenho": 0
   },
@@ -422,7 +422,7 @@
     "preco": 2100.0,
     "peso": 1.1,
     "volume": 0.0,
-    "estoque": 4,
+    "estoque": 2,
     "consumoWatts": 45,
     "nivelDesempenho": 0
   },
@@ -450,7 +450,7 @@
     "preco": 1250.0,
     "peso": 0.2,
     "volume": 0.0,
-    "estoque": 4,
+    "estoque": 2,
     "consumoWatts": 10,
     "nivelDesempenho": 0
   },

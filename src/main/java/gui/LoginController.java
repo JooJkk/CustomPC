@@ -51,12 +51,12 @@ public class LoginController {
 
     @FXML
     void irParaHome(ActionEvent event) {
-        NavegacaoController.trocarTela("/Home.fxml", event, null);
+        NavegacaoController.trocarTela("/Home.fxml", event, usuarioAnterior);
     }
 
     @FXML
     void irParaCadastro(ActionEvent event) {
-        NavegacaoController.trocarTela("/Cadastro.fxml", event, null);
+        NavegacaoController.trocarTela("/Cadastro.fxml", event, usuarioAnterior);
     }
 
     private void mostrarErro(String mensagem) {

@@ -240,6 +240,10 @@ controller.setUsuario(usuario);*/
         NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
     @FXML
+    void irParaLogin(ActionEvent event) {
+        NavegacaoController.trocarTela("/Login.fxml", event, usuarioLogado);
+    }
+    @FXML
     private void atualizarFrete() {
 
         try {

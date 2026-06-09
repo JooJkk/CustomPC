@@ -19,13 +19,8 @@ public class App extends Application {
         FXMLLoader loaderHome = new FXMLLoader(
                 getClass().getResource("/Home.fxml")
         );
-
         Parent telaHome = loaderHome.load();
-
-        HomeController controllerHome = loaderHome.getController();
-        controllerHome.setUsuario(ClienteService.getInstance().buscarPorId(1));
         Scene scene = new Scene(telaHome, 1200, 800);
-
         stage.setTitle("CustomPC - Home");
         stage.setScene(scene);
         stage.setResizable(false);

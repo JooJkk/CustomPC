@@ -92,6 +92,10 @@ public class CarrinhoController {
         alert.showAndWait();
     }
     @FXML
+    void irParaLogin(ActionEvent event) {
+        NavegacaoController.trocarTela("/Login.fxml", event, usuarioLogado);
+    }
+    @FXML
     private void irParaAreaCliente(ActionEvent event) {
         try {
             // 1. Carrega a "casca" da Área do Cliente
