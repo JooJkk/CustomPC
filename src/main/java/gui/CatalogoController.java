@@ -1,7 +1,5 @@
 package gui;
 
-import javafx.scene.layout.HBox;
-import javafx.geometry.Pos;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,10 +21,11 @@ import model.componentes.*;
 import negocio.CarrinhoService;
 import negocio.BuildService;
 import negocio.ComponenteService;
-
+import negocio.CupomService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class CatalogoController {
 
@@ -222,8 +221,32 @@ public class CatalogoController {
 
     @FXML private void voltarHome(ActionEvent event) { NavegacaoController.trocarTela("/home.fxml", event, usuarioLogado); }
     @FXML private void enviarParaBuild(ActionEvent event) { Componente s = tabelaComponentes.getSelectionModel().getSelectedItem(); if (s != null) buildService.adicionarComponenteParaMontagem(s); NavegacaoController.trocarTela("/builds-view.fxml", event, usuarioLogado); }
-    @FXML private void irParaCarrinho(ActionEvent event) {NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);}
+    @FXML private void irParaCarrinho(ActionEvent event) {
+        String mensagem = CupomService.getInstance().verificarProgressoDesconto(carrinhoService.getCarrinho().getItens());
 
+        if (mensagem != null) {
+
+            ButtonType btnCarrinho = new ButtonType("Ir para o carrinho");
+
+            ButtonType btnContinuar = new ButtonType("Continuar comprando");
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+            alert.setTitle("Desconto próximo!");
+            alert.setHeaderText("Você está perto de ganhar um cupom");
+            alert.setContentText(mensagem);
+
+            alert.getButtonTypes().setAll(btnCarrinho, btnContinuar);
+
+            Optional<ButtonType> resultado = alert.showAndWait();
+            if (resultado.isPresent() && resultado.get() == btnCarrinho) {
+                NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
+            }
+        }
+        else {
+            NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
+        }
+    }
     private void alert(String message) { Alert a = new Alert(Alert.AlertType.INFORMATION); a.setHeaderText(null); a.setContentText(message); a.showAndWait(); }
     @FXML
     private void irParaAreaCliente(ActionEvent event) {

@@ -67,4 +67,41 @@ public class CupomService {
     public CupomDesconto buscarPorCodigo(String codigo) {
         return cuponsGerados.stream().filter(c -> c.getCodigo().equals(codigo)).findFirst().orElseThrow(() -> new IllegalArgumentException("Cupom não encontrado: " + codigo));
     }
+
+    public String verificarProgressoDesconto(List<ItemCarrinho> itens) {
+
+        int componentesFaltando = calcularComponentesFaltando(itens);
+
+        if (componentesFaltando > 0 && componentesFaltando <= 2) {
+            return "Faltam apenas " + componentesFaltando +
+                    " componentes para ganhar 10% de desconto!";
+        }
+
+        int itensMesmaMarca = maiorQuantidadeMesmaMarca(itens);
+
+        if (itensMesmaMarca >= 2 && itensMesmaMarca < 4) {
+            return "Compre mais " + (4 - itensMesmaMarca) +
+                    " item(ns) da mesma marca para ganhar 7% de desconto!";
+        }
+
+        return null;
+    }
+
+    private int calcularComponentesFaltando(List<ItemCarrinho> itens) {
+
+        Set<Class<?>> tiposPresentes = itens.stream().map(item -> item.getComponente().getClass()).collect(Collectors.toSet());
+
+        int faltando = 0;
+
+        if (!tiposPresentes.contains(Processador.class)) faltando++;
+        if (!tiposPresentes.contains(MemoriaRam.class)) faltando++;
+        if (!tiposPresentes.contains(PlacaMae.class)) faltando++;
+        if (!tiposPresentes.contains(Fonte.class)) faltando++;
+
+        return faltando;
+    }
+
+    private int maiorQuantidadeMesmaMarca(List<ItemCarrinho> itens) {
+        return itens.stream().collect(Collectors.groupingBy(item -> item.getComponente().getMarca(), Collectors.counting())).values().stream().mapToInt(Long::intValue).max().orElse(0);
+    }
 }
