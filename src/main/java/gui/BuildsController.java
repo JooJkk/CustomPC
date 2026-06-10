@@ -6,10 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.componentes.Build;
@@ -18,11 +15,8 @@ import model.componentes.Fonte;
 import model.componentes.MemoriaRam;
 import model.componentes.PlacaMae;
 import model.componentes.Processador;
-import negocio.BuildService;
-import negocio.CarrinhoService;
-import negocio.CompatibilidadeService;
+import negocio.*;
 import exception.BuildIncompativelException;
-import negocio.ComponenteService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -213,8 +207,27 @@ public class BuildsController {
         adicionarComEstoque(mobo);
         adicionarComEstoque(ram);
         adicionarComEstoque(fonte);
-
+        exibirProgressoCupom();
         NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
+    }
+    private void exibirProgressoCupom() {
+
+        String mensagem = CupomService.getInstance()
+                .verificarProgressoDesconto(
+                        carrinhoService.getCarrinho().getItens());
+        if (mensagem == null) {
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quase lá!");
+        alert.setHeaderText("🎁 Você está perto de um desconto");
+        alert.setContentText(mensagem);
+
+        ButtonType continuarComprando = new ButtonType("Continuar comprando");
+
+        ButtonType irCarrinho = new ButtonType("Ir para o carrinho");
+
+        alert.getButtonTypes().setAll(continuarComprando, irCarrinho);
     }
     private void adicionarComEstoque(Componente comp) {
         if (comp == null) return;
