@@ -224,10 +224,10 @@ public class BuildsController {
         alert.setContentText(mensagem);
 
         ButtonType continuarComprando = new ButtonType("Continuar comprando");
-
         ButtonType irCarrinho = new ButtonType("Ir para o carrinho");
 
         alert.getButtonTypes().setAll(continuarComprando, irCarrinho);
+        alert.showAndWait();
     }
     private void adicionarComEstoque(Componente comp) {
         if (comp == null) return;

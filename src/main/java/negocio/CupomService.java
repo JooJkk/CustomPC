@@ -53,10 +53,10 @@ public class CupomService {
         return total >= valorMinimo;
     }
 
-    //Desconto em 2 itens da mesma marca
+    //Desconto em 3 itens da mesma marca
     private boolean verificarMesmaMarca(List<ItemCarrinho> itens) {
         Map<String, Long> contagemPorMarca = itens.stream().collect(Collectors.groupingBy(item -> item.getComponente().getMarca(), Collectors.counting()));
-        return contagemPorMarca.values().stream().anyMatch(quantidade -> quantidade >= 2);
+        return contagemPorMarca.values().stream().anyMatch(quantidade -> quantidade >= 3);
     }
 
     public List<CupomDesconto> listarCuponsAtivos() {
@@ -74,22 +74,19 @@ public class CupomService {
         String componentesFaltando = calcularComponentesFaltando(itens);
 
         if (componentesFaltando != null) {
-            return "Faltam apenas " + componentesFaltando + " componentes para ganhar 10% de desconto!";
+            return componentesFaltando;
         }
 
         int itensMesmaMarca = maiorQuantidadeMesmaMarca(itens);
 
-        if (itensMesmaMarca >= 2 && itensMesmaMarca < 4) {
-            if(4 - itensMesmaMarca == 1){
-                return "Compre mais 1 item da mesma marca para ganhar 7% de desconto!";
-            }
-            return "Compre mais " + (4 - itensMesmaMarca) + " item(ns) da mesma marca para ganhar 7% de desconto!";
+        if (itensMesmaMarca == 2) {
+            return "Compre mais 1 item da mesma marca para ganhar 7% de desconto!";
         }
         double total = itens.stream().mapToDouble(item -> item.getComponente().getPreco() * item.getQuantidade()).sum();
 
         double valorMeta = 5000.0;
         if (total >= valorMeta * 0.75 && total < valorMeta) {
-            return String.format("Faltam apenas R$ %.2f para ganhar 5%% de desconto!", valorMeta - total);
+            return String.format("Faltam apenas R$ %.2f para ganhar 5% de desconto!", valorMeta - total);
         }
 
         return null;
@@ -111,7 +108,7 @@ public class CupomService {
         if (!tiposPresentes.contains(Fonte.class))
             faltantes.add("Fonte");
         if (faltantes.size() <= 2 && !faltantes.isEmpty()) {
-            return "Você está perto de ganhar 10% de desconto! Adicione: " + String.join(" e ", faltantes) + " para completar uma build.";
+            return "Você está perto de ganhar 10% de desconto! Adicione: " + String.join(" e ", faltantes) + " para adquirir o desconto.";
         }
         return null;
     }
