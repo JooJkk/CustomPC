@@ -54,19 +54,15 @@ public class RepositorioPedido implements IRepositorioPedido {
 
     @Override
     public void salvar(Pedido pedido) {
-        // 1. Lógica para gerar o ID automático
-        long proximoId = 1; // Se for o primeiro pedido, será 1
+        long proximoId = 1; 
 
         if (!pedidos.isEmpty()) {
-            // Pega o último pedido da lista e soma 1 no ID dele
             Pedido ultimoPedido = pedidos.get(pedidos.size() - 1);
             proximoId = ultimoPedido.getId() + 1;
         }
 
-        // 2. Aplica o ID novo no pedido
         pedido.setId(proximoId);
 
-        // 3. Adiciona na lista e salva no JSON (como já estava antes)
         pedidos.add(pedido);
         salvarDados();
     }
