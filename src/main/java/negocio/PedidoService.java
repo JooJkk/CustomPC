@@ -167,11 +167,12 @@ public class PedidoService {
             novoPedido.adicionarItem(itemP);
         }
 
-        repositorio.salvar(novoPedido);
+
         OrdemMontagem ordem = new OrdemMontagem();
         ordem.setStatus("PENDENTE");
         ordem.setDataCriacao(LocalDate.now());
         novoPedido.setOrdemMontagem(ordem);
+        repositorio.salvar(novoPedido);
         carrinho.limpar();
         setPedidoAtual(novoPedido);
         return novoPedido;
