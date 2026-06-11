@@ -110,14 +110,14 @@
                            <children>
                               <Label style="-fx-font-weight: bold;" text="Estoque novo:" textFill="#2c3e50" />
                               <TextField fx:id="txtEstoqueNovo" prefHeight="25.0" prefWidth="57.0" />
-                              <Button fx:id="btnExcluir" mnemonicParsing="false" style="-fx-background-color: #9c171a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="X">
+                              <Button mnemonicParsing="false" onAction="#onBtnExcluir" style="-fx-background-color: #9c171a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="X">
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
-                        <Button fx:id="btnAtualizar" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Atualizar Estoque">
+                        <Button mnemonicParsing="false" onAction="#onBtnAtualizarEstoque" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Atualizar Estoque">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -138,7 +138,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnAddComponente" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #1e6e1b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Novo Componente">
+            <Button mnemonicParsing="false" onAction="#onBtnAdicionarNovo" prefHeight="40.0" style="-fx-background-color: #1e6e1b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Novo Componente">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

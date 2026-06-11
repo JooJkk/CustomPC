@@ -8,7 +8,7 @@
     "preco": 1000.0,
     "peso": 0.5,
     "volume": 0.0,
-    "estoque": 10,
+    "estoque": 20,
     "consumoWatts": 65,
     "nivelDesempenho": 0
   },
