@@ -5,6 +5,7 @@ import model.componentes.PlacaMae;
 import model.componentes.Processador;
 import negocio.ClienteService;
 import negocio.ComponenteService;
+import negocio.RelatoriosService;
 
 public class Main {
 
