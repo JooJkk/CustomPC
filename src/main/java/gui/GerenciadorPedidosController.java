@@ -87,6 +87,12 @@ public class GerenciadorPedidosController {
         Button btnCancelar = new Button("Cancelar Pedido ❌");
         btnCancelar.setStyle("-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;");
 
+        // Desativa o cancelamento se já estiver enviado ou cancelado
+        if ("ENVIADO".equalsIgnoreCase(pedido.getStatus()) || "CANCELADO".equalsIgnoreCase(pedido.getStatus())) {
+            btnCancelar.setDisable(true);
+            btnCancelar.setStyle("-fx-background-color: #e0a8ad; -fx-text-fill: white; -fx-background-radius: 5;");
+        }
+
         // Desativa o cancelamento se já estiver enviado
         if ("ENVIADO".equalsIgnoreCase(pedido.getStatus())) {
             btnCancelar.setDisable(true);
@@ -106,6 +112,10 @@ public class GerenciadorPedidosController {
     private void configurarBotaoStatus(Button btn, Pedido pedido) {
         String statusAtual = pedido.getStatus();
 
+        // Garante que o botão volte a ficar visível/gerenciado para os outros cards reciclados/recarregados
+        btn.setVisible(true);
+        btn.setManaged(true);
+
         switch (statusAtual.toUpperCase()) {
             case "PENDENTE":
                 btn.setText("Avançar para: AGUARDANDO_PAGAMENTO ⏳");
@@ -124,6 +134,10 @@ public class GerenciadorPedidosController {
                 btn.setText("Pedido Concluído (ENVIADO) ✓");
                 btn.setDisable(true);
                 btn.setStyle("-fx-background-color: #6c757d; -fx-text-fill: white; -fx-background-radius: 5;");
+                break;
+            case "CANCELADO":
+                btn.setVisible(false);
+                btn.setManaged(false); // Remove o espaço fantasma do botão no HBox
                 break;
             default:
                 btn.setText("Mudar Status 🔄");
