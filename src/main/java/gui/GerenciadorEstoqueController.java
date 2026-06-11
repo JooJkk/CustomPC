@@ -5,28 +5,23 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.Cliente;
 import model.componentes.Componente;
 import model.componentes.*;
 import negocio.CarrinhoService;
-import negocio.BuildService;
 import negocio.ComponenteService;
-import negocio.CupomService;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javafx.event.ActionEvent;
+
+import javafx.scene.control.Alert;
+import dados.RepositorioComponente;
+
 
 public class GerenciadorEstoqueController {
     private Cliente usuarioLogado;
@@ -39,6 +34,7 @@ public class GerenciadorEstoqueController {
     private void carregarCatalogo() {
         todasPecas = componenteService.listar();
     }
+    private RepositorioComponente repositorio = new RepositorioComponente();
 
     @FXML
     private TableView<Componente> tabelaComponentes;
@@ -72,10 +68,57 @@ public class GerenciadorEstoqueController {
     public void onBtnVoltar(ActionEvent event){
         NavegacaoController.trocarTela("/AdminView.fxml", event, usuarioLogado);
     }
+
     @FXML
-    private Button btnAddComponente;
+    public void onBtnAdicionarNovo(ActionEvent event){
+        NavegacaoController.trocarTela("/NewComponente.fxml", event, usuarioLogado);
+    }
+
     @FXML
-    private Button btnAtualizar;
+    public void onBtnAtualizarEstoque(ActionEvent event){
+        Componente selecionado = tabelaComponentes.getSelectionModel().getSelectedItem();
+        if(selecionado != null){
+            try {
+                int qntNova = Integer.parseInt(txtEstoqueNovo.getText());
+                selecionado.setEstoque(qntNova);
+                componenteService.atualizar(selecionado);
+                exibirDetalhesProduto(selecionado);
+                alert("Estoque atualizado com sucesso!");
+            } catch (NumberFormatException e) {
+                alert("⚠️ Por favor, digite um número.");
+            }
+        }
+
+    }
+    @FXML
+    public void onBtnExcluir(ActionEvent event){
+        Componente selecionado = tabelaComponentes.getSelectionModel().getSelectedItem();
+        if(selecionado != null){
+            try {
+                ButtonType btnConfimar = new ButtonType("Excluir do estoque");
+                ButtonType btnCancelar = new ButtonType("Cancelar");
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+                alert.setTitle("Exclusão");
+                alert.setHeaderText("Você selecionou" + selecionado.getNome());
+                alert.setContentText("Continuar com a exclusão?");
+
+                alert.getButtonTypes().setAll(btnConfimar, btnCancelar);
+
+                Optional<ButtonType> resultado = alert.showAndWait();
+                if (resultado.isPresent() && resultado.get() == btnConfimar) {
+                    long idComp = selecionado.getId();
+                    repositorio.remover(idComp);
+                    alert("Componente removido com sucesso!");
+                    exibirDetalhesProduto(selecionado);
+                    filtrarTodos();
+                }
+            } catch (NumberFormatException e) {
+                alert("⚠️ Por favor, digite um número.");
+            }
+        }
+    }
 
     @FXML
     private void filtrarTodos() { tabelaComponentes.setItems(FXCollections.observableArrayList(todasPecas)); }
@@ -205,6 +248,10 @@ public class GerenciadorEstoqueController {
             lblDetalheConsumo.setText("Consumo: " + ((MemoriaRam) comp).getConsumoWatts() + "W");
         }
     }
-
+    private void alert(String message) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setHeaderText(null);
+        alerta.setContentText(message);
+        alerta.showAndWait(); }
 
 }
