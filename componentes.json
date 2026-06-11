@@ -34,7 +34,7 @@
     "preco": 3500.0,
     "peso": 0.5,
     "volume": 0.0,
-    "estoque": 0,
+    "estoque": 17,
     "consumoWatts": 170,
     "nivelDesempenho": 0
   },
@@ -858,6 +858,19 @@
     "volume": 0.0,
     "estoque": 12,
     "consumoWatts": 70,
+    "nivelDesempenho": 0
+  },
+  {
+    "socket": "AM5",
+    "tdp": 100,
+    "id": 127,
+    "nome": "R7 7600x",
+    "marca": "AMD",
+    "preco": 1500.0,
+    "peso": 20.0,
+    "volume": 0.0,
+    "estoque": 15,
+    "consumoWatts": 100,
     "nivelDesempenho": 0
   }
 ]

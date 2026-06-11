@@ -1634,5 +1634,72 @@
       "email": "email@teste.com",
       "senha": "123"
     }
+  },
+  {
+    "id": 18,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      },
+      "time": {
+        "hour": 10,
+        "minute": 14,
+        "second": 8,
+        "nano": 266824300
+      }
+    },
+    "status": "ENVIADO",
+    "valorTotal": 10527.0,
+    "pagamento": {
+      "id": 52,
+      "valor": 10521.75,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 3,
+        "precoUnitario": 3500.0,
+        "componente": {
+          "socket": "AM5",
+          "tdp": 170,
+          "id": 3,
+          "nome": "Ryzen 9 7950X",
+          "marca": "AMD",
+          "preco": 3500.0,
+          "peso": 0.5,
+          "volume": 0.0,
+          "estoque": 17,
+          "consumoWatts": 170,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "q",
+      "numero": "1",
+      "bairro": "q",
+      "cidade": "q",
+      "cep": "12345678",
+      "estado": "q"
+    },
+    "frete": 27.0,
+    "ordemMontagem": {
+      "id": 1,
+      "status": "PENDENTE",
+      "dataCriacao": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      }
+    },
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
   }
 ]
