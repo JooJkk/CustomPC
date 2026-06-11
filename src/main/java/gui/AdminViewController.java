@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 
 import model.Cliente;
 import negocio.ComponenteService;
+import negocio.PedidoService;
 import negocio.RelatoriosService;
 
 import java.io.IOException;
@@ -25,10 +26,30 @@ public class AdminViewController {
 
     }
     @FXML
-    public void onBtnRelatorio(ActionEvent event){
+    public void onBtnRelatorioBE(ActionEvent event){
         RelatoriosService relatoriosService = new RelatoriosService();
         try {
             relatoriosService.gerarRelatorioBaixoEstoque(ComponenteService.getInstance().listar(), 10, "relatorios/relatorio_baixo_estoque.xlsx");
+            alert("Relatorio baixado com sucesso!");
+        } catch (IOException e) {
+            alert("Não foi possivel baixar o relatorio, erro: " + e.getMessage());
+        }
+    }
+    @FXML
+    public void onBtnRelatorioF(ActionEvent event){
+        RelatoriosService relatoriosService = new RelatoriosService();
+        try {
+            relatoriosService.gerarFaturamentoMensal(PedidoService.getInstance().listarTodos(), 6, 2026, "relatorios/relatorio_faturamento.xlsx");
+            alert("Relatorio baixado com sucesso!");
+        } catch (IOException e) {
+            alert("Não foi possivel baixar o relatorio, erro: " + e.getMessage());
+        }
+    }
+    @FXML
+    public void onBtnRelatorioOP(ActionEvent event){
+        RelatoriosService relatoriosService = new RelatoriosService();
+        try {
+            relatoriosService.gerarOrdensPendentes(PedidoService.getInstance().listarTodos(), "relatorios/relatorio_ordens_pendentes.xlsx");
             alert("Relatorio baixado com sucesso!");
         } catch (IOException e) {
             alert("Não foi possivel baixar o relatorio, erro: " + e.getMessage());

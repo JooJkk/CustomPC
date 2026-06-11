@@ -23,7 +23,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnGerPedidos" prefHeight="45.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="GERENCIAR PEDIDOS">
@@ -34,7 +34,23 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnRelatorio" prefHeight="45.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="RELATÓRIO">
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnRelatorioBE" prefHeight="45.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="RLT - BAIXO ESTOQUE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnRelatorioF" prefHeight="45.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="RLT - FATURAMENTO">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnRelatorioOP" prefHeight="45.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="RLT - ORDENS PEND.">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -49,6 +65,9 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
                   </Button>
                </children>
                <padding>
