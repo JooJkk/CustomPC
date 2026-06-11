@@ -33,6 +33,9 @@ public class CarrinhoController {
     private TableView<ItemCarrinho> tabelaCarrinho;
 
     @FXML
+    private Button btnIrCatalogo;
+
+    @FXML
     private TableColumn<ItemCarrinho, String> colunaItem;
 
     @FXML
@@ -159,4 +162,10 @@ public class CarrinhoController {
             System.err.println("Erro crítico ao tentar voltar para a Área do Cliente a partir do Carrinho.");
         }
     }
+    @FXML
+    private void voltarParaCatalogo(ActionEvent event) {
+        // Esse método vai levar o usuário de volta para o catálogo
+        NavegacaoController.trocarTela("/catalogo-view.fxml", event, usuarioLogado);
+    }
+
 }

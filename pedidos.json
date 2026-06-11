@@ -1514,47 +1514,83 @@
       },
       "time": {
         "hour": 10,
-        "minute": 14,
-        "second": 8,
-        "nano": 266824300
+        "minute": 36,
+        "second": 0,
+        "nano": 925209400
       }
     },
-    "status": "ENVIADO",
-    "valorTotal": 10527.0,
+    "status": "PENDENTE",
+    "valorTotal": 10101.0,
     "pagamento": {
-      "id": 52,
-      "valor": 10521.75,
+      "id": 53,
+      "valor": 10095.975,
       "formaPagamento": "Pix",
       "status": "PENDENTE"
     },
     "itens": [
       {
-        "quantidade": 3,
-        "precoUnitario": 3500.0,
+        "quantidade": 1,
+        "precoUnitario": 1000.0,
         "componente": {
-          "socket": "AM5",
-          "tdp": 170,
-          "id": 3,
-          "nome": "Ryzen 9 7950X",
+          "socket": "AM4",
+          "tdp": 65,
+          "id": 1,
+          "nome": "Ryzen 5 5600",
           "marca": "AMD",
-          "preco": 3500.0,
+          "preco": 1000.0,
           "peso": 0.5,
           "volume": 0.0,
-          "estoque": 17,
-          "consumoWatts": 170,
+          "estoque": 9,
+          "consumoWatts": 65,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 1,
+        "precoUnitario": 650.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 60,
+          "id": 5,
+          "nome": "Core i3-12100F",
+          "marca": "Intel",
+          "preco": 650.0,
+          "peso": 0.4,
+          "volume": 0.0,
+          "estoque": 12,
+          "consumoWatts": 58,
+          "nivelDesempenho": 0
+        }
+      },
+      {
+        "quantidade": 3,
+        "precoUnitario": 2800.0,
+        "componente": {
+          "socket": "AM5",
+          "tipoRamSuportada": "DDR5",
+          "slotsRam": 4,
+          "formato": "ATX",
+          "id": 145,
+          "nome": "X670E ASUS ROG",
+          "marca": "ASUS",
+          "preco": 2800.0,
+          "peso": 1.2,
+          "volume": 0.0,
+          "estoque": 1,
+          "consumoWatts": 40,
           "nivelDesempenho": 0
         }
       }
     ],
     "endereco": {
-      "rua": "q",
-      "numero": "1",
-      "bairro": "q",
-      "cidade": "q",
+      "rua": "itnhitrnhi",
+      "numero": "12345678",
+      "bairro": "rhnuihnui",
+      "cidade": "h rfhv ",
       "cep": "12345678",
-      "estado": "q"
+      "estado": "erngiurn"
     },
-    "frete": 27.0,
+    "frete": 51.0,
     "ordemMontagem": {
       "id": 1,
       "status": "PENDENTE",
@@ -1565,9 +1601,277 @@
       }
     },
     "cliente": {
-      "id": 1,
-      "nome": "Teste",
-      "email": "email@teste.com",
+      "id": 6,
+      "nome": "brenna",
+      "email": "brennatoriab@gmail.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 19,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      },
+      "time": {
+        "hour": 11,
+        "minute": 1,
+        "second": 2,
+        "nano": 774608200
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 1019.0,
+    "pagamento": {
+      "id": 55,
+      "valor": 1019.0,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 1000.0,
+        "componente": {
+          "socket": "AM4",
+          "tdp": 65,
+          "id": 1,
+          "nome": "Ryzen 5 5600",
+          "marca": "AMD",
+          "preco": 1000.0,
+          "peso": 0.5,
+          "volume": 0.0,
+          "estoque": 8,
+          "consumoWatts": 65,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "ghb lkg",
+      "numero": "12345678",
+      "bairro": "tnlkbnl",
+      "cidade": "bt blk",
+      "cep": "12345678",
+      "estado": "bt bt"
+    },
+    "frete": 19.0,
+    "ordemMontagem": {
+      "id": 4,
+      "status": "PENDENTE",
+      "dataCriacao": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      }
+    },
+    "cliente": {
+      "id": 6,
+      "nome": "brenna",
+      "email": "brennatoriab@gmail.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 20,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      },
+      "time": {
+        "hour": 11,
+        "minute": 13,
+        "second": 56,
+        "nano": 841955400
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 1919.8,
+    "pagamento": {
+      "id": 77,
+      "valor": 1919.8,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 1900.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 125,
+          "id": 4,
+          "nome": "Core i5-13600K",
+          "marca": "Intel",
+          "preco": 1900.0,
+          "peso": 0.6,
+          "volume": 0.0,
+          "estoque": 1,
+          "consumoWatts": 125,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "kjnfng",
+      "numero": "12345678",
+      "bairro": "ngong",
+      "cidade": "orngn",
+      "cep": "12345678",
+      "estado": "pe"
+    },
+    "frete": 19.8,
+    "ordemMontagem": {
+      "id": 9,
+      "status": "PENDENTE",
+      "dataCriacao": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      }
+    },
+    "cliente": {
+      "id": 6,
+      "nome": "brenna",
+      "email": "brennatoriab@gmail.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 21,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      },
+      "time": {
+        "hour": 11,
+        "minute": 23,
+        "second": 7,
+        "nano": 579994300
+      }
+    },
+    "status": "CANCELADO",
+    "valorTotal": 668.2,
+    "pagamento": {
+      "id": 61,
+      "valor": 668.2,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 650.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 60,
+          "id": 5,
+          "nome": "Core i3-12100F",
+          "marca": "Intel",
+          "preco": 650.0,
+          "peso": 0.4,
+          "volume": 0.0,
+          "estoque": 10,
+          "consumoWatts": 58,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "skjdfbg",
+      "numero": "12345678",
+      "bairro": "KBRGB",
+      "cidade": "RJGB",
+      "cep": "12345766",
+      "estado": "OGRBO"
+    },
+    "frete": 18.2,
+    "ordemMontagem": {
+      "id": 10,
+      "status": "PENDENTE",
+      "dataCriacao": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      }
+    },
+    "cliente": {
+      "id": 6,
+      "nome": "brenna",
+      "email": "brennatoriab@gmail.com",
+      "senha": "123"
+    }
+  },
+  {
+    "id": 22,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      },
+      "time": {
+        "hour": 11,
+        "minute": 26,
+        "second": 59,
+        "nano": 855203500
+      }
+    },
+    "status": "CANCELADO",
+    "valorTotal": 668.2,
+    "pagamento": {
+      "id": 64,
+      "valor": 668.2,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 650.0,
+        "componente": {
+          "socket": "LGA1700",
+          "tdp": 60,
+          "id": 5,
+          "nome": "Core i3-12100F",
+          "marca": "Intel",
+          "preco": 650.0,
+          "peso": 0.4,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 58,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "gkrnre",
+      "numero": "12345678",
+      "bairro": "kndroin",
+      "cidade": "gnroin",
+      "cep": "12345678",
+      "estado": "rnhin"
+    },
+    "frete": 18.2,
+    "ordemMontagem": {
+      "id": 13,
+      "status": "PENDENTE",
+      "dataCriacao": {
+        "year": 2026,
+        "month": 6,
+        "day": 11
+      }
+    },
+    "cliente": {
+      "id": 6,
+      "nome": "brenna",
+      "email": "brennatoriab@gmail.com",
       "senha": "123"
     }
   }

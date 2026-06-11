@@ -9,16 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Cliente;
-import model.componentes.Componente;
-import model.componentes.Fonte;
-import model.componentes.MemoriaRam;
-import model.componentes.PlacaMae;
-import model.componentes.Processador;
+import model.componentes.*;
 import negocio.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BuildsController {
     private Cliente usuarioLogado;
@@ -29,7 +26,7 @@ public class BuildsController {
     @FXML private ComboBox<Processador> comboProcessador;
     @FXML private ComboBox<PlacaMae> comboPlacaMae;
     @FXML private ComboBox<MemoriaRam> comboRam;
-    @FXML private ComboBox<Processador> comboPlacaVideo;
+    @FXML private ComboBox<PlacaVideo> comboPlacaVideo;
     @FXML private ComboBox<Fonte> comboFonte;
     @FXML private Label lblResultado;
 // infomação generica para arrumar commit
@@ -40,7 +37,7 @@ public class BuildsController {
     private List<Processador> todosProcessadores = new ArrayList<>();
     private List<PlacaMae> todasPlacasMae = new ArrayList<>();
     private List<MemoriaRam> todasMemorias = new ArrayList<>();
-    private List<Processador> todasPlacasVideo = new ArrayList<>();
+    private List<PlacaVideo> todasPlacasVideo = new ArrayList<>();
     private List<Fonte> todasFontes = new ArrayList<>();
 
     @FXML
@@ -145,7 +142,7 @@ public class BuildsController {
         Processador cpu = comboProcessador.getValue();
         PlacaMae mobo = comboPlacaMae.getValue();
         MemoriaRam ram = comboRam.getValue();
-        Processador gpu = comboPlacaVideo.getValue();
+        PlacaVideo gpu = comboPlacaVideo.getValue();
 
         comboFonte.setValue(null);
         comboFonte.getItems().clear();
@@ -190,7 +187,7 @@ public class BuildsController {
         Processador cpu = comboProcessador.getValue();
         PlacaMae mobo = comboPlacaMae.getValue();
         MemoriaRam ram = comboRam.getValue();
-        Processador gpu = comboPlacaVideo.getValue();
+        PlacaVideo gpu = comboPlacaVideo.getValue();
         Fonte fonte = comboFonte.getValue();
 
         if (cpu == null || mobo == null || ram == null || gpu == null || fonte == null) {
@@ -205,13 +202,16 @@ public class BuildsController {
         adicionarComEstoque(gpu);
         adicionarComEstoque(fonte);
 
-        exibirProgressoCupom();
+        exibirProgressoCupom(event);
         NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
 
-    private void exibirProgressoCupom() {
+    private void exibirProgressoCupom(ActionEvent event) {
         String mensagem = CupomService.getInstance().verificarProgressoDesconto(carrinhoService.getCarrinho().getItens());
-        if (mensagem == null) return;
+        if (mensagem == null) {
+            NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
+            return;
+        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quase lá!");
@@ -222,7 +222,15 @@ public class BuildsController {
         ButtonType irCarrinho = new ButtonType("Ir para o carrinho");
 
         alert.getButtonTypes().setAll(continuarComprando, irCarrinho);
-        alert.showAndWait();
+        Optional<ButtonType> resultado = alert.showAndWait();
+
+        if (resultado.isPresent()) {
+            if (resultado.get() == irCarrinho) {
+                NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
+            } else if (resultado.get() == continuarComprando) {
+                voltarCatalogo(event);
+            }
+        }
     }
 
     private void adicionarComEstoque(Componente comp) {
@@ -285,44 +293,55 @@ public class BuildsController {
         List<Componente> compartilhados = buildService.getComponentesSelecionadosParaMontagem();
         if (compartilhados == null || compartilhados.isEmpty()) return;
 
-        for (Componente comp : compartilhados) {
-            if (comp == null) continue;
+        Processador cpuParaSetar = null;
+        PlacaMae moboParaSetar = null;
+        MemoriaRam ramParaSetar = null;
+        PlacaVideo gpuParaSetar = null;
+        Fonte fonteParaSetar = null;
 
-            if (comp instanceof Processador) {
-                String nomeUpper = comp.getNome().toUpperCase();
-                if (nomeUpper.contains("RTX") || nomeUpper.contains("RX ") || nomeUpper.contains("GTX")) {
-                    comboPlacaVideo.setDisable(false);
-                    comboPlacaVideo.getItems().setAll(todasPlacasVideo);
-                    comboPlacaVideo.setValue((Processador) comp);
-                    filtrarEExibirFontes();
-                } else {
-                    comboProcessador.setValue((Processador) comp);
-                }
-            } else if (comp instanceof PlacaMae) {
-                comboPlacaMae.setDisable(false);
-                comboPlacaMae.getItems().setAll(todasPlacasMae);
-                comboPlacaMae.setValue((PlacaMae) comp);
-            } else if (comp instanceof MemoriaRam) {
-                comboRam.setDisable(false);
-                comboRam.getItems().setAll(todasMemorias);
-                comboRam.setValue((MemoriaRam) comp);
-            } else if (comp instanceof Fonte) {
-                comboFonte.setDisable(false);
-                comboFonte.getItems().setAll(todasFontes);
-                comboFonte.setValue((Fonte) comp);
-            }
+        for (Componente comp : compartilhados) {
+            if (comp == null || comp.getEstoque() <= 0) continue;
+            if (comp instanceof Processador)  cpuParaSetar   = (Processador) comp;
+            else if (comp instanceof PlacaMae)     moboParaSetar  = (PlacaMae) comp;
+            else if (comp instanceof MemoriaRam)   ramParaSetar   = (MemoriaRam) comp;
+            else if (comp instanceof PlacaVideo)   gpuParaSetar   = (PlacaVideo) comp;
+            else if (comp instanceof Fonte)        fonteParaSetar = (Fonte) comp;
+        }
+
+        // Respeita a cascata: cada setValue dispara o listener que filtra o próximo combo
+        if (cpuParaSetar != null) {
+            comboProcessador.setValue(cpuParaSetar);
+            filtrarEExibirPlacasMae(); // dispara manualmente pois setValue não aciona setOnAction
+        }
+        if (moboParaSetar != null) {
+            comboPlacaMae.setValue(moboParaSetar);
+            filtrarEExibirMemoriasRam();
+        }
+        if (ramParaSetar != null) {
+            comboRam.setValue(ramParaSetar);
+            filtrarEExibirPlacasVideo();
+        }
+        if (gpuParaSetar != null) {
+            comboPlacaVideo.setValue(gpuParaSetar);
+            filtrarEExibirFontes();
+        }
+        if (fonteParaSetar != null) {
+            comboFonte.setValue(fonteParaSetar);
         }
     }
 
     private void carregarPecas() {
+        todosProcessadores.clear();
+        todasPlacasMae.clear();
+        todasMemorias.clear();
+        todasPlacasVideo.clear();
+        todasFontes.clear();
         for (Componente c : componenteService.listar()) {
+            if (c == null || c.getEstoque() <= 0) {
+                continue;
+            }
             if (c instanceof Processador) {
-                String nomeUpper = c.getNome().toUpperCase();
-                if (nomeUpper.contains("RTX") || nomeUpper.contains("RX ") || nomeUpper.contains("GTX")) {
-                    todasPlacasVideo.add((Processador) c);
-                } else {
-                    todosProcessadores.add((Processador) c);
-                }
+                todosProcessadores.add((Processador) c);
             } else if (c instanceof PlacaMae) {
                 todasPlacasMae.add((PlacaMae) c);
             } else if (c instanceof MemoriaRam) {
@@ -330,7 +349,11 @@ public class BuildsController {
             } else if (c instanceof Fonte) {
                 todasFontes.add((Fonte) c);
             }
+            else if (c instanceof PlacaVideo) {
+                todasPlacasVideo.add((PlacaVideo) c);
+            }
         }
+        System.out.println("GPUs carregadas: " + todasPlacasVideo.size());
     }
 
     private void exibirErro(String mensagem) {
