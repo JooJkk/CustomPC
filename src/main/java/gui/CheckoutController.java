@@ -24,31 +24,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class CheckoutController {
-/*Para a tela que vem antes, quando for abrir a tela de checkout (para que o carrinho seja registrado:
- FXMLLoader loader =
-        new FXMLLoader(
-                getClass().getResource(
-                        "/fxml/checkout.fxml"
-                )
-        );
 
-Parent root = loader.load();
-
-CheckoutController controller =
-        loader.getController();
-
-controller.setCarrinhoService(carrinhoService);
-controller.setUsuario(usuario);*/
     private CarrinhoService carrinhoService = CarrinhoService.getInstance();
     private PedidoService pedidoService;
     private Cliente usuarioLogado;
+
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
     }
 
     @FXML
     private Button btnVoltar;
-    //tabela com dados dos produtos comprados
+
     @FXML
     private TableView<ItemCarrinho> tabelaCheckout;
 
@@ -64,110 +51,94 @@ controller.setUsuario(usuario);*/
     @FXML
     private TableColumn<ItemCarrinho, Double> colunaTotal;
 
-    //Endereço
-    @FXML
-    private TextField txtRua;
+    // Endereço
+    @FXML private TextField txtRua;
+    @FXML private TextField txtNumero;
+    @FXML private TextField txtCidade;
+    @FXML private TextField txtCep;
+    @FXML private TextField txtEstado;
+    @FXML private TextField txtBairro;
 
-    @FXML
-    private TextField txtNumero;
+    // Forma de pagamento
+    @FXML private RadioButton btnPix;
+    @FXML private RadioButton btnCartao;
+    @FXML private RadioButton btnBoleto;
+    @FXML private ToggleGroup grupoPagamento;
+    @FXML private VBox painelPagamento;
 
-    @FXML
-    private TextField txtCidade;
-
-    @FXML
-    private TextField txtCep;
-
-    @FXML
-    private TextField txtEstado;
-
-    @FXML
-    private TextField txtBairro;
-
-
-    //Forma de pagamento
-    @FXML
-    private RadioButton btnPix;
-
-    @FXML
-    private RadioButton btnCartao;
-
-    @FXML
-    private RadioButton btnBoleto;
-
-    @FXML
-    private ToggleGroup grupoPagamento;
-
-    @FXML
-    private VBox painelPagamento;
-
-    // Finalizar (e dados da compra finais)
-    @FXML
-    private Button btnConfirmar;
-
-    @FXML
-    private Label txtSubtotal;
-
-    @FXML
-    private Label txtFrete;
-
-    @FXML
-    private Label txtDesconto;
-
-    @FXML
-    private Label txtTotal;
+    // Finalizar
+    @FXML private Button btnConfirmar;
+    @FXML private Label txtSubtotal;
+    @FXML private Label txtFrete;
+    @FXML private Label txtDesconto;
+    @FXML private Label txtTotal;
 
     private void carregarDados() {
-
         ObservableList<ItemCarrinho> itens = FXCollections.observableArrayList(carrinhoService.getCarrinho().getItens());
-
         tabelaCheckout.setItems(itens);
-
         txtSubtotal.setText("R$: " + carrinhoService.calcularTotal());
-
     }
 
     @FXML
     public void initialize() {
+
+        CheckoutMoments momentos = CheckoutMoments.getInstance();
+        txtRua.setText(momentos.pegarCampo("rua"));
+        txtNumero.setText(momentos.pegarCampo("numero"));
+        txtCidade.setText(momentos.pegarCampo("cidade"));
+        txtCep.setText(momentos.pegarCampo("cep"));
+        txtEstado.setText(momentos.pegarCampo("estado"));
+        txtBairro.setText(momentos.pegarCampo("bairro"));
+
+        // calcula o frete automaticamente se o usuario tiver digitado o cep
+        if (!txtCep.getText().isEmpty()) {
+            atualizarFrete();
+        }
+
+
         carregarDados();
         IRepositorioPedido repositorio = new RepositorioPedido();
         pedidoService = PedidoService.getInstance();
-        //Tabela
-        colunaTotal.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
 
+        // Tabela
+        colunaTotal.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSubtotal()).asObject());
         colunaProduto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getComponente().getNome()));
         colunaQuantidade.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getQuantidade()).asObject());
         colunaPreco.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrecoUnitario()).asObject());
 
         grupoPagamento.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
-
             painelPagamento.getChildren().clear();
-
             if (newToggle == btnPix) {
                 mostrarPix();
-
             } else if (newToggle == btnCartao) {
                 mostrarCartao();
-
             } else if (newToggle == btnBoleto) {
                 mostrarBoleto();
             }
         });
     }
 
+    // metodo que vai salvar os dados de forma TEMPORARIAA
+    private void salvarDadosAtuais() {
+        CheckoutMoments momentos = CheckoutMoments.getInstance();
+        momentos.salvarCampo("rua", txtRua.getText());
+        momentos.salvarCampo("numero", txtNumero.getText());
+        momentos.salvarCampo("cidade", txtCidade.getText());
+        momentos.salvarCampo("cep", txtCep.getText());
+        momentos.salvarCampo("estado", txtEstado.getText());
+        momentos.salvarCampo("bairro", txtBairro.getText());
+    }
+
     private void mostrarPix() {
-
         ImageView qrCode = new ImageView(new Image(getClass().getResourceAsStream("/PIX.png")));
-
         qrCode.setFitWidth(200);
         qrCode.setFitHeight(200);
         Label lblQr = new Label("QR CODE");
         lblQr.setFont(new Font(20));
-        painelPagamento.getChildren().add(qrCode);
-        painelPagamento.getChildren().add(lblQr);
+        painelPagamento.getChildren().addAll(qrCode, lblQr);
     }
 
     private void mostrarCartao() {
-
         TextField numeroCartao = new TextField();
         numeroCartao.setPromptText("Número do cartão");
 
@@ -181,24 +152,20 @@ controller.setUsuario(usuario);*/
     }
 
     private void mostrarBoleto() {
-
         Label lblBoleto = new Label("O boleto será gerado após confirmar a compra.");
         lblBoleto.setFont(new Font(20));
         lblBoleto.setWrapText(true);
         painelPagamento.getChildren().add(lblBoleto);
     }
+
     @FXML
     private void finalizarCompra(ActionEvent event) {
-
-
         String rua = txtRua.getText();
         String numero = txtNumero.getText();
         String cidade = txtCidade.getText();
         String cep = txtCep.getText();
         String estado = txtEstado.getText();
         String bairro = txtBairro.getText();
-
-
 
         Toggle selecionado = grupoPagamento.getSelectedToggle();
 
@@ -219,35 +186,38 @@ controller.setUsuario(usuario);*/
                 Pedido pedido = pedidoService.finalizarCompra(carrinhoService.getCarrinho(), endereco, pagamento, usuarioLogado);
 
                 NavegacaoController.trocarTelaConfirmacao("/ConfirmacaoPagamento.fxml", event, usuarioLogado, pedido);
+
+                // ponto em que vai excluir depois que a compra ja tiver sido feita
+                CheckoutMoments.getInstance().limparDados();
             }
             else {
                 alert("Faça o Login antes de finalizar o pedido");
             }
         } catch (CarrinhoVazioException e) {
             alert("Carrinho não pode estar vazio!");
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e){
             alert(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             alert("Erro: " + e.getMessage());
         }
-
     }
+
     @FXML
     private void voltar(ActionEvent event){
         NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
+
     @FXML
     void irParaLogin(ActionEvent event) {
+
+        salvarDadosAtuais();
         NavegacaoController.trocarTela("/Login.fxml", event, usuarioLogado);
     }
+
     @FXML
     private void atualizarFrete() {
-
         try {
-
             String rua = txtRua.getText();
             String numero = txtNumero.getText();
             String cidade = txtCidade.getText();
@@ -257,7 +227,6 @@ controller.setUsuario(usuario);*/
 
             double subtotal = carrinhoService.calcularTotal();
 
-            // só calcula frete se endereço válido
             Endereco endereco = new Endereco(rua, numero, bairro, cidade, cep, estado);
             double frete = pedidoService.calcularFrete(carrinhoService.getCarrinho());
             CupomDesconto cupom = CupomService.getInstance().verificarEGerarCupom(carrinhoService.getCarrinho().getItens());
@@ -267,29 +236,16 @@ controller.setUsuario(usuario);*/
             }
             double total = subtotal + frete - desconto;
 
-            txtSubtotal.setText(
-                    String.format("+ R$ %.2f", subtotal)
-            );
-
-            txtDesconto.setText(
-                    String.format("- R$ %.2f", desconto)
-            );
-
-            txtFrete.setText(
-                    String.format("+ R$ %.2f", frete)
-            );
-
-            txtTotal.setText(
-                    String.format("R$ %.2f", total)
-            );
+            txtSubtotal.setText(String.format("+ R$ %.2f", subtotal));
+            txtDesconto.setText(String.format("- R$ %.2f", desconto));
+            txtFrete.setText(String.format("+ R$ %.2f", frete));
+            txtTotal.setText(String.format("R$ %.2f", total));
         } catch (Exception e) {
-
-            // enquanto usuário digita,
-            // evita popup de erro
             txtFrete.setText("—");
             txtTotal.setText("—");
         }
     }
+
     private void alert(String mensagem) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(mensagem);
