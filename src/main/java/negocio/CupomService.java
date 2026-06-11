@@ -107,6 +107,8 @@ public class CupomService {
             faltantes.add("Placa-mãe");
         if (!tiposPresentes.contains(Fonte.class))
             faltantes.add("Fonte");
+        if (!tiposPresentes.contains(PlacaVideo.class))
+            faltantes.add("Placa de video");
         if (faltantes.size() <= 2 && !faltantes.isEmpty()) {
             return "Você está perto de ganhar 10% de desconto! Adicione: " + String.join(" e ", faltantes) + " para adquirir o desconto.";
         }
