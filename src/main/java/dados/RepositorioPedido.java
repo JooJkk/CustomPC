@@ -54,19 +54,15 @@ public class RepositorioPedido implements IRepositorioPedido {
 
     @Override
     public void salvar(Pedido pedido) {
-        // 1. Lógica para gerar o ID automático
-        long proximoId = 1; // Se for o primeiro pedido, será 1
+        long proximoId = 1; 
 
         if (!pedidos.isEmpty()) {
-            // Pega o último pedido da lista e soma 1 no ID dele
             Pedido ultimoPedido = pedidos.get(pedidos.size() - 1);
             proximoId = ultimoPedido.getId() + 1;
         }
 
-        // 2. Aplica o ID novo no pedido
         pedido.setId(proximoId);
 
-        // 3. Adiciona na lista e salva no JSON (como já estava antes)
         pedidos.add(pedido);
         salvarDados();
     }
@@ -103,7 +99,6 @@ public class RepositorioPedido implements IRepositorioPedido {
     }
     @Override
     public void atualizar(Pedido pedido) {
-        // Procura o pedido na lista pelo ID e substitui pela versão atualizada
         for (int i = 0; i < pedidos.size(); i++) {
             if (pedidos.get(i).getId() == pedido.getId()) {
                 pedidos.set(i, pedido);
@@ -112,7 +107,7 @@ public class RepositorioPedido implements IRepositorioPedido {
         }
 
         System.out.println("Salvando o status do pedido #" + pedido.getId() + " no arquivo JSON...");
-        salvarDados(); // Força a reescrita do arquivo
+        salvarDados(); 
         System.out.println("Arquivo JSON atualizado com sucesso!");
     }
 }

@@ -86,7 +86,7 @@ public class CupomService {
 
         double valorMeta = 5000.0;
         if (total >= valorMeta * 0.75 && total < valorMeta) {
-            return String.format("Faltam apenas R$ %.2f para ganhar 5% de desconto!", valorMeta - total);
+            return String.format("Faltam apenas R$ %.2f para ganhar 5%% de desconto!", valorMeta - total);
         }
 
         return null;

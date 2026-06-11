@@ -35,10 +35,8 @@ public class PedidoController {
     }
 
     private void carregarPedidos() {
-        // Limpa a tela por precaução
         containerPedidos.getChildren().clear();
 
-        // Puxamos TODOS os pedidos cujo cliente relacionado seja o usuario logado
         List<Pedido> meusPedidos = PedidoService.getInstance().listarTodos().stream().filter(p -> p.getCliente() != null && p.getCliente().getId() == usuarioLogado.getId()).toList();
 
         if (meusPedidos == null || meusPedidos.isEmpty()) {
@@ -48,7 +46,6 @@ public class PedidoController {
 
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        // Loop: Para cada pedido na lista, cria um "quadradinho" (VBox) na tela
         for (Pedido p : meusPedidos) {
             VBox cardPedido = new VBox(5);
             cardPedido.setStyle("-fx-border-color: #cccccc; -fx-border-radius: 5; -fx-padding: 10; -fx-background-color: #f9f9f9;");
@@ -65,16 +62,12 @@ public class PedidoController {
             Label lblStatus = new Label("Status: " + p.getStatus());
             lblStatus.setStyle("-fx-text-fill: #2ecc71; -fx-font-weight: bold;");
 
-            // Cria a barra de progresso
             ProgressBar barra = new ProgressBar(0);
             barra.setPrefWidth(250);
             if ("PENDENTE".equalsIgnoreCase(p.getStatus()) || "AGUARDANDO_PAGAMENTO".equalsIgnoreCase(p.getStatus())) barra.setProgress(0.25);
             else if ("PREPARANDO_COMPONENTE 🛠️".equalsIgnoreCase(p.getStatus())) barra.setProgress(0.50);
             else if ("ENVIADO".equalsIgnoreCase(p.getStatus())) barra.setProgress(1.0);
 
-            // =========================================================================
-            // LISTA DE ITENS
-            // =========================================================================
             Label lblTituloItens = new Label("Itens Comprados:");
             lblTituloItens.setStyle("-fx-font-weight: bold; -fx-padding: 10 0 2 0;");
 
@@ -99,9 +92,6 @@ public class PedidoController {
                 caixaDeItens.getChildren().add(lblVazio);
             }
 
-            // =========================================================================
-            // BOTÃO CANCELAR
-            // =========================================================================
             Button btnCancelar = new Button("Cancelar Pedido");
             btnCancelar.setStyle("-fx-background-color: #ff4c4c; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;");
 
@@ -120,7 +110,6 @@ public class PedidoController {
 
                 carregarPedidos();
             });
-            // =========================================================================
 
             cardPedido.getChildren().addAll(lblId, lblData, lblStatus, barra, lblTituloItens, caixaDeItens, lblTotal, btnCancelar);
 

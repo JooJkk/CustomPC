@@ -154,16 +154,18 @@
                                        <font>
                                           <Font size="18.0" />
                                        </font></Label>
-                                    <TextField fx:id="txtRua" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" />
-                                    <TextField fx:id="txtCidade" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="txtEstado" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField fx:id="txtNumero" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <TextField fx:id="txtCep" onKeyReleased="#atualizarFrete" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                     <Label text="Bairro" GridPane.rowIndex="1">
                                        <font>
                                           <Font size="18.0" />
                                        </font></Label>
+                                    <TextField fx:id="txtRua" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" />
                                     <TextField fx:id="txtBairro" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txtCidade" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txtEstado" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="txtNumero" onAction="#atualizarFrete" onKeyReleased="#atualizarFrete" prefWidth="202.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txtCep" onKeyReleased="#atualizarFrete" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+
                                  </children>
                                  <VBox.margin>
                                     <Insets top="8.0" />

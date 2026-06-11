@@ -123,12 +123,10 @@ public class CatalogoController {
             if (selecionado != null) {
                 int qtdDesejada = spinQuantidade.getValue();
 
-                // ALTERADO PARA UTILIAR .getEstoque()
                 int estoqueAtual = selecionado.getEstoque();
 
                 if (qtdDesejada <= estoqueAtual) {
                     carrinhoService.adicionarItem(selecionado, qtdDesejada);
-                    // ALTERADO PARA UTILIAR .setEstoque()
                     selecionado.setEstoque(estoqueAtual - qtdDesejada);
                     componenteService.atualizar(selecionado);
                     exibirDetalhesProduto(selecionado);
@@ -155,7 +153,6 @@ public class CatalogoController {
             return;
         }
 
-        // ALTERADO PARA UTILIAR .getEstoque()
         int estoqueDisponivel = comp.getEstoque();
 
         lblDetalheNome.setText(comp.getNome());
@@ -255,15 +252,11 @@ public class CatalogoController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
             Parent rootCliente = loader.load();
 
-            // Pega o controller que acabamos de ajustar acima
             ClienteController clienteController = loader.getController();
 
-            // Passa o usuário de volta para ele. Isso vai disparar o 'carregarTela("hello-view.fxml")'
-            // automaticamente lá de dentro, montando o centro do layout!
             clienteController.setUsuario(this.usuarioLogado);
             clienteController.atualizarTela();
 
-            // Aplica a cena restaurada perfeitamente no tamanho original do seu sistema
             Scene cenaAreaCliente = new Scene(rootCliente, 1200.0, 800.0);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(cenaAreaCliente);
