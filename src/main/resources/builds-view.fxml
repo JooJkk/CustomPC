@@ -23,7 +23,7 @@
         </VBox.margin>
     </Label>
 
-    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha o Processador:" textFill="#34495e" />
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha um Processador:" textFill="#34495e" />
     <ComboBox fx:id="comboProcessador" prefHeight="35.0" prefWidth="400.0" promptText="Selecione um Processador..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
     <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Placa-Mãe:" textFill="#34495e" />

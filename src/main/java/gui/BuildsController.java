@@ -32,7 +32,7 @@ public class BuildsController {
     @FXML private ComboBox<Processador> comboPlacaVideo;
     @FXML private ComboBox<Fonte> comboFonte;
     @FXML private Label lblResultado;
-
+// infomação generica para arrumar commit
     private BuildService buildService = BuildService.getInstance();
     private CarrinhoService carrinhoService = CarrinhoService.getInstance();
     private ComponenteService componenteService = ComponenteService.getInstance();
