@@ -8,7 +8,7 @@
     "preco": 1000.0,
     "peso": 0.5,
     "volume": 0.0,
-    "estoque": 20,
+    "estoque": 10,
     "consumoWatts": 65,
     "nivelDesempenho": 0
   },
@@ -47,7 +47,7 @@
     "preco": 1900.0,
     "peso": 0.6,
     "volume": 0.0,
-    "estoque": 4,
+    "estoque": 2,
     "consumoWatts": 125,
     "nivelDesempenho": 0
   },
@@ -90,7 +90,7 @@
     "preco": 2800.0,
     "peso": 1.2,
     "volume": 0.0,
-    "estoque": 1,
+    "estoque": 0,
     "consumoWatts": 40,
     "nivelDesempenho": 0
   },
@@ -105,7 +105,7 @@
     "preco": 620.0,
     "peso": 0.8,
     "volume": 0.0,
-    "estoque": 12,
+    "estoque": 10,
     "consumoWatts": 25,
     "nivelDesempenho": 0
   },
@@ -149,7 +149,7 @@
     "preco": 380.0,
     "peso": 0.1,
     "volume": 0.0,
-    "estoque": 28,
+    "estoque": 30,
     "consumoWatts": 5,
     "nivelDesempenho": 0
   },
@@ -191,7 +191,7 @@
     "preco": 440.0,
     "peso": 0.1,
     "volume": 0.0,
-    "estoque": 23,
+    "estoque": 21,
     "consumoWatts": 8,
     "nivelDesempenho": 0
   },
@@ -204,7 +204,7 @@
     "preco": 460.0,
     "peso": 2.0,
     "volume": 0.0,
-    "estoque": 7,
+    "estoque": 9,
     "consumoWatts": 0,
     "nivelDesempenho": 0
   },
@@ -230,7 +230,7 @@
     "preco": 290.0,
     "peso": 1.5,
     "volume": 0.0,
-    "estoque": 22,
+    "estoque": 16,
     "consumoWatts": 0,
     "nivelDesempenho": 0
   },
@@ -243,7 +243,7 @@
     "preco": 1600.0,
     "peso": 3.0,
     "volume": 0.0,
-    "estoque": 1,
+    "estoque": 0,
     "consumoWatts": 0,
     "nivelDesempenho": 0
   },
@@ -256,8 +256,8 @@
     "preco": 2600.0,
     "peso": 1.2,
     "volume": 0.0,
-    "estoque": 6,
-    "consumoWatts": 0,
+    "estoque": 5,
+    "consumoWatts": 70,
     "nivelDesempenho": 0
   },
   {
@@ -269,8 +269,8 @@
     "preco": 2300.0,
     "peso": 1.3,
     "volume": 0.0,
-    "estoque": 3,
-    "consumoWatts": 0,
+    "estoque": 0,
+    "consumoWatts": 70,
     "nivelDesempenho": 0
   },
   {
@@ -282,8 +282,8 @@
     "preco": 1850.0,
     "peso": 1.1,
     "volume": 0.0,
-    "estoque": 12,
-    "consumoWatts": 0,
+    "estoque": 10,
+    "consumoWatts": 60,
     "nivelDesempenho": 0
   },
   {
@@ -407,7 +407,7 @@
     "preco": 480.0,
     "peso": 0.7,
     "volume": 0.0,
-    "estoque": 12,
+    "estoque": 15,
     "consumoWatts": 20,
     "nivelDesempenho": 0
   },
@@ -422,7 +422,7 @@
     "preco": 2100.0,
     "peso": 1.1,
     "volume": 0.0,
-    "estoque": 0,
+    "estoque": 2,
     "consumoWatts": 45,
     "nivelDesempenho": 0
   },
@@ -436,7 +436,7 @@
     "preco": 380.0,
     "peso": 0.1,
     "volume": 0.0,
-    "estoque": 30,
+    "estoque": 26,
     "consumoWatts": 5,
     "nivelDesempenho": 0
   },
@@ -450,7 +450,7 @@
     "preco": 1250.0,
     "peso": 0.2,
     "volume": 0.0,
-    "estoque": 2,
+    "estoque": 0,
     "consumoWatts": 10,
     "nivelDesempenho": 0
   },
@@ -544,7 +544,7 @@
     "peso": 1.2,
     "volume": 0.0,
     "estoque": 7,
-    "consumoWatts": 0,
+    "consumoWatts": 60,
     "nivelDesempenho": 0
   },
   {
@@ -557,7 +557,7 @@
     "peso": 1.3,
     "volume": 0.0,
     "estoque": 5,
-    "consumoWatts": 0,
+    "consumoWatts": 70,
     "nivelDesempenho": 0
   },
   {
@@ -570,7 +570,7 @@
     "peso": 1.1,
     "volume": 0.0,
     "estoque": 10,
-    "consumoWatts": 0,
+    "consumoWatts": 60,
     "nivelDesempenho": 0
   },
   {
@@ -831,7 +831,7 @@
     "peso": 1.2,
     "volume": 0.0,
     "estoque": 7,
-    "consumoWatts": 0,
+    "consumoWatts": 70,
     "nivelDesempenho": 0
   },
   {
@@ -844,7 +844,7 @@
     "peso": 1.3,
     "volume": 0.0,
     "estoque": 5,
-    "consumoWatts": 0,
+    "consumoWatts": 70,
     "nivelDesempenho": 0
   },
   {
@@ -857,7 +857,7 @@
     "peso": 1.1,
     "volume": 0.0,
     "estoque": 12,
-    "consumoWatts": 0,
+    "consumoWatts": 70,
     "nivelDesempenho": 0
   }
 ]
