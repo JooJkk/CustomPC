@@ -200,7 +200,7 @@ public class NewComponenteController {
             limparFormulario();
 
             // Retorna à tela anterior de Gerenciamento/Administração
-            NavegacaoController.trocarTela("/AdminView.fxml", event, usuarioLogado);
+            NavegacaoController.trocarTela("/GerenciadorEstoque.fxml", event, usuarioLogado);
 
         } catch (NumberFormatException e) {
             exibirAlerta("Erro de Validação", "Verifique as entradas numéricas. Preço, Estoque e campos numéricos específicos (Potência, Slots, Comprimento, TDP, Capacidade) precisam de valores numéricos válidos.");
