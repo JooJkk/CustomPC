@@ -99,7 +99,6 @@ public class RepositorioPedido implements IRepositorioPedido {
     }
     @Override
     public void atualizar(Pedido pedido) {
-        // Procura o pedido na lista pelo ID e substitui pela versão atualizada
         for (int i = 0; i < pedidos.size(); i++) {
             if (pedidos.get(i).getId() == pedido.getId()) {
                 pedidos.set(i, pedido);
@@ -108,7 +107,7 @@ public class RepositorioPedido implements IRepositorioPedido {
         }
 
         System.out.println("Salvando o status do pedido #" + pedido.getId() + " no arquivo JSON...");
-        salvarDados(); // Força a reescrita do arquivo
+        salvarDados(); 
         System.out.println("Arquivo JSON atualizado com sucesso!");
     }
 }
