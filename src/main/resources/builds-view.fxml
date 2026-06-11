@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="12.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildsController">
+<VBox alignment="CENTER" prefHeight="850.0" prefWidth="1200.0" spacing="12.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildsController">
     <padding>
         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
     </padding>
@@ -23,19 +23,22 @@
         </VBox.margin>
     </Label>
 
-    <Label text="Escolha o Processador:" textFill="#34495e" style="-fx-font-weight: bold; -fx-font-size: 13;" />
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha o Processador:" textFill="#34495e" />
     <ComboBox fx:id="comboProcessador" prefHeight="35.0" prefWidth="400.0" promptText="Selecione um Processador..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
-    <Label text="Escolha a Placa-Mãe:" textFill="#34495e" style="-fx-font-weight: bold; -fx-font-size: 13;" />
-    <ComboBox fx:id="comboPlacaMae" prefHeight="35.0" prefWidth="400.0" promptText="Selecione uma Placa-Mãe..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Placa-Mãe:" textFill="#34495e" />
+    <ComboBox fx:id="comboPlacaMae" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Processador..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
-    <Label text="Escolha a Memória RAM:" textFill="#34495e" style="-fx-font-weight: bold; -fx-font-size: 13;" />
-    <ComboBox fx:id="comboRam" prefHeight="35.0" prefWidth="400.0" promptText="Selecione a Memória RAM..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Memória RAM:" textFill="#34495e" />
+    <ComboBox fx:id="comboRam" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Placa-Mãe..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
-    <Label text="Escolha a Fonte de Alimentação:" textFill="#34495e" style="-fx-font-weight: bold; -fx-font-size: 13;" />
-    <ComboBox fx:id="comboFonte" prefHeight="35.0" prefWidth="400.0" promptText="Selecione uma Fonte..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Placa de Vídeo (GPU):" textFill="#34495e" />
+    <ComboBox fx:id="comboPlacaVideo" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Memória RAM..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
-    <Label fx:id="lblResultado" text="Escolha um Processador para iniciar a montagem da Build." textFill="#1e90ff" textAlignment="CENTER" wrapText="true">
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Fonte de Alimentação:" textFill="#34495e" />
+    <ComboBox fx:id="comboFonte" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Placa de Vídeo..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+
+    <Label fx:id="lblResultado" text="Escolha um Processador para iniciar a montagem da Build." textAlignment="CENTER" textFill="#1e90ff" wrapText="true">
         <font>
             <Font name="System Bold" size="14.0" />
         </font>
@@ -43,15 +46,6 @@
             <Insets bottom="10.0" top="10.0" />
         </VBox.margin>
     </Label>
-
-    <Button mnemonicParsing="false" onAction="#validarBuild" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #2ec76e; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Validar Build  ✨">
-        <font>
-            <Font size="14.0" />
-        </font>
-        <cursor>
-            <Cursor fx:constant="HAND" />
-        </cursor>
-    </Button>
 
     <Button mnemonicParsing="false" onAction="#adicionarEIrParaCarrinho" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="🛒 Enviar peças ao Carrinho">
         <font>

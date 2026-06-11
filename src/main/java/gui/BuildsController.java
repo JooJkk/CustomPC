@@ -9,14 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Cliente;
-import model.componentes.Build;
 import model.componentes.Componente;
 import model.componentes.Fonte;
 import model.componentes.MemoriaRam;
 import model.componentes.PlacaMae;
 import model.componentes.Processador;
 import negocio.*;
-import exception.BuildIncompativelException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,16 +29,18 @@ public class BuildsController {
     @FXML private ComboBox<Processador> comboProcessador;
     @FXML private ComboBox<PlacaMae> comboPlacaMae;
     @FXML private ComboBox<MemoriaRam> comboRam;
+    @FXML private ComboBox<Processador> comboPlacaVideo;
     @FXML private ComboBox<Fonte> comboFonte;
     @FXML private Label lblResultado;
 
-    private CompatibilidadeService compatibilidadeService = new CompatibilidadeService();
     private BuildService buildService = BuildService.getInstance();
     private CarrinhoService carrinhoService = CarrinhoService.getInstance();
+    private ComponenteService componenteService = ComponenteService.getInstance();
 
     private List<Processador> todosProcessadores = new ArrayList<>();
     private List<PlacaMae> todasPlacasMae = new ArrayList<>();
     private List<MemoriaRam> todasMemorias = new ArrayList<>();
+    private List<Processador> todasPlacasVideo = new ArrayList<>();
     private List<Fonte> todasFontes = new ArrayList<>();
 
     @FXML
@@ -50,16 +50,19 @@ public class BuildsController {
         configurarCombo(comboProcessador);
         configurarCombo(comboPlacaMae);
         configurarCombo(comboRam);
+        configurarCombo(comboPlacaVideo);
         configurarCombo(comboFonte);
 
         comboProcessador.getItems().addAll(todosProcessadores);
         comboPlacaMae.setDisable(true);
         comboRam.setDisable(true);
+        comboPlacaVideo.setDisable(true);
         comboFonte.setDisable(true);
 
         comboProcessador.setOnAction(e -> filtrarEExibirPlacasMae());
         comboPlacaMae.setOnAction(e -> filtrarEExibirMemoriasRam());
-        comboRam.setOnAction(e -> filtrarEExibirFontes());
+        comboRam.setOnAction(e -> filtrarEExibirPlacasVideo());
+        comboPlacaVideo.setOnAction(e -> filtrarEExibirFontes());
 
         processarComponentesDoCatalogo();
     }
@@ -72,6 +75,9 @@ public class BuildsController {
         comboRam.setValue(null);
         comboRam.getItems().clear();
         comboRam.setDisable(true);
+        comboPlacaVideo.setValue(null);
+        comboPlacaVideo.getItems().clear();
+        comboPlacaVideo.setDisable(true);
         comboFonte.setValue(null);
         comboFonte.getItems().clear();
         comboFonte.setDisable(true);
@@ -95,6 +101,9 @@ public class BuildsController {
 
         comboRam.setValue(null);
         comboRam.getItems().clear();
+        comboPlacaVideo.setValue(null);
+        comboPlacaVideo.getItems().clear();
+        comboPlacaVideo.setDisable(true);
         comboFonte.setValue(null);
         comboFonte.getItems().clear();
         comboFonte.setDisable(true);
@@ -113,21 +122,37 @@ public class BuildsController {
         }
     }
 
+    private void filtrarEExibirPlacasVideo() {
+        MemoriaRam ramSelecionada = comboRam.getValue();
+
+        comboPlacaVideo.setValue(null);
+        comboPlacaVideo.getItems().clear();
+        comboFonte.setValue(null);
+        comboFonte.getItems().clear();
+        comboFonte.setDisable(true);
+
+        if (ramSelecionada != null) {
+            comboPlacaVideo.getItems().addAll(todasPlacasVideo);
+            comboPlacaVideo.setDisable(false);
+            lblResultado.setText("⚡ Memória selecionada. Escolha a sua Placa de Vídeo.");
+            lblResultado.setStyle("-fx-text-fill: #2ecc71;");
+        } else {
+            comboPlacaVideo.setDisable(true);
+        }
+    }
+
     private void filtrarEExibirFontes() {
         Processador cpu = comboProcessador.getValue();
         PlacaMae mobo = comboPlacaMae.getValue();
         MemoriaRam ram = comboRam.getValue();
+        Processador gpu = comboPlacaVideo.getValue();
 
         comboFonte.setValue(null);
         comboFonte.getItems().clear();
 
-        if (cpu != null && mobo != null && ram != null) {
-            Build buildTemp = new Build();
-            buildTemp.setProcessador(cpu);
-            buildTemp.setPlacaMae(mobo);
-            buildTemp.adicionarMemoria(ram);
-
-            int consumoWatts = buildTemp.calcularConsumoTotal();
+        if (cpu != null && mobo != null && ram != null && gpu != null) {
+            // SOMA ENERGÉTICA COMPLETA DE TODOS OS HARDWARES SELECIONADOS NA CASCATA
+            int consumoWatts = cpu.getConsumoWatts() + mobo.getConsumoWatts() + ram.getConsumoWatts() + gpu.getConsumoWatts();
             double consumoRecomendado = consumoWatts * 1.2;
 
             for (Fonte f : todasFontes) {
@@ -136,7 +161,7 @@ public class BuildsController {
                 }
             }
             comboFonte.setDisable(false);
-            lblResultado.setText("⚡ Fontes filtradas. Consumo mínimo estimado: " + (int)consumoRecomendado + "W.");
+            lblResultado.setText("⚡ Fontes filtradas. Consumo total (com GPU): " + consumoWatts + "W (Recomendado: " + (int)consumoRecomendado + "W).");
             lblResultado.setStyle("-fx-text-fill: #2ecc71;");
         } else {
             comboFonte.setDisable(true);
@@ -161,44 +186,15 @@ public class BuildsController {
     }
 
     @FXML
-    public void validarBuild() {
-        Processador cpu = comboProcessador.getValue();
-        PlacaMae mobo = comboPlacaMae.getValue();
-        MemoriaRam ram = comboRam.getValue();
-        Fonte fonte = comboFonte.getValue();
-
-        if (cpu == null || mobo == null || ram == null || fonte == null) {
-            lblResultado.setText("⚠️ Selecione todos os componentes antes de validar.");
-            lblResultado.setStyle("-fx-text-fill: #ffa500;");
-            return;
-        }
-
-        Build novaBuild = new Build();
-        novaBuild.setNome("Build Pronta");
-        novaBuild.setProcessador(cpu);
-        novaBuild.setPlacaMae(mobo);
-        novaBuild.adicionarMemoria(ram);
-        novaBuild.setFonte(fonte);
-
-        try {
-            compatibilidadeService.validarBuildCompleta(novaBuild);
-            lblResultado.setText("✅ Sucesso! A build passou em 100% dos testes de compatibilidade.");
-            lblResultado.setStyle("-fx-text-fill: #2ecc71; -fx-font-weight: bold;");
-        } catch (BuildIncompativelException e) {
-            lblResultado.setText("❌ Erro: " + e.getMessage());
-            lblResultado.setStyle("-fx-text-fill: #e74c3c; -fx-font-weight: bold;");
-        }
-    }
-
-    @FXML
     public void adicionarEIrParaCarrinho(ActionEvent event) {
         Processador cpu = comboProcessador.getValue();
         PlacaMae mobo = comboPlacaMae.getValue();
         MemoriaRam ram = comboRam.getValue();
+        Processador gpu = comboPlacaVideo.getValue();
         Fonte fonte = comboFonte.getValue();
 
-        if (cpu == null && mobo == null && ram == null && fonte == null) {
-            lblResultado.setText("⚠️ Selecione pelo menos uma peça para mandar ao carrinho.");
+        if (cpu == null || mobo == null || ram == null || gpu == null || fonte == null) {
+            lblResultado.setText("⚠️ Complete todos os passos da build antes de enviar ao carrinho.");
             lblResultado.setStyle("-fx-text-fill: #ffa500;");
             return;
         }
@@ -206,18 +202,17 @@ public class BuildsController {
         adicionarComEstoque(cpu);
         adicionarComEstoque(mobo);
         adicionarComEstoque(ram);
+        adicionarComEstoque(gpu);
         adicionarComEstoque(fonte);
+
         exibirProgressoCupom();
         NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
     }
-    private void exibirProgressoCupom() {
 
-        String mensagem = CupomService.getInstance()
-                .verificarProgressoDesconto(
-                        carrinhoService.getCarrinho().getItens());
-        if (mensagem == null) {
-            return;
-        }
+    private void exibirProgressoCupom() {
+        String mensagem = CupomService.getInstance().verificarProgressoDesconto(carrinhoService.getCarrinho().getItens());
+        if (mensagem == null) return;
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quase lá!");
         alert.setHeaderText("🎁 Você está perto de um desconto");
@@ -229,6 +224,7 @@ public class BuildsController {
         alert.getButtonTypes().setAll(continuarComprando, irCarrinho);
         alert.showAndWait();
     }
+
     private void adicionarComEstoque(Componente comp) {
         if (comp == null) return;
         if (comp.getEstoque() <= 0) {
@@ -239,6 +235,7 @@ public class BuildsController {
         comp.setEstoque(comp.getEstoque() - 1);
         componenteService.atualizar(comp);
     }
+
     @FXML
     public void limparBancada() {
         buildService.limparComponentesMontagem();
@@ -246,14 +243,17 @@ public class BuildsController {
         comboProcessador.setValue(null);
         comboPlacaMae.setValue(null);
         comboRam.setValue(null);
+        comboPlacaVideo.setValue(null);
         comboFonte.setValue(null);
 
         comboPlacaMae.getItems().clear();
         comboRam.getItems().clear();
+        comboPlacaVideo.getItems().clear();
         comboFonte.getItems().clear();
 
         comboPlacaMae.setDisable(true);
         comboRam.setDisable(true);
+        comboPlacaVideo.setDisable(true);
         comboFonte.setDisable(true);
 
         lblResultado.setText("Bancada limpa. Escolha um Processador para reiniciar.");
@@ -283,34 +283,53 @@ public class BuildsController {
 
     private void processarComponentesDoCatalogo() {
         List<Componente> compartilhados = buildService.getComponentesSelecionadosParaMontagem();
+        if (compartilhados == null || compartilhados.isEmpty()) return;
+
         for (Componente comp : compartilhados) {
+            if (comp == null) continue;
+
             if (comp instanceof Processador) {
-                if (!comp.getNome().toUpperCase().contains("RTX") && !comp.getNome().toUpperCase().contains("RX ")) {
-                    Processador p = (Processador) comp;
-                    comboProcessador.setValue(p);
-                    filtrarEExibirPlacasMae();
+                String nomeUpper = comp.getNome().toUpperCase();
+                if (nomeUpper.contains("RTX") || nomeUpper.contains("RX ") || nomeUpper.contains("GTX")) {
+                    comboPlacaVideo.setDisable(false);
+                    comboPlacaVideo.getItems().setAll(todasPlacasVideo);
+                    comboPlacaVideo.setValue((Processador) comp);
+                    filtrarEExibirFontes();
+                } else {
+                    comboProcessador.setValue((Processador) comp);
                 }
             } else if (comp instanceof PlacaMae) {
-                PlacaMae pm = (PlacaMae) comp;
-                comboPlacaMae.setValue(pm);
-                filtrarEExibirMemoriasRam();
+                comboPlacaMae.setDisable(false);
+                comboPlacaMae.getItems().setAll(todasPlacasMae);
+                comboPlacaMae.setValue((PlacaMae) comp);
             } else if (comp instanceof MemoriaRam) {
-                MemoriaRam ram = (MemoriaRam) comp;
-                comboRam.setValue(ram);
-                filtrarEExibirFontes();
+                comboRam.setDisable(false);
+                comboRam.getItems().setAll(todasMemorias);
+                comboRam.setValue((MemoriaRam) comp);
             } else if (comp instanceof Fonte) {
-                Fonte f = (Fonte) comp;
-                comboFonte.setValue(f);
+                comboFonte.setDisable(false);
+                comboFonte.getItems().setAll(todasFontes);
+                comboFonte.setValue((Fonte) comp);
             }
         }
     }
-    private ComponenteService componenteService = ComponenteService.getInstance();
+
     private void carregarPecas() {
         for (Componente c : componenteService.listar()) {
-            if (c instanceof Processador) todosProcessadores.add((Processador) c);
-            else if (c instanceof PlacaMae) todasPlacasMae.add((PlacaMae) c);
-            else if (c instanceof MemoriaRam) todasMemorias.add((MemoriaRam) c);
-            else if (c instanceof Fonte) todasFontes.add((Fonte) c);
+            if (c instanceof Processador) {
+                String nomeUpper = c.getNome().toUpperCase();
+                if (nomeUpper.contains("RTX") || nomeUpper.contains("RX ") || nomeUpper.contains("GTX")) {
+                    todasPlacasVideo.add((Processador) c);
+                } else {
+                    todosProcessadores.add((Processador) c);
+                }
+            } else if (c instanceof PlacaMae) {
+                todasPlacasMae.add((PlacaMae) c);
+            } else if (c instanceof MemoriaRam) {
+                todasMemorias.add((MemoriaRam) c);
+            } else if (c instanceof Fonte) {
+                todasFontes.add((Fonte) c);
+            }
         }
     }
 
