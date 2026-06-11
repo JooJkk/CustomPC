@@ -170,7 +170,7 @@
         "nano": 243263400
       }
     },
-    "status": "PENDENTE",
+    "status": "AGUARDANDO_PAGAMENTO",
     "valorTotal": 4028.6,
     "pagamento": {
       "id": 5,

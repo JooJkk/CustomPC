@@ -23,7 +23,7 @@ public class AdminViewController {
     }
     @FXML
     public void onBtnGerPedidos(ActionEvent event){
-
+        NavegacaoController.trocarTela("/GerenciadorPedidos.fxml", event, usuarioLogado);
     }
     @FXML
     public void onBtnRelatorioBE(ActionEvent event){

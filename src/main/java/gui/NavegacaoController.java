@@ -41,6 +41,8 @@ public class NavegacaoController {
                 ((GerenciadorEstoqueController) controller).setUsuario(usuario);
             else if (controller instanceof NewComponenteController)
                 ((NewComponenteController) controller).setUsuario(usuario);
+            else if (controller instanceof GerenciadorPedidosController)
+                ((GerenciadorPedidosController) controller).setUsuario(usuario);
 
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
