@@ -58,71 +58,87 @@ public class RelatoriosService {
         }
     }
 
-        public void gerarFaturamentoMensal(List<Pedido> pedidos, int mes, int ano, String caminho)
-                throws IOException {
+    public void gerarFaturamentoMensal(List<Pedido> pedidos, int mes, int ano, String caminho)
+            throws IOException {
 
-            try (Workbook wb = new XSSFWorkbook()) {
-                Sheet sheet = wb.createSheet("Faturamento " + mes + "-" + ano);
+        try (Workbook wb = new XSSFWorkbook()) {
+            Sheet sheet = wb.createSheet("Faturamento " + mes + "-" + ano);
 
-                CellStyle headerStyle = criarEstiloHeader(wb, new byte[]{(byte)189, (byte)215, (byte)238});
-                CellStyle moedaStyle  = criarEstiloMoeda(wb);
-                CellStyle percentStyle = criarEstiloPercent(wb);
+            CellStyle headerStyle = criarEstiloHeader(wb, new byte[]{(byte)189, (byte)215, (byte)238});
+            CellStyle moedaStyle  = criarEstiloMoeda(wb);
+            CellStyle percentStyle = criarEstiloPercent(wb);
 
-                // Cabeçalho
-                String[] colunas = {
-                        "Pedido", "Data", "Cliente", "Produto",
-                        "Qtd", "Custo Unit.", "Preço Unit.",
-                        "Subtotal", "Custo Total", "Lucro", "Margem %"
-                };
-                Row header = sheet.createRow(0);
-                for (int i = 0; i < colunas.length; i++) {
-                    Cell c = header.createCell(i);
-                    c.setCellValue(colunas[i]);
-                    c.setCellStyle(headerStyle);
+            String[] colunas = {
+                    "Pedido", "Data", "Cliente", "Produto",
+                    "Qtd", "Custo Unit.", "Preço Unit.",
+                    "Subtotal", "Custo Total", "Lucro", "Margem %"
+            };
+            Row header = sheet.createRow(0);
+            for (int i = 0; i < colunas.length; i++) {
+                Cell c = header.createCell(i);
+                c.setCellValue(colunas[i]);
+                c.setCellStyle(headerStyle);
+            }
+
+            int rowIdx = 1;
+            for (Pedido pedido : pedidos) {
+                // SEGURANÇA: Ignora se o pedido ou a data estiverem nulos
+                if (pedido == null || pedido.getData() == null) continue;
+
+                // FILTRO REAL: Só adiciona se o pedido for do mês e ano selecionados
+                int mesPedido = pedido.getData().getMonthValue();
+                int anoPedido = pedido.getData().getYear();
+                if (mesPedido != mes || anoPedido != ano) continue;
+
+                // SEGURANÇA: Ignora se a lista de itens estiver vazia
+                if (pedido.getItens() == null) continue;
+
+                for (ItemPedido item : pedido.getItens()) {
+                    if (item == null || item.getComponente() == null) continue;
+
+                    Row row = sheet.createRow(rowIdx);
+
+                    row.createCell(0).setCellValue(pedido.getId());
+                    row.createCell(1).setCellValue(pedido.getData().toLocalDate().toString());
+
+                    // Evita NullPointerException no Cliente
+                    String nomeCliente = (pedido.getCliente() != null) ? pedido.getCliente().getNome() : "Não informado";
+                    row.createCell(2).setCellValue(nomeCliente);
+
+                    row.createCell(3).setCellValue(item.getComponente().getNome());
+                    row.createCell(4).setCellValue(item.getQuantidade());
+
+                    Cell custoUnit = row.createCell(5);
+                    custoUnit.setCellValue(item.getComponente().getPreco());
+                    custoUnit.setCellStyle(moedaStyle);
+
+                    Cell precoUnit = row.createCell(6);
+                    precoUnit.setCellValue(item.getPrecoUnitario());
+                    precoUnit.setCellStyle(moedaStyle);
+
+                    int r = rowIdx + 1;
+                    Cell subtotal = row.createCell(7);
+                    subtotal.setCellFormula("E" + r + "*G" + r);
+                    subtotal.setCellStyle(moedaStyle);
+
+                    Cell custoTotal = row.createCell(8);
+                    custoTotal.setCellFormula("E" + r + "*F" + r);
+                    custoTotal.setCellStyle(moedaStyle);
+
+                    Cell lucro = row.createCell(9);
+                    lucro.setCellFormula("H" + r + "-I" + r);
+                    lucro.setCellStyle(moedaStyle);
+
+                    Cell margem = row.createCell(10);
+                    margem.setCellFormula("IF(H" + r + "=0,0,J" + r + "/H" + r + ")");
+                    margem.setCellStyle(percentStyle);
+
+                    rowIdx++;
                 }
+            }
 
-                int rowIdx = 1;
-                for (Pedido pedido : pedidos) {
-                    for (ItemPedido item : pedido.getItens()) {
-                        Row row = sheet.createRow(rowIdx);
-
-                        row.createCell(0).setCellValue(pedido.getId());
-                        row.createCell(1).setCellValue(pedido.getData().toLocalDate().toString());
-                        row.createCell(2).setCellValue(pedido.getCliente().getNome());
-                        row.createCell(3).setCellValue(item.getComponente().getNome());
-                        row.createCell(4).setCellValue(item.getQuantidade());
-
-                        Cell custoUnit = row.createCell(5);
-                        custoUnit.setCellValue(item.getComponente().getPreco());
-                        custoUnit.setCellStyle(moedaStyle);
-
-                        Cell precoUnit = row.createCell(6);
-                        precoUnit.setCellValue(item.getPrecoUnitario());
-                        precoUnit.setCellStyle(moedaStyle);
-
-                        // Fórmulas dinâmicas — Excel recalcula automaticamente
-                        int r = rowIdx + 1; // Excel é base 1
-                        Cell subtotal = row.createCell(7);
-                        subtotal.setCellFormula("E" + r + "*G" + r);   // qtd * precoUnit
-                        subtotal.setCellStyle(moedaStyle);
-
-                        Cell custoTotal = row.createCell(8);
-                        custoTotal.setCellFormula("E" + r + "*F" + r); // qtd * custoUnit
-                        custoTotal.setCellStyle(moedaStyle);
-
-                        Cell lucro = row.createCell(9);
-                        lucro.setCellFormula("H" + r + "-I" + r);      // subtotal - custoTotal
-                        lucro.setCellStyle(moedaStyle);
-
-                        Cell margem = row.createCell(10);
-                        margem.setCellFormula("IF(H" + r + "=0,0,J" + r + "/H" + r + ")");
-                        margem.setCellStyle(percentStyle);
-
-                        rowIdx++;
-                    }
-                }
-
-                // Linha de totais
+            // Apenas cria a linha de totais se houveram dados populados (rowIdx > 1)
+            if (rowIdx > 1) {
                 Row totais = sheet.createRow(rowIdx + 1);
                 totais.createCell(0).setCellValue("TOTAL");
                 Cell totalSubtotal = totais.createCell(7);
@@ -136,14 +152,14 @@ public class RelatoriosService {
                 Cell margemGeral = totais.createCell(10);
                 margemGeral.setCellFormula("IF(H" + (rowIdx+2) + "=0,0,J" + (rowIdx+2) + "/H" + (rowIdx+2) + ")");
                 margemGeral.setCellStyle(percentStyle);
-
-                for (int i = 0; i < colunas.length; i++) sheet.autoSizeColumn(i);
-
-                try (FileOutputStream fos = new FileOutputStream(caminho)) {
-                    wb.write(fos);
-                }
             }
 
+            for (int i = 0; i < colunas.length; i++) sheet.autoSizeColumn(i);
+
+            try (FileOutputStream fos = new FileOutputStream(caminho)) {
+                wb.write(fos);
+            }
+        }
     }
     public void gerarOrdensPendentes(List<Pedido> pedidos, String caminho) throws IOException {
         try (Workbook wb = new XSSFWorkbook()) {
