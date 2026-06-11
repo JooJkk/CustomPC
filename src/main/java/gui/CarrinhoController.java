@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import model.*;
+import model.componentes.Componente;
 import negocio.*;
 import java.io.IOException;
 
@@ -53,6 +54,9 @@ public class CarrinhoController {
     @FXML
     private Label txtValorTotal;
 
+    @FXML
+    private TableColumn<ItemCarrinho, Void> colunaRemove;
+
     private void carregarDados() {
         carrinhoService = CarrinhoService.getInstance();
         ObservableList<ItemCarrinho> itens =
@@ -72,10 +76,43 @@ public class CarrinhoController {
                 -> new SimpleIntegerProperty(cellData.getValue().getQuantidade()).asObject());
         colunaUnd.setCellValueFactory(cellData
                 -> new SimpleDoubleProperty(cellData.getValue().getPrecoUnitario()).asObject());
+        configurarColunaRemover();
         carregarDados();
         pedidoService = PedidoService.getInstance();
     }
+    private void configurarColunaRemover() {
+        colunaRemove.setCellFactory(param -> new TableCell<>() {
+            private final Button btnRemover = new Button("Remover 🗑️");
 
+            {
+                btnRemover.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; " + "-fx-background-radius: 5; -fx-font-weight: bold; -fx-font-size: 12px;");
+                btnRemover.setCursor(javafx.scene.Cursor.HAND);
+                btnRemover.setOnAction(event -> {
+                    ItemCarrinho item = getTableView().getItems().get(getIndex());
+                    removerItemDoCarrinho(item);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btnRemover);
+                }
+            }
+        });
+    }
+    private void removerItemDoCarrinho(ItemCarrinho item) {
+        Componente componente = item.getComponente();
+        int quantidadeParaDevolver = item.getQuantidade();
+        carrinhoService.getCarrinho().removerItem(item);
+        int estoqueAtual = componente.getEstoque();
+        componente.setEstoque(estoqueAtual + quantidadeParaDevolver);
+        ComponenteService.getInstance().atualizar(componente);
+        carregarDados();
+    }
     @FXML
     private void continuarCheckout(ActionEvent event) {
         NavegacaoController.trocarTela("/Checkout.fxml", event, usuarioLogado);

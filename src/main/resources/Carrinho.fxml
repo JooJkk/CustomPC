@@ -60,10 +60,11 @@
                      <children>
                         <TableView fx:id="tabelaCarrinho" prefHeight="670.0" prefWidth="820.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                            <columns>
-                              <TableColumn fx:id="colunaItem" prefWidth="320.0" text="Item" />
+                              <TableColumn fx:id="colunaItem" prefWidth="260.0" text="Item" />
                               <TableColumn fx:id="colunaQnt" minWidth="0.0" prefWidth="140.0" text="Quantidade" />
                               <TableColumn fx:id="colunaUnd" minWidth="0.0" prefWidth="160.0" text="Preço Unitário" />
-                              <TableColumn fx:id="colunaTotal" prefWidth="180.0" text="Total" />
+                              <TableColumn fx:id="colunaTotal" prefWidth="150.0" text="Total" />
+                              <TableColumn fx:id="colunaRemove" prefWidth="130.0" style="-fx-alignment: CENTER;" text="Remover" />
                            </columns>
                         </TableView>
                      </children>
