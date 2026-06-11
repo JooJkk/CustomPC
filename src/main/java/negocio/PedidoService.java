@@ -17,6 +17,7 @@ import com.itextpdf.layout.properties.TextAlignment;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PedidoService {
@@ -167,6 +168,10 @@ public class PedidoService {
         }
 
         repositorio.salvar(novoPedido);
+        OrdemMontagem ordem = new OrdemMontagem();
+        ordem.setStatus("PENDENTE");
+        ordem.setDataCriacao(LocalDate.now());
+        novoPedido.setOrdemMontagem(ordem);
         carrinho.limpar();
         setPedidoAtual(novoPedido);
         return novoPedido;
