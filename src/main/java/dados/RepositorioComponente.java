@@ -13,17 +13,33 @@ import java.util.List;
 public class RepositorioComponente implements IRepositorioComponente {
 
     private static final String ARQUIVO = "componentes.json";
-    private final Gson gson = new GsonBuilder().registerTypeAdapter(Componente.class, new JsonDeserializer<Componente>() {
-        @Override public Componente deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) {JsonObject obj = json.getAsJsonObject();
-            if (obj.has("tipoRam")) {return context.deserialize(obj, MemoriaRam.class);}
-            if (obj.has("formato")) {return context.deserialize(obj, PlacaMae.class);}
-            if (obj.has("comprimentoMM")) {return context.deserialize(obj, PlacaVideo.class);}
-            if (obj.has("certificacao")) {return context.deserialize(obj, Fonte.class);}
-            if (obj.has("comprimentoMaxGpuMM")) {return context.deserialize(obj, Gabinete.class);}
-            if (obj.has("socket")) {return context.deserialize(obj, Processador.class);}
-            throw new JsonParseException(
-                    "Tipo de componente desconhecido");
-        }}).setPrettyPrinting().create();
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Componente.class, new JsonDeserializer<Componente>() {
+                @Override
+                public Componente deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) {
+                    JsonObject obj = json.getAsJsonObject();
+                    if (obj.has("tipoRamSuportada"))     return context.deserialize(obj, PlacaMae.class);
+                    if (obj.has("tipoRam"))              return context.deserialize(obj, MemoriaRam.class);
+                    if (obj.has("certificacao"))         return context.deserialize(obj, Fonte.class);
+                    if (obj.has("comprimentoMaxGpuMM")) return context.deserialize(obj, Gabinete.class);
+
+                    // 2. PLACA DE VÍDEO: Se tiver qualquer um dos campos exclusivos de GPU
+                    if (obj.has("comprimentoMM") || obj.has("memoriaGB")) {
+                        return context.deserialize(obj, PlacaVideo.class);
+                    }
+
+                    // 3. PROCESSADOR: Se tiver tdp ou socket (e não caiu nos filtros anteriores)
+                    if (obj.has("tdp") || obj.has("socket")) {
+                        return context.deserialize(obj, Processador.class);
+                    }
+
+                    throw new JsonParseException("Tipo de componente desconhecido");
+                }
+            })
+            .serializeNulls()           // ← serializa nulls
+            .enableComplexMapKeySerialization()
+            .setPrettyPrinting()
+            .create();
     private List<Componente> componentes;
 
     public RepositorioComponente() {
