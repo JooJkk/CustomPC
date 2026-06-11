@@ -167,7 +167,7 @@ public class GerenciadorPedidosController {
             novoStatus = "PREPARANDO_COMPONENTE 🛠️";
         } else if (statusAtual.equals("PREPARANDO_COMPONENTE 🛠️") || statusAtual.equals("PREPARANDO_COMPONENTE")) {
             novoStatus = "ENVIADO";
-        }
+        }//
 
         if (!novoStatus.equals(statusAtual)) {
             pedido.setStatus(novoStatus);
