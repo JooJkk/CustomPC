@@ -34,6 +34,7 @@ public class LoginController {
     void fazerLogin(ActionEvent event) {
         String email = campoEmail.getText().trim();
         String senha = campoSenha.getText();
+        String emailAdm = "admin@custompc.com";
 
         if (email.isEmpty() || senha.isEmpty()) {
             mostrarErro("Preencha o e-mail e a senha.");
@@ -41,8 +42,14 @@ public class LoginController {
         }
 
         try {
-            Cliente cliente = ClienteService.getInstance().autenticar(email, senha);
-            NavegacaoController.trocarTela("/cliente-view.fxml", event, cliente);
+            if(email.equals(emailAdm)) {
+                Cliente cliente = ClienteService.getInstance().autenticar(email, senha);
+                NavegacaoController.trocarTela("/AdminView.fxml", event, cliente);
+            }
+            else{
+                Cliente cliente = ClienteService.getInstance().autenticar(email, senha);
+                NavegacaoController.trocarTela("/cliente-view.fxml", event, cliente);
+            }
         } catch (ClienteNaoEncontradoException e) {
             mostrarErro("E-mail ou senha incorretos. Tente novamente.");
             campoSenha.clear();

@@ -1576,5 +1576,63 @@
       "email": "email2@teste.com",
       "senha": "123"
     }
+  },
+  {
+    "id": 17,
+    "data": {
+      "date": {
+        "year": 2026,
+        "month": 6,
+        "day": 10
+      },
+      "time": {
+        "hour": 19,
+        "minute": 24,
+        "second": 34,
+        "nano": 646232600
+      }
+    },
+    "status": "PENDENTE",
+    "valorTotal": 1019.0,
+    "pagamento": {
+      "id": 49,
+      "valor": 1019.0,
+      "formaPagamento": "Pix",
+      "status": "PENDENTE"
+    },
+    "itens": [
+      {
+        "quantidade": 1,
+        "precoUnitario": 1000.0,
+        "componente": {
+          "socket": "AM4",
+          "tdp": 65,
+          "id": 22,
+          "nome": "Ryzen 5 5600",
+          "marca": "AMD",
+          "preco": 1000.0,
+          "peso": 0.5,
+          "volume": 0.0,
+          "estoque": 9,
+          "consumoWatts": 65,
+          "nivelDesempenho": 0
+        }
+      }
+    ],
+    "endereco": {
+      "rua": "q",
+      "numero": "1",
+      "bairro": "q",
+      "cidade": "q",
+      "cep": "12345678",
+      "estado": "q"
+    },
+    "frete": 19.0,
+    "cliente": {
+      "id": 1,
+      "nome": "Teste",
+      "email": "email@teste.com",
+      "senha": "123"
+    }
   }
 ]

@@ -112,7 +112,8 @@ public class CatalogoController {
         spinQuantidade.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1, 1));
         spinQuantidade.setDisable(true);
 
-        tabelaComponentes.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> exibirDetalhesProduto(newValue));
+        tabelaComponentes.getSelectionModel().selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> exibirDetalhesProduto(newValue));
 
         carregarCatalogo();
         filtrarTodos();

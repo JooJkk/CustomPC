@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="15.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.GerenciadorEstoqueController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label text="Estoque dos Produtos" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#filtrarTodos" prefHeight="35.0" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="📋 Todos">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#filtrarProcessadores" prefHeight="35.0" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="💻 Processadores">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#filtrarPlacasMae" prefHeight="35.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="🔌 Placas-Mãe">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#filtrarMemorias" prefHeight="35.0" style="-fx-background-color: #2ec76e; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="💾 Memórias RAM">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#filtrarPlacasDeVideo" prefHeight="35.0" style="-fx-background-color: #1abc9c; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="🎮 Placas de Vídeo">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#filtrarFontes" prefHeight="35.0" style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="⚡ Fontes">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" spacing="20.0">
+         <children>
+            <TableView fx:id="tabelaComponentes" prefHeight="450.0" prefWidth="680.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-overflow-changed: transparent;">
+               <columns>
+                  <TableColumn fx:id="colunaImagem" prefWidth="70.0" text="Ícone" />
+                  <TableColumn fx:id="colunaNome" prefWidth="200.0" text="Produto" />
+                  <TableColumn fx:id="colunaMarca" prefWidth="110.0" text="Marca" />
+                  <TableColumn fx:id="colunaPreco" prefWidth="143.3333740234375" text="Preço (R$)" />
+                  <TableColumn fx:id="colunaConsumo" prefWidth="155.6666259765625" text="Consumo Estimado" />
+               </columns>
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
+            </TableView>
+            <VBox fx:id="painelDetalhes" prefHeight="450.0" prefWidth="280.0" spacing="12.0" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 4);">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <Label text="Detalhes do Produto" textFill="#2c3e50">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="110.0">
+                     <children>
+                        <ImageView fx:id="imgDetalheGrande" fitHeight="100.0" fitWidth="100.0" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <Label fx:id="lblDetalheNome" text="Selecione um item..." textFill="#2c3e50" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDetalheMarca" text="Marca: -" textFill="#7f8c8d" />
+                  <Label fx:id="lblDetalhePreco" text="Preço: R$ 0.00" textFill="#2ec76e">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDetalheConsumo" text="Consumo: -" textFill="#34495e" />
+                  <Label fx:id="lblDetalheEstoque" style="-fx-font-weight: bold;" text="Disponível em Estoque: -" textFill="#7f8c8d" />
+                  <VBox alignment="BOTTOM_CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" spacing="10.0">
+                           <children>
+                              <Label style="-fx-font-weight: bold;" text="Estoque novo:" textFill="#2c3e50" />
+                              <TextField fx:id="txtEstoqueNovo" prefHeight="25.0" prefWidth="57.0" />
+                              <Button fx:id="btnExcluir" mnemonicParsing="false" style="-fx-background-color: #9c171a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="X">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Button fx:id="btnAtualizar" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #1e90ff; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Atualizar Estoque">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+      <HBox alignment="CENTER" spacing="15.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onBtnVoltar" prefHeight="40.0" style="-fx-background-color: #9c171a; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Voltar">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnAddComponente" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: #1e6e1b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Novo Componente">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

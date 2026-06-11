@@ -26,9 +26,9 @@ public class CupomService {
     public CupomDesconto verificarEGerarCupom(List<ItemCarrinho> itens) {
 
         if (verificarBuildCompleta(itens))
-            return gerarCupom(TipoCupom.FULL_BUILD, 10.0, 0.0);
+            return gerarCupom(TipoCupom.FULL_BUILD, 10.0, 3000.0);
         if (verificarMesmaMarca(itens))
-            return gerarCupom(TipoCupom.SAME_BRAND, 7.0, 0.0);
+            return gerarCupom(TipoCupom.SAME_BRAND, 7.0, 1500.0);
         if (verificarValorMinimo(itens, 5000.0))
             return gerarCupom(TipoCupom.MIN_VALUE, 5.0, 5000.0);
 

@@ -35,6 +35,10 @@ public class NavegacaoController {
                 ((ClienteController) controller).setUsuario(usuario);
             else if (controller instanceof LoginController)
                 ((LoginController) controller).setUsuarioAnterior(usuario);
+            else if (controller instanceof AdminViewController)
+                ((AdminViewController) controller).setUsuario(usuario);
+            else if (controller instanceof GerenciadorEstoqueController)
+                ((GerenciadorEstoqueController) controller).setUsuario(usuario);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
