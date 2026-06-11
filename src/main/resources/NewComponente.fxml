@@ -31,7 +31,7 @@
                </font>
             </Label>
             <ComboBox fx:id="comboTipo" layoutX="457.0" layoutY="86.0" prefHeight="25.0" prefWidth="286.0" />
-            <Button fx:id="onBtnSalvar" layoutX="1135.0" layoutY="12.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="51.0" style="-fx-background-color: #1e6e1b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Salvar">
+            <Button layoutX="1135.0" layoutY="12.0" mnemonicParsing="false" onAction="#onBtnSalvar" prefHeight="28.0" prefWidth="51.0" style="-fx-background-color: #1e6e1b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="Salvar">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -96,13 +96,18 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Label text="Nível de Desempenho:">
+                        <Label fx:id="lblNivel" text="- - - :">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
+                        </Label>
+                        <Label fx:id="lblMutavel" text="- - - :">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
                         </Label>
                      </children>
                   </VBox>
@@ -148,6 +153,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </TextField>
+                        <TextField fx:id="txtEspecifico2" prefHeight="25.0" prefWidth="610.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="670.0" prefWidth="200.0" />

@@ -95,27 +95,32 @@ public class GerenciadorEstoqueController {
         Componente selecionado = tabelaComponentes.getSelectionModel().getSelectedItem();
         if(selecionado != null){
             try {
-                ButtonType btnConfimar = new ButtonType("Excluir do estoque");
+                ButtonType btnConfirmar = new ButtonType("Excluir do estoque");
                 ButtonType btnCancelar = new ButtonType("Cancelar");
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
                 alert.setTitle("Exclusão");
-                alert.setHeaderText("Você selecionou" + selecionado.getNome());
+                alert.setHeaderText("Você selecionou: " + selecionado.getNome());
                 alert.setContentText("Continuar com a exclusão?");
 
-                alert.getButtonTypes().setAll(btnConfimar, btnCancelar);
+                alert.getButtonTypes().setAll(btnConfirmar, btnCancelar);
 
                 Optional<ButtonType> resultado = alert.showAndWait();
-                if (resultado.isPresent() && resultado.get() == btnConfimar) {
+                if (resultado.isPresent() && resultado.get() == btnConfirmar) {
                     long idComp = selecionado.getId();
-                    repositorio.remover(idComp);
+
+                    // 1. Usa o service para remover (Boa prática arquitetural)
+                    componenteService.remover(idComp);
                     alert("Componente removido com sucesso!");
-                    exibirDetalhesProduto(selecionado);
+                    // 2. Limpa os detalhes da tela já que o item não existe mais
+                    exibirDetalhesProduto(null);
+                    // 3. Atualiza a lista interna 'todasPecas' buscando do service
+                    carregarCatalogo();
+                    // 4. Atualiza a TableView com a lista nova
                     filtrarTodos();
                 }
-            } catch (NumberFormatException e) {
-                alert("⚠️ Por favor, digite um número.");
+            } catch (Exception e) {
+                alert("⚠️ Erro ao remover o componente: " + e.getMessage());
             }
         }
     }
