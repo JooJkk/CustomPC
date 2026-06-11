@@ -20,15 +20,12 @@ public class ClienteController {
 
     private Cliente usuarioLogado;
 
-    // Método essencial para que o CatalogoController injete o usuário de volta ao retornar!
     public void setUsuario(Cliente usuario) {
         this.usuarioLogado = usuario;
 
-        // Carrega a sub-tela de boas-vindas no centro do painel principal
         carregarTela("hello-view.fxml");
     }
 
-    // Mudado para PUBLIC para que o CatalogoController consiga atualizar o texto ao voltar
     public void atualizarTela() {
         if (lblBoasVindas == null) return;
 
@@ -79,13 +76,11 @@ public class ClienteController {
 
     @FXML
     public void onBotaoHomeClick(ActionEvent event) {
-        // 🔥 CORRIGIDO: Sai da área do cliente e volta para a tela inicial limpa (Home.fxml)
         NavegacaoController.trocarTela("/Home.fxml", event, usuarioLogado);
     }
 
     @FXML
     public void onBotaoCatalogoClick(ActionEvent event) {
-        // Volta a usar o NavegacaoController para abrir o catálogo em tela cheia isolada!
         NavegacaoController.trocarTela("/catalogo-view.fxml", event, usuarioLogado);
     }
 
