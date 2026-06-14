@@ -149,12 +149,11 @@ public class PedidoService {
         double subtotal = carrinho.getValorTotal();
         double frete = calcularFrete(carrinho);
         if (cupom != null) {
-            desconto = cupom.calcularDesconto(subtotal) / 100.0;
+            desconto = cupom.calcularDesconto(subtotal);
         }
         double total = subtotal + frete - desconto;
         novoPedido.setFrete(frete);
-        novoPedido.setValorTotal(total);
-        pagamento.setValor(total);
+        ;
         novoPedido.setPagamento(pagamento);
         novoPedido.getPagamento().setStatus("PENDENTE");
         novoPedido.setStatus("PENDENTE");
@@ -166,7 +165,8 @@ public class PedidoService {
             itemP.setComponente(itemC.getComponente());
             novoPedido.adicionarItem(itemP);
         }
-
+        novoPedido.setValorTotal(total);
+        pagamento.setValor(total);
 
         OrdemMontagem ordem = new OrdemMontagem();
         ordem.setStatus("PENDENTE");
