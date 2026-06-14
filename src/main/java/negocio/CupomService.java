@@ -81,11 +81,11 @@ public class CupomService {
             return "Compre mais 1 item da mesma marca para ganhar 7% de desconto!";
         }
         double total = calcularTotalCarrinho(itens);
-        if (total > 1750 && total < 3000.0) {
+        if (total >= 1750 && total < 3000.0) {
             return String.format("Faltam R$ %.2f para ganhar 5%% de desconto por valor!", 3000.0 - total);
-        } else if (total < 5000.0) {
+        } else if (total >= 3000.0 && total < 5000.0) {
             return String.format("Você já tem 5%%! Faltam R$ %.2f para subir para 10%% de desconto!", 5000.0 - total);
-        } else if (total < 8000.0) {
+        } else if (total >= 5000.0 && total < 8000.0) {
             return String.format("Você já tem 10%%! Faltam R$ %.2f para atingir o desconto máximo de 15%%!", 8000.0 - total);
         }
         return null;
