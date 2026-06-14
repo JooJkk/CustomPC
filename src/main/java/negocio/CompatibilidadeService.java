@@ -4,6 +4,8 @@ import exception.BuildIncompativelException;
 import model.componentes.Build;
 import model.componentes.MemoriaRam;
 import model.componentes.PlacaMae;
+import model.componentes.PlacaVideo;
+import model.componentes.Gabinete;
 
 public class CompatibilidadeService {
 
@@ -15,6 +17,18 @@ public class CompatibilidadeService {
         validarGargalo(build);
     }
 
+    public void validarGpuGabineteDireto(PlacaVideo gpu, Gabinete gab) {
+        if (gpu != null && gab != null) {
+            int comprimentoGpu = gpu.getComprimentoMM();
+            int espacoGabinete = gab.getComprimentoMaxGpuMM();
+
+            if (comprimentoGpu > espacoGabinete) {
+                throw new BuildIncompativelException("Incompatibilidade Física Crítica: A Placa de Vídeo possui " +
+                        comprimentoGpu + "mm de comprimento, ultrapassando o limite máximo de " +
+                        espacoGabinete + "mm suportado pelo Gabinete selecionado.");
+            }
+        }
+    }
 
     private void validarComponentesObrigatorios(Build build) {
         if (build.getProcessador() == null || build.getPlacaMae() == null ||
@@ -22,7 +36,6 @@ public class CompatibilidadeService {
             throw new BuildIncompativelException("A build deve ter obrigatoriamente: Processador, Placa-mãe, RAM e Fonte.");
         }
     }
-
 
     private void validarSocket(Build build) {
         if (!build.getProcessador().getSocket().equals(build.getPlacaMae().getSocket())) {
@@ -34,12 +47,10 @@ public class CompatibilidadeService {
     private void validarSlotsETipoMemoria(Build build) {
         PlacaMae mobo = build.getPlacaMae();
 
-
         if (build.getMemorias().size() > mobo.getSlotsRam()) {
             throw new BuildIncompativelException("Quantidade de memórias (" + build.getMemorias().size() +
                     ") excede os slots da placa-mãe (" + mobo.getSlotsRam() + ").");
         }
-
 
         for (MemoriaRam ram : build.getMemorias()) {
             if (!ram.getTipoRam().equals(mobo.getTipoRamSuportada())) {
@@ -49,10 +60,8 @@ public class CompatibilidadeService {
         }
     }
 
-
     private void validarPotenciaFonte(Build build) {
         int consumoTotal = build.calcularConsumoTotal();
-
         double consumoRecomendado = consumoTotal * 1.2;
 
         if (build.getFonte().getPotenciaWatts() < consumoRecomendado) {
@@ -61,12 +70,10 @@ public class CompatibilidadeService {
         }
     }
 
-
     private void validarGargalo(Build build) {
         if (build.getGpu() != null) {
             int cpuPower = build.getProcessador().getNivelDesempenho();
             int gpuPower = build.getGpu().getNivelDesempenho();
-
 
             if (Math.abs(cpuPower - gpuPower) > 3) {
                 String pecaFraca = (cpuPower < gpuPower) ? "Processador" : "Placa de Vídeo";

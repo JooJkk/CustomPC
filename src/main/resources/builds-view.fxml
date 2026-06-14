@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="850.0" prefWidth="1200.0" spacing="12.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildsController">
+<VBox alignment="CENTER" prefHeight="900.0" prefWidth="1200.0" spacing="12.0" style="-fx-background-color: #f4f6f9;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BuildsController">
     <padding>
-        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
     </padding>
 
     <Label text="Monte seu CustomPC 🛠️" textFill="#2c3e50">
@@ -19,11 +19,11 @@
             <Font name="System Bold" size="32.0" />
         </font>
         <VBox.margin>
-            <Insets bottom="15.0" />
+            <Insets bottom="10.0" />
         </VBox.margin>
     </Label>
 
-    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha um Processador:" textFill="#34495e" />
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha o Processador:" textFill="#34495e" />
     <ComboBox fx:id="comboProcessador" prefHeight="35.0" prefWidth="400.0" promptText="Selecione um Processador..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
     <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Placa-Mãe:" textFill="#34495e" />
@@ -35,8 +35,11 @@
     <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Placa de Vídeo (GPU):" textFill="#34495e" />
     <ComboBox fx:id="comboPlacaVideo" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Memória RAM..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
+    <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha o Gabinete:" textFill="#34495e" />
+    <ComboBox fx:id="comboGabinete" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Placa de Vídeo..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+
     <Label style="-fx-font-weight: bold; -fx-font-size: 13;" text="Escolha a Fonte de Alimentação:" textFill="#34495e" />
-    <ComboBox fx:id="comboFonte" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Placa de Vídeo..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
+    <ComboBox fx:id="comboFonte" prefHeight="35.0" prefWidth="400.0" promptText="Aguardando Gabinete..." style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #e2e8f0;" />
 
     <Label fx:id="lblResultado" text="Escolha um Processador para iniciar a montagem da Build." textAlignment="CENTER" textFill="#1e90ff" wrapText="true">
         <font>
@@ -66,9 +69,6 @@
     </Button>
 
     <HBox alignment="CENTER" spacing="16.0">
-        <VBox.margin>
-            <Insets top="10.0" />
-        </VBox.margin>
         <children>
             <Button mnemonicParsing="false" onAction="#voltarCatalogo" prefHeight="40.0" prefWidth="192.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10;" text="⬅ Voltar ao Catálogo">
                 <cursor>

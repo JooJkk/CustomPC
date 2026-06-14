@@ -87,6 +87,11 @@ public class CatalogoController {
             } else if (comp instanceof MemoriaRam) {
                 MemoriaRam ram = (MemoriaRam) comp;
                 return new SimpleStringProperty(ram.getConsumoWatts() + "W");
+            } else if (comp instanceof PlacaVideo) {
+                PlacaVideo pv = (PlacaVideo) comp;
+                return new SimpleStringProperty(pv.getConsumoWatts() + "W");
+            } else if (comp instanceof Gabinete) {
+                return new SimpleStringProperty("0W");
             }
             return new SimpleStringProperty("0W");
         });
@@ -122,7 +127,6 @@ public class CatalogoController {
             Componente selecionado = tabelaComponentes.getSelectionModel().getSelectedItem();
             if (selecionado != null) {
                 int qtdDesejada = spinQuantidade.getValue();
-
                 int estoqueAtual = selecionado.getEstoque();
 
                 if (qtdDesejada <= estoqueAtual) {
@@ -168,6 +172,10 @@ public class CatalogoController {
             lblDetalheConsumo.setText("Consumo: " + ((PlacaMae) comp).getConsumoWatts() + "W");
         } else if (comp instanceof MemoriaRam) {
             lblDetalheConsumo.setText("Consumo: " + ((MemoriaRam) comp).getConsumoWatts() + "W");
+        } else if (comp instanceof PlacaVideo) {
+            lblDetalheConsumo.setText("Consumo: " + ((PlacaVideo) comp).getConsumoWatts() + "W");
+        } else if (comp instanceof Gabinete) {
+            lblDetalheConsumo.setText("Gabinete físico (Sem consumo).");
         }
 
         imgDetalheGrande.setImage(descobrirImagemPeca(comp));
@@ -183,16 +191,15 @@ public class CatalogoController {
     }
 
     private Image descobrirImagemPeca(Componente item) {
+        if (item instanceof PlacaVideo) return imgGpu;
+        if (item instanceof Fonte) return imgFonte;
+        if (item instanceof MemoriaRam) return imgRam;
+
         String nomeUpper = item.getNome().toUpperCase();
         if (nomeUpper.contains("RTX") || nomeUpper.contains("RX ") || nomeUpper.contains("GTX")) {
             return imgGpu;
-        } else if (item instanceof Fonte) {
-            return imgFonte;
-        } else if (item instanceof MemoriaRam) {
-            return imgRam;
-        } else {
-            return imgCpu;
         }
+        return imgCpu;
     }
 
     private void carregarImagensSystem() {
@@ -205,66 +212,73 @@ public class CatalogoController {
             System.out.println("Aviso: Arquivos de imagem não encontrados em resources/imagens/.");
         }
     }
+
     private ComponenteService componenteService = ComponenteService.getInstance();
     private void carregarCatalogo() {
         todasPecas = componenteService.listar();
-        }
+    }
 
     @FXML private void filtrarTodos() { tabelaComponentes.setItems(FXCollections.observableArrayList(todasPecas)); }
     @FXML private void filtrarProcessadores() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof Processador && !c.getNome().toUpperCase().contains("RTX") && !c.getNome().toUpperCase().contains("RX ")) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
     @FXML private void filtrarPlacasMae() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof PlacaMae) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
     @FXML private void filtrarMemorias() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof MemoriaRam) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
-    @FXML private void filtrarPlacasDeVideo() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { String n = c.getNome().toUpperCase(); if (n.contains("RTX") || n.contains("RX ") || n.contains("GTX")) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
+    @FXML private void filtrarPlacasDeVideo() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof PlacaVideo) f.add(c); String n = c.getNome().toUpperCase(); if (n.contains("RTX") || n.contains("RX ") || n.contains("GTX")) { if(!f.contains(c)) f.add(c); } } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
     @FXML private void filtrarFontes() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof Fonte) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
+    @FXML private void filtrarGabinetes() { List<Componente> f = new ArrayList<>(); for (Componente c : todasPecas) { if (c instanceof Gabinete) f.add(c); } tabelaComponentes.setItems(FXCollections.observableArrayList(f)); }
 
     @FXML private void voltarHome(ActionEvent event) { NavegacaoController.trocarTela("/home.fxml", event, usuarioLogado); }
-    @FXML private void enviarParaBuild(ActionEvent event) { Componente s = tabelaComponentes.getSelectionModel().getSelectedItem(); if (s != null) buildService.adicionarComponenteParaMontagem(s); NavegacaoController.trocarTela("/builds-view.fxml", event, usuarioLogado); }
+
+    @FXML
+    private void enviarParaBuild(ActionEvent event) {
+        Componente s = tabelaComponentes.getSelectionModel().getSelectedItem();
+        if (s != null) {
+            List<Componente> atuais = new ArrayList<>(buildService.getComponentesSelecionadosParaMontagem());
+            atuais.removeIf(c -> c.getClass().equals(s.getClass()));
+            atuais.add(s);
+
+            buildService.limparComponentesMontagem();
+            for (Componente c : atuais) {
+                buildService.adicionarComponenteParaMontagem(c);
+            }
+        }
+
+        NavegacaoController.trocarTela("/builds-view.fxml", event, usuarioLogado);
+    }
+
     @FXML private void irParaCarrinho(ActionEvent event) {
         String mensagem = CupomService.getInstance().verificarProgressoDesconto(carrinhoService.getCarrinho().getItens());
-
         if (mensagem != null) {
-
             ButtonType btnCarrinho = new ButtonType("Ir para o carrinho");
-
             ButtonType btnContinuar = new ButtonType("Continuar comprando");
-
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
             alert.setTitle("Desconto próximo!");
             alert.setHeaderText("Você está perto de ganhar um cupom");
             alert.setContentText(mensagem);
-
             alert.getButtonTypes().setAll(btnCarrinho, btnContinuar);
-
             Optional<ButtonType> resultado = alert.showAndWait();
             if (resultado.isPresent() && resultado.get() == btnCarrinho) {
                 NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
             }
-        }
-        else {
+        } else {
             NavegacaoController.trocarTela("/Carrinho.fxml", event, usuarioLogado);
         }
     }
     private void alert(String message) { Alert a = new Alert(Alert.AlertType.INFORMATION); a.setHeaderText(null); a.setContentText(message); a.showAndWait(); }
+
     @FXML
     private void irParaAreaCliente(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cliente-view.fxml"));
             Parent rootCliente = loader.load();
-
             ClienteController clienteController = loader.getController();
-
             clienteController.setUsuario(this.usuarioLogado);
             clienteController.atualizarTela();
-
             Scene cenaAreaCliente = new Scene(rootCliente, 1200.0, 800.0);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(cenaAreaCliente);
             window.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }
