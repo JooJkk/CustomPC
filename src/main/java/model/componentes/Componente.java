@@ -35,6 +35,7 @@ public abstract class Componente {
         if(volume < 0){
             throw new IllegalArgumentException("volume não pode ser negativo");
         }
+        this.volume = volume;
     }
 
     public String getNome() {

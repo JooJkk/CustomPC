@@ -9,15 +9,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import model.*;
 import negocio.*;
 import javafx.fxml.FXML;
@@ -82,7 +77,7 @@ public class CheckoutController {
     @FXML
     public void initialize() {
 
-        CheckoutMoments momentos = CheckoutMoments.getInstance();
+        CheckoutStateService momentos = CheckoutStateService.getInstance();
         txtRua.setText(momentos.pegarCampo("rua"));
         txtNumero.setText(momentos.pegarCampo("numero"));
         txtCidade.setText(momentos.pegarCampo("cidade"));
@@ -120,7 +115,7 @@ public class CheckoutController {
 
     // metodo que vai salvar os dados de forma TEMPORARIAA
     private void salvarDadosAtuais() {
-        CheckoutMoments momentos = CheckoutMoments.getInstance();
+        CheckoutStateService momentos = CheckoutStateService.getInstance();
         momentos.salvarCampo("rua", txtRua.getText());
         momentos.salvarCampo("numero", txtNumero.getText());
         momentos.salvarCampo("cidade", txtCidade.getText());
@@ -130,7 +125,7 @@ public class CheckoutController {
     }
 
     private void mostrarPix() {
-        ImageView qrCode = new ImageView(new Image(getClass().getResourceAsStream("/PIX.png")));
+        ImageView qrCode = new ImageView(new Image(getClass().getResourceAsStream("/imagens/PIX.png")));
         qrCode.setFitWidth(200);
         qrCode.setFitHeight(200);
         Label lblQr = new Label("QR CODE");
@@ -188,7 +183,7 @@ public class CheckoutController {
                 NavegacaoController.trocarTelaConfirmacao("/ConfirmacaoPagamento.fxml", event, usuarioLogado, pedido);
 
                 // ponto em que vai excluir depois que a compra ja tiver sido feita
-                CheckoutMoments.getInstance().limparDados();
+                CheckoutStateService.getInstance().limparDados();
             }
             else {
                 alert("Faça o Login antes de finalizar o pedido");

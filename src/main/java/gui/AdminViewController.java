@@ -94,7 +94,6 @@ public class AdminViewController {
 
     @FXML
     public void initialize(){
-        System.out.println("Controller inicializado com sucesso!");
     }
 
     private void alert(String mensagem) {

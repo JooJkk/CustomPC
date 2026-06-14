@@ -360,6 +360,5 @@ public class BuildsController {
                 todasFontes.add((Fonte) c);
             }
         }
-        System.out.println("CPUs: " + todosProcessadores.size() + " | GPUs: " + todasPlacasVideo.size() + " | Gabinetes: " + todosGabinetes.size());
-    }
+           }
 }

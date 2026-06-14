@@ -102,8 +102,6 @@ public class PedidoController {
             }
 
             btnCancelar.setOnAction(event -> {
-                System.out.println("Clicou em cancelar no pedido #" + p.getId());
-
                 p.setStatus("CANCELADO");
 
                 PedidoService.getInstance().atualizarPedido(p);

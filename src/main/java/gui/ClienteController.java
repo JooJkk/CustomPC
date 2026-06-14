@@ -1,20 +1,14 @@
 package gui;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-
-import javafx.stage.Stage;
 import model.Cliente;
-import model.Pedido;
+
 
 public class ClienteController {
 
@@ -40,38 +34,10 @@ public class ClienteController {
     public BorderPane painelPrincipal;
 
     @FXML
-    private Label lblNumeroPedido;
-    @FXML
-    private Label lblDataPedido;
-    @FXML
-    private Label lblTotalPedido;
-    @FXML
-    private Label lblStatusPedido;
-    @FXML
-    private ProgressBar barraProgresso;
-
-    @FXML
     private Label lblBoasVindas;
 
     @FXML
     public void initialize() {
-        if (lblNumeroPedido != null) {
-            Pedido pedidoExemplo = new Pedido();
-            pedidoExemplo.setId(45219);
-            pedidoExemplo.setStatus("PREPARANDO_COMPONENTE 🛠️");
-
-            DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            String dataFormatada = pedidoExemplo.getData().format(formatador);
-
-            lblNumeroPedido.setText("Número do Pedido: #" + pedidoExemplo.getId());
-            lblDataPedido.setText("Data do Pedido: " + dataFormatada);
-            lblStatusPedido.setText("Status: " + pedidoExemplo.getStatus());
-            lblTotalPedido.setText(String.format("Valor Total: R$ %.2f", pedidoExemplo.getValorTotal()));
-
-            if (barraProgresso != null) {
-                barraProgresso.setProgress(0.5);
-            }
-        }
     }
 
     @FXML
@@ -86,7 +52,25 @@ public class ClienteController {
 
     @FXML
     public void onBotaoPedidoClick(ActionEvent event) {
-        carregarTela("pedido-view.fxml");
+        if(usuarioLogado == null){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Acesso Restrito");
+            alert.setHeaderText("Você precisa estar logado para ver seus pedidos.");
+            alert.setContentText("Deseja ir para a tela de login?");
+
+            ButtonType botaoLogin = new ButtonType("Fazer Login");
+            ButtonType botaoCancelar = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(botaoLogin, botaoCancelar);
+
+            alert.showAndWait().ifPresent(resposta -> {
+                if (resposta == botaoLogin) {
+                    NavegacaoController.trocarTela("/Login.fxml", event, null);
+                }
+            });
+        }
+        else {
+            carregarTela("pedido-view.fxml");
+        }
     }
 
     @FXML
@@ -110,7 +94,6 @@ public class ClienteController {
             }
 
             if (recurso == null) {
-                System.out.println("❌ ERRO: Não foi possível encontrar o arquivo FXML: " + fxml);
                 return;
             }
 
@@ -134,12 +117,10 @@ public class ClienteController {
 
             if (painelPrincipal != null) {
                 painelPrincipal.setCenter(novaTela);
-                System.out.println("✅ Tela " + fxml + " carregada com sucesso no centro!");
             }
 
         } catch (IOException e) {
-            System.out.println("💥 ERRO crítico ao dar .load() na tela " + fxml + ":");
             e.printStackTrace();
         }
     }
-} // Chave final que fecha a classe e resolve o erro da linha 131!
+}

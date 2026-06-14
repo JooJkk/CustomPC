@@ -3,17 +3,17 @@ package negocio;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CheckoutMoments {
-    private static CheckoutMoments instance;
+public class CheckoutStateService {
+    private static CheckoutStateService instance;
 
 
     private final Map<String, String> dadosTemporarios = new HashMap<>();
 
-    private CheckoutMoments() {}
+    private CheckoutStateService() {}
 
-    public static CheckoutMoments getInstance() {
+    public static synchronized CheckoutStateService getInstance() {
         if (instance == null) {
-            instance = new CheckoutMoments();
+            instance = new CheckoutStateService();
         }
         return instance;
     }

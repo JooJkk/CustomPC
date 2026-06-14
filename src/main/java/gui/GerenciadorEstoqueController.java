@@ -82,6 +82,7 @@ public class GerenciadorEstoqueController {
                 int qntNova = Integer.parseInt(txtEstoqueNovo.getText());
                 selecionado.setEstoque(qntNova);
                 componenteService.atualizar(selecionado);
+                carregarCatalogo();
                 exibirDetalhesProduto(selecionado);
                 alert("Estoque atualizado com sucesso!");
             } catch (NumberFormatException e) {
@@ -148,6 +149,7 @@ public class GerenciadorEstoqueController {
     private Image imgRam;
     private Image imgGpu;
     private Image imgCpu;
+    private Image imgGabinete;
 
     @FXML
     public void initialize() {
@@ -207,7 +209,11 @@ public class GerenciadorEstoqueController {
             return imgFonte;
         } else if (item instanceof MemoriaRam) {
             return imgRam;
-        } else {
+        }
+        else if (item instanceof Gabinete) {
+            return imgGabinete;
+        }
+        else {
             return imgCpu;
         }
     }
@@ -218,8 +224,9 @@ public class GerenciadorEstoqueController {
             imgRam = new Image(getClass().getResourceAsStream("/imagens/memoriaram.png"));
             imgGpu = new Image(getClass().getResourceAsStream("/imagens/placa de video.png"));
             imgCpu = new Image(getClass().getResourceAsStream("/imagens/Processador.jpg"));
+            imgGabinete = new Image(getClass().getResourceAsStream("/imagens/gabinete.jpg"));
         } catch (Exception e) {
-            System.out.println("Aviso: Arquivos de imagem não encontrados em resources/imagens/.");
+            e.printStackTrace();
         }
     }
 
@@ -237,6 +244,7 @@ public class GerenciadorEstoqueController {
 
         // ALTERADO PARA UTILIAR .getEstoque()
         int estoqueDisponivel = comp.getEstoque();
+        txtEstoqueNovo.setDisable(false);
 
         lblDetalheNome.setText(comp.getNome());
         lblDetalheMarca.setText("Marca: " + comp.getMarca());

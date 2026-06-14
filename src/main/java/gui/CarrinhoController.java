@@ -159,12 +159,10 @@ public class CarrinhoController {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Erro crítico ao tentar voltar para a Área do Cliente a partir do Carrinho.");
-        }
+      }
     }
     @FXML
     private void voltarParaCatalogo(ActionEvent event) {
-        // Esse método vai levar o usuário de volta para o catálogo
         NavegacaoController.trocarTela("/catalogo-view.fxml", event, usuarioLogado);
     }
 

@@ -68,7 +68,7 @@ public class RepositorioPedido implements IRepositorioPedido {
     }
 
     @Override
-    public Pedido buscarPorId(int id) throws PedidoNaoEncontradoException {
+    public Pedido buscarPorId(long id) throws PedidoNaoEncontradoException {
         for (Pedido p : pedidos) {
             if (p.getId() == id) return p;
         }
@@ -105,9 +105,6 @@ public class RepositorioPedido implements IRepositorioPedido {
                 break;
             }
         }
-
-        System.out.println("Salvando o status do pedido #" + pedido.getId() + " no arquivo JSON...");
-        salvarDados(); 
-        System.out.println("Arquivo JSON atualizado com sucesso!");
+        salvarDados();
     }
 }

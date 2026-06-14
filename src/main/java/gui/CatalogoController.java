@@ -65,6 +65,7 @@ public class CatalogoController {
     private Image imgRam;
     private Image imgGpu;
     private Image imgCpu;
+    private Image imgGabinete;
 
     @FXML
     public void initialize() {
@@ -191,10 +192,18 @@ public class CatalogoController {
     }
 
     private Image descobrirImagemPeca(Componente item) {
-        if (item instanceof PlacaVideo) return imgGpu;
-        if (item instanceof Fonte) return imgFonte;
-        if (item instanceof MemoriaRam) return imgRam;
-
+        if (item instanceof PlacaVideo) {
+            return imgGpu;
+        }
+        if (item instanceof Fonte) {
+            return imgFonte;
+        }
+        if (item instanceof MemoriaRam) {
+            return imgRam;
+        }
+        else if (item instanceof Gabinete) {
+            return imgGabinete;
+        }
         String nomeUpper = item.getNome().toUpperCase();
         if (nomeUpper.contains("RTX") || nomeUpper.contains("RX ") || nomeUpper.contains("GTX")) {
             return imgGpu;
@@ -208,8 +217,9 @@ public class CatalogoController {
             imgRam = new Image(getClass().getResourceAsStream("/imagens/memoriaram.png"));
             imgGpu = new Image(getClass().getResourceAsStream("/imagens/placa de video.png"));
             imgCpu = new Image(getClass().getResourceAsStream("/imagens/Processador.jpg"));
+            imgGabinete = new Image(getClass().getResourceAsStream("/imagens/gabinete.jpg"));
         } catch (Exception e) {
-            System.out.println("Aviso: Arquivos de imagem não encontrados em resources/imagens/.");
+            System.out.println("Arquivos de imagem não encontrados em resources/imagens/.");
         }
     }
 

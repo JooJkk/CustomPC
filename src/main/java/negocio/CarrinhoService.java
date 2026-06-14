@@ -33,7 +33,6 @@ public class CarrinhoService {
             if (item.getComponente().equals(componente)) {
                 item.setQuantidade(item.getQuantidade() + quantidade);
                 componente.setEstoque(componente.getEstoque() - quantidade);
-                System.out.println("Item adicionado");
                 return;
             }
         }
@@ -46,7 +45,6 @@ public class CarrinhoService {
                 componente.getEstoque() - quantidade
         );
 
-        System.out.println("Item adicionado");
     }
 
     public void removerItem(String nome) {
@@ -62,12 +60,10 @@ public class CarrinhoService {
 
                 carrinho.removerItem(item);
 
-                System.out.println("Item removido");
                 return;
             }
         }
 
-        System.out.println("Item não encontrado");
     }
 
     public void listarItens() {
